@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">NewsApp</string>
+    <string name="edit_news">EDIT NEWS</string>
+    <string name="edit_title">Title</string>
+    <string name="edit_news_title">Enter the News Title</string>
+    <string name="edit_description">Description</string>
+    <string name="edit_news_desc">Enter the description regarding the News here</string>
+    <string name="edit_tags">Tags</string>
+    <string name="edit_news_tags">#tags</string>
+    <string name="edit_categories">Categories</string>
+    <string name="edit_source">Source</string>
+    <string name="edit_url">URL</string>
+    <string name="edit_save_changes">Save Changes</string>
 </resources>

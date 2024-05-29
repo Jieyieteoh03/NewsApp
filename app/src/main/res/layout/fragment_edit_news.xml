@@ -6,7 +6,7 @@
         android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
             android:layout_marginHorizontal="@dimen/m">
@@ -14,7 +14,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EDIT NEWS"
+                android:text="@string/edit_news"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/m"/>
@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title"
+                android:text="@string/edit_title"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
 
@@ -39,13 +39,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
-                android:hint="Enter the News Title"
+                android:hint="@string/edit_news_title"
                 android:background="@drawable/input_box"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description"
+                android:text="@string/edit_description"
                 android:layout_marginTop="@dimen/xl"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
@@ -55,13 +55,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:gravity="center"
-                android:hint="Enter the description regarding the News here"
+                android:hint="@string/edit_news_desc"
                 android:background="@drawable/input_box" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tags"
+                android:text="@string/edit_tags"
                 android:layout_marginTop="@dimen/xl"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
@@ -71,13 +71,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
-                android:hint="#tags"
+                android:hint="@string/edit_news_tags"
                 android:background="@drawable/input_box" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Categories"
+                android:text="@string/edit_categories"
                 android:layout_marginTop="@dimen/xl"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
@@ -93,7 +93,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Source"
+                android:text="@string/edit_source"
                 android:layout_marginTop="@dimen/xl"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
@@ -103,17 +103,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
-                android:hint="URL"
+                android:hint="@string/edit_url"
                 android:background="@drawable/input_box"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnUpload"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save Changes"
+                android:text="@string/edit_save_changes"
                 android:textStyle="bold"
                 android:backgroundTint="@color/blue"
-                android:textSize="@dimen/l"
+                android:textSize="@dimen/giant_text_size"
                 android:layout_marginHorizontal="@dimen/xxxl"
                 android:layout_marginVertical="@dimen/xxxl"/>
 
