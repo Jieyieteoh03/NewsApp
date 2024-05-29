@@ -5,4 +5,9 @@
     <string name="category">Category</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+    <string name="sign_up"><u>Sign Up</u></string>
+    <string name="signUp">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 </resources>
