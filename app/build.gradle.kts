@@ -55,7 +55,7 @@ dependencies {
 
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.fragment.ktx)
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
@@ -68,4 +68,8 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
+}
+
+kapt {
+    correctErrorTypes = true
 }
