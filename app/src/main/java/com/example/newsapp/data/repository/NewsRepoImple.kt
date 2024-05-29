@@ -1,6 +1,6 @@
 package com.example.newsapp.data.repository
 
-import com.example.newsapp.data.db.NewsDb.NewsDao
+import com.example.newsapp.data.db.newsdb.NewsDao
 import com.example.newsapp.data.model.news.News
 import kotlinx.coroutines.flow.Flow
 

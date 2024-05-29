@@ -1,5 +1,5 @@
 
-package com.example.newsapp.ui.Account
+package com.example.newsapp.ui.account.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,11 +1,9 @@
-package com.example.newsapp.data.db.UserDb
+package com.example.newsapp.data.db.userdb
 
 import androidx.room.Database
-import androidx.room.Entity
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.newsapp.data.db.NewsDb.NewsDao
 import com.example.newsapp.data.model.user.User
 
 @Database(entities = [User::class], version = 2)

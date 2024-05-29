@@ -1,11 +1,10 @@
-package com.example.newsapp.data.db.UserDb
+package com.example.newsapp.data.db.userdb
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.newsapp.data.model.news.News
 import com.example.newsapp.data.model.user.User
 import kotlinx.coroutines.flow.Flow
 
