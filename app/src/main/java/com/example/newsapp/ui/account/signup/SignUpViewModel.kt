@@ -25,11 +25,19 @@ class SignUpViewModel @Inject constructor(
     val snackbar: MutableLiveData<String> = MutableLiveData()
 
     fun register() {
-        if (userName.value.isNullOrEmpty() || email.value.isNullOrEmpty() || phoneNumber.value.toString().isEmpty() || password.value.isNullOrEmpty() || confirm_password.value.isNullOrEmpty()) {
+        if (
+            userName.value.isNullOrEmpty() ||
+            email.value.isNullOrEmpty() ||
+            phoneNumber.value.toString().isEmpty() ||
+            password.value.isNullOrEmpty() ||
+            confirm_password.value.isNullOrEmpty()
+            ) {
             snackbar.value = "Please fill in all fields"
             return
         }
-        if (confirm_password.value == password.value ) {
+        if (
+            confirm_password.value == password.value
+            ) {
             snackbar.value = "Confirm Password does not match your Password"
         }
         viewModelScope.launch (Dispatchers.IO){
