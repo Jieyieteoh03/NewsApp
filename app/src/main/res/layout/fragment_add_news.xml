@@ -21,12 +21,13 @@
             android:layout_marginTop="@dimen/m"/>
 
         <ImageView
-            android:id="@+id/uploadImg"
+            android:id="@+id/imgGallery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/xl"
             android:layout_marginHorizontal="@dimen/xxxxxl"
             android:src="@drawable/imgUpload"/>
+
 
         <TextView
             android:layout_width="match_parent"
