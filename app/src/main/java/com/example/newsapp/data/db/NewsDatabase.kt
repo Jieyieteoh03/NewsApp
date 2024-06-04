@@ -2,9 +2,6 @@ package com.example.newsapp.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.newsapp.data.db.NewsDao
 import com.example.newsapp.data.model.News
 import com.example.newsapp.data.model.user.User
 
