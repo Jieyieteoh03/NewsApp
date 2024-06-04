@@ -3,7 +3,7 @@ package com.example.newsapp.data.model.user
 import android.provider.MediaStore
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.newsapp.data.model.news.Categories
+import com.example.newsapp.data.model.Categories
 
 @Entity
 data class User(
@@ -11,7 +11,7 @@ data class User(
     val id: Int? = null,
     val userName: String,
     val email: String,
-    val role: Role = Role.User,
+    val role: Role = Role.USER,
     val phoneNumber: Int,
     val password: String
 )
