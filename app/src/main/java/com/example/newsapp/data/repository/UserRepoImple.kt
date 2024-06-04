@@ -25,6 +25,10 @@ class UserRepoImple(
     }
 
     override fun updateUser(id: Int, user: User) {
-        dao.updateUser(user.copy(id = id))
+        dao.updateUser(user.copy(userId = id))
+    }
+
+    override fun verifyLoginUser(email: String, password: String): User {
+        return dao.userLogin(email, password)
     }
 }

@@ -17,4 +17,6 @@ interface UserRepo {
 
     fun updateUser(id: Int, user: User)
 
+    fun verifyLoginUser(email: String, password: String) : User
+
 }
