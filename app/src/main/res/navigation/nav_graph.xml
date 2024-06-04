@@ -19,5 +19,14 @@
         android:label="fragment_view_news"
         tools:layout="@layout/fragment_view_news" >
         <argument android:name="id" app:argType="integer"/>
+        <action
+            android:id="@+id/action_viewNews_to_editNews"
+            app:destination="@id/editNewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editNewsFragment"
+        android:name="com.example.newsapp.ui.editNews.EditNewsFragment"
+        android:label="EditNewsFragment" >
+        <argument android:name="id" app:argType="integer"/>
     </fragment>
 </navigation>

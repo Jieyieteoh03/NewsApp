@@ -1,0 +1,54 @@
+package com.example.newsapp.ui.editNews
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.newsapp.R
+import com.example.newsapp.databinding.FragmentEditNewsBinding
+import com.example.newsapp.databinding.FragmentViewNewsBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+
+@AndroidEntryPoint
+class EditNewsFragment : Fragment() {
+    private lateinit var binding: FragmentEditNewsBinding
+    private val viewModel: EditNewsViewModel by viewModels()
+    private val args: EditNewsFragmentArgs by navArgs()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentEditNewsBinding.inflate(
+            layoutInflater,
+            container,
+            false
+        )
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.run {
+            viewModel = viewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
+
+        lifecycleScope.launch (Dispatchers.IO){
+            viewModel.run {
+                getWordById(args.id)
+                news.observe(viewLifecycleOwner) {setNews()}
+                finish.collect{findNavController().popBackStack()}
+            }
+        }
+    }
+
+}

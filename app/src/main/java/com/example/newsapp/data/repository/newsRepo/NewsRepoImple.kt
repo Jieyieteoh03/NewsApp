@@ -2,7 +2,6 @@ package com.example.newsapp.data.repository.newsRepo
 
 import com.example.newsapp.data.db.NewsDao
 import com.example.newsapp.data.model.News
-import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import kotlinx.coroutines.flow.Flow
 
 class NewsRepoImple(
@@ -25,7 +24,7 @@ class NewsRepoImple(
         dao.deleteNews(id)
     }
 
-    override fun updateNews(id: Int, news: News) {
+    override fun updateNews(id: News, news: News) {
         dao.updateNews(news.copy(id = id))
     }
 
