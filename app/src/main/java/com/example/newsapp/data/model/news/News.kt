@@ -25,4 +25,5 @@ data class News(
     val tags: String,
     val categories: Categories = Categories.NORMAL_NEWS,
     val source: String,
+    val userId: Int? = null
 )

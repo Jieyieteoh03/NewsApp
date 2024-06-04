@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/addNewsFragment"
-        android:name="com.example.newsapp.ui.Add.addNewsFragment"
+        android:name="com.example.newsapp.ui.Add.AddNewsFragment"
         android:label="addNewsFragment" />
 </navigation>
