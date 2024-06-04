@@ -7,7 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/ic_rectangle"
         android:gravity="center"
         android:layout_marginVertical="@dimen/xxxxxl"
         android:layout_marginHorizontal="@dimen/m">
@@ -43,7 +42,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="@string/login_email_title"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
 
@@ -52,13 +51,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
-                android:hint="Enter the email"
-                android:background="@drawable/input_box"/>
+                android:hint="@string/login_email" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Password"
+                android:text="@string/login_password_title"
                 android:layout_marginTop="@dimen/xl"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
@@ -68,14 +66,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
-                android:hint="Enter the Password"
-                android:background="@drawable/input_box" />
+                android:hint="@string/login_paswword"
+                />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign In"
+                android:text="@string/title_sign_in"
                 android:layout_marginHorizontal="@dimen/xxxl"
                 android:layout_marginVertical="@dimen/xxl"/>
 

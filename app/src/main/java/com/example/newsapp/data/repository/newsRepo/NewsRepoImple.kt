@@ -1,7 +1,8 @@
-package com.example.newsapp.data.repository
+package com.example.newsapp.data.repository.newsRepo
 
-import com.example.newsapp.data.db.newsdb.NewsDao
-import com.example.newsapp.data.model.news.News
+import com.example.newsapp.data.db.NewsDao
+import com.example.newsapp.data.model.News
+import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import kotlinx.coroutines.flow.Flow
 
 class NewsRepoImple(

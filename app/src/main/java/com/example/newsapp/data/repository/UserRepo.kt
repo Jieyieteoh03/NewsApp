@@ -1,6 +1,5 @@
 package com.example.newsapp.data.repository
 
-import com.example.newsapp.data.model.news.News
 import com.example.newsapp.data.model.user.User
 import kotlinx.coroutines.flow.Flow
 
@@ -17,6 +16,6 @@ interface UserRepo {
 
     fun updateUser(id: Int, user: User)
 
-    fun verifyLoginUser(email: String, password: String) : User
+    fun verifyLoginUser(email: String, password: String) : Flow<User?>
 
 }

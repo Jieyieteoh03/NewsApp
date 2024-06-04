@@ -1,4 +1,4 @@
-package com.example.newsapp.data.db.userdb
+package com.example.newsapp.data.db
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -26,6 +26,6 @@ interface UserDao {
     @Query("DELETE FROM user_table WHERE user_id = :id")
     fun deleteUser(id: Int)
 
-    @Query("SELECT * FROM user_table WHERE email LIKE :email AND password LIKE :password ")
-    fun userLogin(email: String, password: String): User
+    @Query("SELECT * FROM user_table WHERE email = :email AND password = :password ")
+    fun userLogin(email: String, password: String): Flow<User?>
 }

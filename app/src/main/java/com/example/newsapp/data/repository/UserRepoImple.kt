@@ -1,6 +1,6 @@
 package com.example.newsapp.data.repository
 
-import com.example.newsapp.data.db.userdb.UserDao
+import com.example.newsapp.data.db.UserDao
 import com.example.newsapp.data.model.user.User
 import kotlinx.coroutines.flow.Flow
 
@@ -28,7 +28,7 @@ class UserRepoImple(
         dao.updateUser(user.copy(userId = id))
     }
 
-    override fun verifyLoginUser(email: String, password: String): User {
+    override fun verifyLoginUser(email: String, password: String): Flow<User?> {
         return dao.userLogin(email, password)
     }
 }
