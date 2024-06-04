@@ -19,7 +19,7 @@ class HomeViewModel @Inject constructor(
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
     fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
-
+    
 
 
 }
