@@ -1,4 +1,4 @@
-package com.example.newsapp.data.model.news
+package com.example.newsapp.data.model
 
 import android.provider.MediaStore.Images
 import androidx.room.Entity
