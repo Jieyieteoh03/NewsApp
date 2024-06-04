@@ -32,8 +32,13 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/xl"
             android:layout_marginHorizontal="@dimen/xxxxxl"
-            android:src="@drawable/imgUpload"/>
+            android:src="@drawable/cat1"/>
 
+        <Button
+            android:id="@+id/btnSelectImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Image" />
 
         <TextView
             android:layout_width="match_parent"

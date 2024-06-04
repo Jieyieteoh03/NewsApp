@@ -1,11 +1,15 @@
 package com.example.newsapp.ui.Add
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -19,6 +23,7 @@ import kotlinx.coroutines.launch
 class AddNewsFragment : Fragment() {
     private lateinit var binding: FragmentAddNewsBinding
     private val addViewModel: AddNewViewModel by viewModels()
+    val REQUEST_IMAGE_PICK = 1
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,14 +42,31 @@ class AddNewsFragment : Fragment() {
         binding.addViewModel = addViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        binding.btnSelectImage.setOnClickListener {
+            openImagePicker()
+        }
+
         lifecycleScope.launch {
-            addViewModel.finish.collect{
+            addViewModel.finish.collect {
 
                 findNavController().popBackStack()
             }
         }
+
+
     }
 
+    fun openImagePicker() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, REQUEST_IMAGE_PICK)
+    }
 
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
+            val selectedImageUri = data.data
+            binding.imgGallery.setImageURI(selectedImageUri)
+            // You can also update the addViewModel's img property with the selected image
+        }
+    }
 }
