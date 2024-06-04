@@ -1,6 +1,6 @@
-package com.example.newsapp.data.repository
+package com.example.newsapp.data.repository.newsRepo
 
-import com.example.newsapp.data.model.news.News
+import com.example.newsapp.data.model.News
 import kotlinx.coroutines.flow.Flow
 
 interface NewsRepo {

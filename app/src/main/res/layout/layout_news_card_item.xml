@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
     <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/cvNews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_marginVertical="4dp"
         app:cardElevation="2dp"
         app:cardCornerRadius="4dp">
