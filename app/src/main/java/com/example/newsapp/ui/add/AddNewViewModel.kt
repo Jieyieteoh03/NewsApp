@@ -25,7 +25,6 @@ class AddNewViewModel @Inject constructor(
     val source: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
-
     fun submit() {
         if (img.value != null &&
             title.value != null &&
@@ -40,7 +39,7 @@ class AddNewViewModel @Inject constructor(
                         title = title.value!!,
                         description = description.value!!,
                         tags = tags.value!!,
-                        categories = Categories.NORMAL_NEWS,
+                        categories = categoryValue ?: Categories.NORMAL_NEWS,
                         source = source.value!!,
                         userId = 1
                     )

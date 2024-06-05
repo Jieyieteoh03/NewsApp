@@ -19,6 +19,7 @@ abstract class NewsDatabase: RoomDatabase() {
 
     companion object {
         const val NAME = "my_news_database"
+
     }
 
 }

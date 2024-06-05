@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.Spinner
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -101,8 +102,7 @@ class AddNewsFragment : Fragment() {
                 // Do nothing
             }
         }
+
     }
-
-
 
 }
