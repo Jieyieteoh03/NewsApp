@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/containerFragment">
 
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.newsapp.ui.home.HomeFragment"
-        android:label="HomeFragment" >
-        <action
-            android:id="@+id/action_home_to_viewNews"
-            app:destination="@id/viewNewsFragment" />
-    </fragment>
     <fragment
         android:id="@+id/viewNewsFragment"
         android:name="com.example.newsapp.ui.viewNews.ViewNewsFragment"
         android:label="fragment_view_news"
         tools:layout="@layout/fragment_view_news" >
         <argument android:name="id" app:argType="integer"/>
+    </fragment>
+    <fragment
+        android:id="@+id/containerFragment"
+        android:name="com.example.newsapp.ui.ContainerFragment"
+        android:label="ContainerFragment" >
+        <action
+            android:id="@+id/action_container_to_viewNews"
+            app:destination="@id/viewNewsFragment" />
     </fragment>
 </navigation>

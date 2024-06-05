@@ -1,4 +1,4 @@
-package com.example.newsapp.ui.home
+package com.example.newsapp.ui.savedNews
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,23 +8,24 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.newsapp.R
 import com.example.newsapp.data.model.News
-import com.example.newsapp.databinding.FragmentHomeBinding
+import com.example.newsapp.databinding.FragmentSavedNewsBinding
 import com.example.newsapp.ui.ContainerFragmentDirections
 import com.example.newsapp.ui.adapter.NewsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
-    private val viewModel: HomeViewModel by viewModels ()
-    private lateinit var binding: FragmentHomeBinding
+class SavedNewsFragment : Fragment() {
+    private lateinit var binding: FragmentSavedNewsBinding
+    private val viewModel: SavedNewsViewModel by viewModels()
     private lateinit var adapter: NewsAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(
+        binding = FragmentSavedNewsBinding.inflate(
             layoutInflater,
             container,
             false
@@ -34,16 +35,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
         setupAdapter()
 
-
-
-//        binding.btnFabAdd.setOnClickListener{
-//
-//        }
     }
 
     private fun setupAdapter() {
@@ -76,4 +69,5 @@ class HomeFragment : Fragment() {
         }
         return newsList
     }
+
 }

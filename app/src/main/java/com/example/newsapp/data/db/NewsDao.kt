@@ -13,6 +13,9 @@ interface NewsDao {
     @Query("SELECT * FROM News")
     fun getAllNews(): Flow<List<News>>
 
+    @Query("SELECT * FROM News")
+    fun getSavedNews(): Flow<List<News>>
+
     @Query("SELECT * FROM News WHERE id = :id")
     fun getNewsById(id: Int): News?
 

@@ -12,13 +12,16 @@ class NewsRepoImple(
         return dao.getAllNews()
     }
 
+    override fun getSavedNews(): Flow<List<News>> {
+       return dao.getSavedNews()
+    }
+
     override fun getNewsById(id: Int): News? {
         return dao.getNewsById(id)
     }
 
-    override fun addNews(news: News): Int? {
+    override fun addNews(news: News) {
         dao.addNews(news)
-        return null
     }
 
     override fun deleteNews(id: Int) {
