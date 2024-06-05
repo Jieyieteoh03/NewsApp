@@ -17,4 +17,10 @@
     <string name="login_email_title">Email</string>
     <string name="title_sign_in">Sign In</string>
     <string name="source">Source</string>
+
+
+    <string-array name="category_options">
+        <item>HOT_NEWS</item>
+        <item>NORMAL_NEWS</item>
+    </string-array>
 </resources>

@@ -37,10 +37,11 @@ class HomeFragment : Fragment() {
         setupAdapter()
 
 
-
-//        binding.btnFabAdd.setOnClickListener{
-//
-//        }
+        binding.btnFabAdd.setOnClickListener{
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToAddNewsFragment()
+            )
+        }
     }
 
     private fun setupAdapter() {
@@ -59,18 +60,7 @@ class HomeFragment : Fragment() {
 
     private fun generateDummyNews(count:Int): List<News> {
         val newsList = mutableListOf<News>()
-        for (i in 1..count) {
-            val rand = (1..10).random()
-            val card = News(
-                id = rand,
-                title = "Title $rand",
-                description = "Description $rand",
-                tags = "Tag $rand",
-//                categories = listOf("Category $rand"),
-                source = "Source $rand"
-            )
-            newsList.add(card)
-        }
+
         return newsList
     }
 }
