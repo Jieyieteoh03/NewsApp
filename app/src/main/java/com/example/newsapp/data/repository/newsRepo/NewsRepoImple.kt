@@ -15,9 +15,8 @@ class NewsRepoImple(
         return dao.getNewsById(id)
     }
 
-    override fun addNews(news: News): Int? {
+    override fun addNews(news: News) {
         dao.addNews(news)
-        return null
     }
 
     override fun deleteNews(id: Int) {
