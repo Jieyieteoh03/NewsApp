@@ -10,7 +10,7 @@ interface NewsRepo {
     fun getNewsById(id: Int) : News?
 
 
-    fun addNews(news: News): Int?
+    fun addNews(news: News)
 
     fun deleteNews(id: Int)
 

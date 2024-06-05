@@ -1,5 +1,6 @@
-package com.example.newsapp.ui.Add
+package com.example.newsapp.ui.add
 
+import android.R
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -8,16 +9,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.app.ActivityCompat.startActivityForResult
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.newsapp.R
+import com.bumptech.glide.Glide
+import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.databinding.FragmentAddNewsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.net.URL
 
 @AndroidEntryPoint
 class AddNewsFragment : Fragment() {
@@ -42,9 +46,6 @@ class AddNewsFragment : Fragment() {
         binding.addViewModel = addViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.btnSelectImage.setOnClickListener {
-            openImagePicker()
-        }
 
         lifecycleScope.launch {
             addViewModel.finish.collect {
@@ -52,8 +53,16 @@ class AddNewsFragment : Fragment() {
                 findNavController().popBackStack()
             }
         }
+        setupImagePicker()
+        setupCategorySpinner()
+    }
 
+    // upload image
 
+    private fun setupImagePicker() {
+        binding.btnSelectImage.setOnClickListener {
+            openImagePicker()
+        }
     }
 
     fun openImagePicker() {
@@ -65,8 +74,35 @@ class AddNewsFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
             val selectedImageUri = data.data
+            val inputStream = requireContext().contentResolver.openInputStream(selectedImageUri!!)
+            val bytes = inputStream?.readBytes()
+            if (bytes != null) {
+                addViewModel.img.value = bytes
+            }
             binding.imgGallery.setImageURI(selectedImageUri)
-            // You can also update the addViewModel's img property with the selected image
         }
     }
+
+    // category
+    private fun setupCategorySpinner() {
+        val categoryOptions = listOf("HOT_NEWS", "NORMAL_NEWS")
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoryOptions)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        binding.etCategory.adapter = adapter
+
+        binding.etCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedCategory = parent?.getItemAtPosition(position).toString()
+                addViewModel.categories.value = selectedCategory
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
+        }
+    }
+
+
+
 }

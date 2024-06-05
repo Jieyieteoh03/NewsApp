@@ -4,6 +4,7 @@ import android.provider.MediaStore.Images
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.data.model.user.User
 import java.net.URL
 
@@ -19,7 +20,7 @@ import java.net.URL
 data class News(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
-    val img: URL,
+    val img: ByteArray,
     val title: String,
     val description: String,
     val tags: String,

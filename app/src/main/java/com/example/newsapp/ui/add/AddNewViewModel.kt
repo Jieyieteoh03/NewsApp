@@ -1,11 +1,11 @@
-package com.example.newsapp.ui.Add
+package com.example.newsapp.ui.add
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.newsapp.data.model.News
 import com.example.newsapp.data.model.news.Categories
-import com.example.newsapp.data.model.news.News
-import com.example.newsapp.data.repository.NewsRepo
+import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,13 +17,14 @@ import javax.inject.Inject
 class AddNewViewModel @Inject constructor(
     private val repo: NewsRepo
 ) :ViewModel() {
-    val img: MutableLiveData<URL> = MutableLiveData()
+    val img: MutableLiveData<ByteArray?> = MutableLiveData()
     val title: MutableLiveData<String> = MutableLiveData()
     val description: MutableLiveData<String> = MutableLiveData()
     val tags: MutableLiveData<String> = MutableLiveData()
     val categories: MutableLiveData<String> = MutableLiveData()
     val source: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
+
 
     fun submit() {
         if (img.value != null &&
@@ -32,6 +33,7 @@ class AddNewViewModel @Inject constructor(
             categories.value != null
         ) {
             viewModelScope.launch(Dispatchers.IO) {
+                val categoryValue = Categories.fromString(categories.value!!)
                 repo.addNews(
                     News(
                         img = img.value!!,
