@@ -5,5 +5,5 @@ import com.example.newsapp.data.model.user.User
 interface UserRepo {
     fun addUser(user: User)
 
-    fun getDummyUser(): User
+
 }

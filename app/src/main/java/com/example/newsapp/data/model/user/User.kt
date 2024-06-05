@@ -10,7 +10,7 @@ data class User(
     val id: Int? = null,
     val userName: String,
     val email: String,
-//    val role: Role = Role.USER,
-//    val phoneNumber: Int,
-//    val password: String
+    val role: Role = Role.USER,
+    val phoneNumber: Int,
+    val password: String
 )

@@ -13,7 +13,5 @@ class UserRepoImple(
         dao.addUser(user)
     }
 
-    override fun getDummyUser(): User{
-        return User(1,  "jane","jane.smith@example.com")
-    }
+
 }

@@ -17,9 +17,8 @@ abstract class NewsDatabase: RoomDatabase() {
 
     abstract fun getUserDao(): UserDao
 
-    companion object{
+    companion object {
         const val NAME = "my_news_database"
     }
-
 
 }
