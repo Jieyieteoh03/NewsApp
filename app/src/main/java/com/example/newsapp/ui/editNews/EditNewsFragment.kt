@@ -25,7 +25,6 @@ class EditNewsFragment : Fragment() {
     private lateinit var binding: FragmentEditNewsBinding
     private val viewModel: EditNewsViewModel by viewModels()
     private val args: EditNewsFragmentArgs by navArgs()
-    val REQUEST_IMAGE_PICK = 1
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,12 +61,12 @@ class EditNewsFragment : Fragment() {
 
     fun openImagePicker() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, REQUEST_IMAGE_PICK)
+        startActivityForResult(intent, Companion.REQUEST_IMAGE_PICK)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
+        if (requestCode == Companion.REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
             val selectedImageUri = data.data
             val inputStream = requireContext().contentResolver.openInputStream(selectedImageUri!!)
             val bytes = inputStream?.readBytes()
@@ -76,6 +75,10 @@ class EditNewsFragment : Fragment() {
             }
             binding.imgGallery.setImageURI(selectedImageUri)
         }
+    }
+
+    companion object {
+        const val REQUEST_IMAGE_PICK = 1
     }
 
 }

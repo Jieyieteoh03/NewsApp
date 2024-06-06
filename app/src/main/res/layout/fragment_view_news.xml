@@ -17,7 +17,6 @@
             android:layout_marginHorizontal="10dp"
             tools:context=".ui.viewNews.ViewNewsFragment">
 
-            <!-- TODO: Update blank fragment layout -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
