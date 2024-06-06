@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:cornerRadius="100pt"
-                app:icon="@drawable/ic_add"/>
+                app:icon="@drawable/ic_profile"/>
         </LinearLayout>
 
 
