@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".ui.Hilt_MainActivity">
+
+    <data>
+        <variable
+            name="updateUser"
+            type="com.example.newsapp.ui.user.EditUserViewModel" />
+    </data>
+
+
+    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_rectangle"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:layout_marginVertical="@dimen/xxxxxl"
+        android:layout_marginHorizontal="@dimen/m">
+
+<!--        <ImageView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/user"-->
+<!--            android:layout_marginVertical="@dimen/xl"-->
+<!--            android:layout_marginHorizontal="@dimen/xxxl"/>-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Edit Profile"
+            android:textSize="@dimen/giant_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/m"/>
+
+        <!--            <ScrollView-->
+        <!--                android:layout_width="370dp"-->
+        <!--                android:layout_height="wrap_content">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_marginHorizontal="@dimen/m"
+            android:paddingVertical="@dimen/s"
+            android:paddingStart="@dimen/xs"
+            android:paddingEnd="@dimen/xs"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textSize="@dimen/giant_text_size"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/xxxxxl"
+                android:paddingHorizontal="@dimen/xs"
+                android:text="@={updateUser.userName}"
+                android:hint="Enter the email"
+                android:background="@drawable/input_box"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:layout_marginTop="@dimen/xl"
+                android:textSize="@dimen/giant_text_size"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/xxxxxl"
+                android:paddingHorizontal="@dimen/xs"
+                android:text="@={updateUser.email}"
+                android:hint="Enter the email"
+                android:background="@drawable/input_box"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Phone Number"
+                android:layout_marginTop="@dimen/xl"
+                android:textSize="@dimen/giant_text_size"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/xxxxxl"
+                android:paddingHorizontal="@dimen/xs"
+                android:text="@={updateUser.phoneNumber}"
+                android:hint="+60X-XXXXXXXX"
+                android:background="@drawable/input_box"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:layout_marginTop="@dimen/xl"
+                android:textSize="@dimen/giant_text_size"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/xxxxxl"
+                android:paddingHorizontal="@dimen/xs"
+                android:text="@={updateUser.password}"
+                android:hint="Enter the Password"
+                android:background="@drawable/input_box" />
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Confirm Password"-->
+<!--                android:layout_marginTop="@dimen/xl"-->
+<!--                android:textSize="@dimen/giant_text_size"-->
+<!--                android:textStyle="bold"/>-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/etConfirmPassword"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/xxxxxl"-->
+<!--                android:paddingHorizontal="@dimen/xs"-->
+<!--                android:text="@={updateUser.confirm_password}"-->
+<!--                android:hint="Enter the Password"-->
+<!--                android:background="@drawable/input_box" />-->
+
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Changes"
+            android:backgroundTint="@color/blue"
+            android:layout_marginHorizontal="@dimen/xxxl"
+            android:layout_marginVertical="@dimen/xxl"
+            android:layout_marginBottom="@dimen/xxxxxl"/>
+    </LinearLayout>
+
+</ScrollView></layout>

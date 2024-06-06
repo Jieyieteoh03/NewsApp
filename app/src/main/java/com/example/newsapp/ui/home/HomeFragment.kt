@@ -13,7 +13,7 @@ import com.example.newsapp.databinding.FragmentHomeBinding
 import com.example.newsapp.ui.adapter.NewsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels ()
     private lateinit var binding: FragmentHomeBinding

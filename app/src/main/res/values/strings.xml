@@ -17,4 +17,5 @@
     <string name="login_email_title">Email</string>
     <string name="title_sign_in">Sign In</string>
     <string name="source">Source</string>
+    <string name="create_an_account"><a>Create an Account</a></string>
 </resources>

@@ -1,10 +1,9 @@
 package com.example.newsapp.data.model.user
 
-import android.provider.MediaStore
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.newsapp.data.model.Categories
+import javax.crypto.EncryptedPrivateKeyInfo
 
 @Entity(tableName = "user_table")
 data class User(
@@ -15,7 +14,8 @@ data class User(
     @ColumnInfo(name = "email")
     val email: String,
     val role: Role = Role.USER,
-    val phoneNumber: Int,
+    val phoneNumber: String,
     @ColumnInfo(name = "password")
-    val password: String
+    val password: String,
+//    val encryptedPassword: String
 )
