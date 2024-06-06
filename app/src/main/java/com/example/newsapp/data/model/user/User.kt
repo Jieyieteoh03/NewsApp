@@ -3,7 +3,6 @@ package com.example.newsapp.data.model.user
 import android.provider.MediaStore
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.newsapp.data.model.Categories
 
 @Entity
 data class User(
