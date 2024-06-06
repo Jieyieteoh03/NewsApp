@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentViewNewsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -41,9 +43,13 @@ class ViewNewsFragment : Fragment() {
             news.observe(viewLifecycleOwner){
                 setNews()
             }
-//            lifecycleScope.launch {
-//                viewModel.
-//            }
+            lifecycleScope.launch {
+                viewModel.finish.collect{
+                    findNavController().popBackStack(
+                        findNavController().graph.startDestinationId,false
+                    )
+                }
+            }
         }
     }
 }

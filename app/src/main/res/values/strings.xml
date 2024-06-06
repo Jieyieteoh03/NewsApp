@@ -18,4 +18,10 @@
     <string name="title_sign_in">Sign In</string>
     <string name="source">Source</string>
     <string name="create_an_account"><a>Create an Account</a></string>
+
+
+    <string-array name="category_options">
+        <item>HOT_NEWS</item>
+        <item>NORMAL_NEWS</item>
+    </string-array>
 </resources>

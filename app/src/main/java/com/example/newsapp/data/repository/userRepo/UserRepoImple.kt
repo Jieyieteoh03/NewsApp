@@ -1,6 +1,7 @@
 package com.example.newsapp.data.repository.userRepo
 
 import com.example.newsapp.data.db.UserDao
+import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.data.model.user.User
 import kotlinx.coroutines.flow.Flow
 
@@ -32,4 +33,6 @@ class UserRepoImple(
     override fun verifyLoginUser(email: String, password: String): Flow<User?> {
         return dao.userLogin(email, password)
     }
+
+
 }

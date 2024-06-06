@@ -7,6 +7,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.data.model.user.User
+import java.net.URL
 
 @Entity(
     tableName = "news_table",
@@ -23,7 +24,7 @@ import com.example.newsapp.data.model.user.User
 data class News(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
-    val imgPath: String,
+    val img: ByteArray,
     val title: String,
     val description: String,
     val tags: String,

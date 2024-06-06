@@ -6,6 +6,10 @@
     app:startDestination="@id/loginFragment">
 
     <fragment
+        android:id="@+id/addNewsFragment"
+        android:name="com.example.newsapp.ui.add.AddNewsFragment"
+        android:label="addNewsFragment" />
+    <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.newsapp.ui.account.signup.SignUpFragment"
         android:label="SignUpFragment" >
@@ -34,6 +38,9 @@
         <action
             android:id="@+id/action_home_to_viewNews"
             app:destination="@id/viewNewsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addNewsFragment"
+            app:destination="@id/addNewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/viewNewsFragment"
