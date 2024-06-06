@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-//
-//        lifecycleScope.launch (Dispatchers.IO){
-//            userRepo.addUser(User(1,  "jane","jane.smith@example.com", Role.USER, 0,"12222222"))
-//        }
+
+        lifecycleScope.launch (Dispatchers.IO){
+            userRepo.addUser(User(1,  "jane","jane.smith@example.com", Role.USER, 0,"12222222"))
+        }
     }
 }
