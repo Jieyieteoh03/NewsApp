@@ -23,8 +23,8 @@ class NewsRepoImple(
         dao.deleteNews(id)
     }
 
-    override fun updateNews(id: News, news: News) {
-        dao.updateNews(news.copy(id = id))
+    override fun updateNews(news: News) {
+        dao.updateNews(news)
     }
 
 

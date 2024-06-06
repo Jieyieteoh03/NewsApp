@@ -14,5 +14,5 @@ interface NewsRepo {
 
     fun deleteNews(id: Int)
 
-    fun updateNews(id: News, news: News)
+    fun updateNews(news: News)
 }

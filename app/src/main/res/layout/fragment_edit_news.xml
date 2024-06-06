@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="viewModel"
@@ -26,11 +26,19 @@
 
             <ImageView
                 android:id="@+id/uploadImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
                 android:layout_marginVertical="@dimen/xl"
                 android:layout_marginHorizontal="@dimen/xxxxxl"
-                android:src="@drawable/imgUpload"/>
+                android:src="@drawable/cat1"
+                app:imageByteArray="@{viewModel.img}"
+                />
+
+            <Button
+                android:id="@+id/btnSelectImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Image" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -45,7 +53,8 @@
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
                 android:hint="@string/edit_news_title"
-                android:background="@drawable/input_box"/>
+                android:background="@drawable/input_box"
+                android:text="@={viewModel.title}"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -61,7 +70,8 @@
                 android:layout_height="150dp"
                 android:gravity="center"
                 android:hint="@string/edit_news_desc"
-                android:background="@drawable/input_box" />
+                android:background="@drawable/input_box"
+                android:text="@={viewModel.description}"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -77,7 +87,8 @@
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
                 android:hint="@string/edit_news_tags"
-                android:background="@drawable/input_box" />
+                android:background="@drawable/input_box"
+                android:text="@={viewModel.tags}"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -90,10 +101,12 @@
             <Spinner
                 android:id="@+id/etCategory"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/xxxxxl"
-                android:paddingHorizontal="@dimen/xs"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/xxs"
                 android:spinnerMode="dropdown"
-                android:background="@drawable/input_box" />
+                android:background="@drawable/input_box"
+                android:entries="@array/category_options"
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -109,7 +122,8 @@
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
                 android:hint="@string/edit_url"
-                android:background="@drawable/input_box"/>
+                android:background="@drawable/input_box"
+                android:text="@={viewModel.source}"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnUpload"

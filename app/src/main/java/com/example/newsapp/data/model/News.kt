@@ -1,12 +1,10 @@
 package com.example.newsapp.data.model
 
-import android.provider.MediaStore.Images
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.data.model.user.User
-import java.net.URL
 
 @Entity(
     foreignKeys = [ForeignKey(
