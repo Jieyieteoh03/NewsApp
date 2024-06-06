@@ -102,6 +102,7 @@
                 />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddNews"
                 android:layout_width="45dp"
                 android:layout_height="50dp"
                 app:icon="@drawable/ic_add"

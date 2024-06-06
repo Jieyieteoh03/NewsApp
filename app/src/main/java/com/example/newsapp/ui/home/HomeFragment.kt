@@ -42,17 +42,20 @@ class HomeFragment : Fragment() {
             binding.svWord.setQuery(query, false)
         }
 
-        binding.btnFabAdd.setOnClickListener{
+        viewModel.news.observe(viewLifecycleOwner) { newsList ->
+            filterNewsList(query = binding.svWord.query.toString(), newsList = newsList)
+        }
+
+        binding.btnAddNews.setOnClickListener{
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToAddNewsFragment()
+                ContainerFragmentDirections.actionContainerToAddNews()
             )
         }
     }
 
     private fun setupAdapter() {
         val layoutManager = LinearLayoutManager(requireContext())
-        val dummyNewsData = generateDummyNews(10)
-        adapter = NewsAdapter(dummyNewsData)
+        adapter = NewsAdapter(emptyList())
         adapter.listener = object: NewsAdapter.Listener {
             override fun onClick(id: Int) {
                 val action = ContainerFragmentDirections.actionContainerToViewNews(id)
@@ -64,11 +67,11 @@ class HomeFragment : Fragment() {
 
         binding.svWord.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                filterNewsList(query)
+                filterNewsList(query, viewModel.news.value ?: emptyList())
                 return true
             }
             override fun onQueryTextChange(query: String?): Boolean {
-                filterNewsList(query)
+                filterNewsList(query, viewModel.news.value ?: emptyList())
                 return true
             }
         })
@@ -76,33 +79,19 @@ class HomeFragment : Fragment() {
 
         binding.rvNews.adapter = adapter
         binding.rvNews.layoutManager = layoutManager
+
+        viewModel.fetchNewsData()
     }
 
-    private fun filterNewsList(query: String?) {
+    private fun filterNewsList(query: String?, newsList: List<News>) {
         val filteredList = if (query.isNullOrBlank()) {
-            generateDummyNews(10)
+            newsList
         } else {
-            generateDummyNews(10).filter {
+           newsList.filter {
                 it.title.contains(query, true) || it.description.contains(query, true)
             }
         }
         adapter.setNews(filteredList)
     }
 
-    private fun generateDummyNews(count:Int): List<News> {
-        val newsList = mutableListOf<News>()
-        for (i in 1..count) {
-            val rand = (1..10).random()
-            val card = News(
-                id = rand,
-                title = "Title $rand",
-                description = "Description $rand",
-                tags = "Tag $rand",
-//                categories = listOf("Category $rand"),
-                source = "Source $rand"
-            )
-            newsList.add(card)
-        }
-        return newsList
-    }
 }
