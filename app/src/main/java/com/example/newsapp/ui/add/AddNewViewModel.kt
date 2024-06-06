@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
-import java.net.URL
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,7 +23,6 @@ class AddNewViewModel @Inject constructor(
     val categories: MutableLiveData<String> = MutableLiveData()
     val source: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
-
 
     fun submit() {
         if (img.value != null &&
@@ -40,7 +38,7 @@ class AddNewViewModel @Inject constructor(
                         title = title.value!!,
                         description = description.value!!,
                         tags = tags.value!!,
-                        categories = Categories.NORMAL_NEWS,
+                        categories = categoryValue ?: Categories.NORMAL_NEWS,
                         source = source.value!!,
                         userId = 1
                     )

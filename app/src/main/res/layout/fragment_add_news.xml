@@ -29,7 +29,7 @@
             android:id="@+id/imgGallery"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:src="@drawable/imgupload"
+            android:src="@drawable/cat1"
             app:imageByteArray="@{addViewModel.img}"
             />
 

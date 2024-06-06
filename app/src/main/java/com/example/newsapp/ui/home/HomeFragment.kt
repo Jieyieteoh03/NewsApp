@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.data.model.News
@@ -14,6 +15,7 @@ import com.example.newsapp.databinding.FragmentHomeBinding
 import com.example.newsapp.ui.ContainerFragmentDirections
 import com.example.newsapp.ui.adapter.NewsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -40,6 +42,13 @@ class HomeFragment : Fragment() {
 
         viewModel.tvTitle.observe(viewLifecycleOwner) { query ->
             binding.svWord.setQuery(query, false)
+        }
+        lifecycleScope.launch {
+            viewModel.run {
+                getAll().collect{
+                    adapter.setNews(it)
+                }
+            }
         }
 
         viewModel.news.observe(viewLifecycleOwner) { newsList ->

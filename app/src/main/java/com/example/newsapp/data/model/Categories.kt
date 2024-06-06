@@ -5,7 +5,7 @@ enum class Categories {
 
     companion object {
         fun fromString(value: String): Categories? {
-            return values().find { it.name == value }
+            return entries.find { it.name == value }
         }
     }
 }

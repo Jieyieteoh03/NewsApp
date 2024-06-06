@@ -8,6 +8,5 @@ import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class NewsApp:Application() {
-
+class NewsApp: Application() {
 }
