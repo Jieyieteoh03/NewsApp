@@ -29,6 +29,9 @@
     <string name="title_sign_in">Sign In</string>
     <string name="source">Source</string>
     <string name="select_image">Select Image</string>
+    <string name="hello">Hello</string>
+    <string name="user">User</string>
+    <string name="for_you">For you</string>
 
 
     <string-array name="category_options">

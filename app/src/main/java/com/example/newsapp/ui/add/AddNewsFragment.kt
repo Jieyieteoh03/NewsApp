@@ -29,6 +29,7 @@ class AddNewsFragment : Fragment() {
     private lateinit var binding: FragmentAddNewsBinding
     private val addViewModel: AddNewViewModel by viewModels()
     val REQUEST_IMAGE_PICK = 1
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

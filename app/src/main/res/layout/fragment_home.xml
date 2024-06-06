@@ -7,7 +7,7 @@
         android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context=".ui.home.HomeFragment">
 
@@ -47,14 +47,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey"
-                    android:text="Hello"
+                    android:text="@string/hello"
                     android:textSize="12sp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:text="User"
+                    android:text="@string/user"
                     android:textSize="20sp"/>
             </LinearLayout>
             </LinearLayout>
@@ -92,11 +92,11 @@
             android:orientation="horizontal"
             android:layout_marginHorizontal="@dimen/s">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:text="For you"
+                android:text="@string/for_you"
                 android:textSize="30sp"
                 android:layout_marginHorizontal="@dimen/s"
                 />
