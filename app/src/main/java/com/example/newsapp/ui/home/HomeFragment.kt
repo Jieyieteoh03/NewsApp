@@ -54,6 +54,8 @@ class HomeFragment : Fragment() {
             override fun onClick(id: Int) {
                 val action = ContainerFragmentDirections.actionContainerToViewNews(id)
                 findNavController().navigate(action)
+
+
             }
         }
         binding.rvNews.adapter = adapter
