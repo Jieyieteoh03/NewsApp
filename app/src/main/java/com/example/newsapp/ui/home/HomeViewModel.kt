@@ -15,11 +15,15 @@ class HomeViewModel @Inject constructor(
     private val newsRepo: NewsRepo
 ): ViewModel() {
     private val _news: MutableLiveData<List<News>> = MutableLiveData()
+    val tvTitle: MutableLiveData<String> = MutableLiveData("")
     val news: LiveData<List<News>> = _news
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
     fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
 
+    fun updateTvTitle(query: String) {
+        tvTitle.value = query
+    }
 
 
 }

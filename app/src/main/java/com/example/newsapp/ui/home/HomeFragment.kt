@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,15 +36,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         setupAdapter()
 
-
-
-//        binding.btnFabAdd.setOnClickListener{
-//
-//        }
+        viewModel.tvTitle.observe(viewLifecycleOwner) { query ->
+            binding.svWord.setQuery(query, false)
+        }
     }
 
     private fun setupAdapter() {
@@ -58,8 +55,32 @@ class HomeFragment : Fragment() {
 
             }
         }
+
+        binding.svWord.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                filterNewsList(query)
+                return true
+            }
+            override fun onQueryTextChange(query: String?): Boolean {
+                filterNewsList(query)
+                return true
+            }
+        })
+
+
         binding.rvNews.adapter = adapter
         binding.rvNews.layoutManager = layoutManager
+    }
+
+    private fun filterNewsList(query: String?) {
+        val filteredList = if (query.isNullOrBlank()) {
+            generateDummyNews(10)
+        } else {
+            generateDummyNews(10).filter {
+                it.title.contains(query, true) || it.description.contains(query, true)
+            }
+        }
+        adapter.setNews(filteredList)
     }
 
     private fun generateDummyNews(count:Int): List<News> {
