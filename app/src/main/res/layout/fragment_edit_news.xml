@@ -134,7 +134,8 @@
                 android:backgroundTint="@color/blue"
                 android:textSize="@dimen/giant_text_size"
                 android:layout_marginHorizontal="@dimen/xxxl"
-                android:layout_marginVertical="@dimen/xxxl"/>
+                android:layout_marginVertical="@dimen/xxxl"
+                android:onClick="@{() -> viewModel.editNews()}"/>
 
 
         </LinearLayout>

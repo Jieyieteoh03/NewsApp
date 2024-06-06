@@ -48,7 +48,7 @@ class HomeFragment : Fragment() {
 
         binding.btnFabAdd.setOnClickListener{
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToAddNewsFragment()
+                HomeFragmentDirections.actionHomeToAddNews()
             )
         }
     }

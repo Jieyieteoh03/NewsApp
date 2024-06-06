@@ -50,6 +50,16 @@ class ViewNewsFragment : Fragment() {
                     )
                 }
             }
+            binding.run {
+                btnDeleteNews.setOnClickListener {
+                    deleteNews()
+                }
+                btnEditNews.setOnClickListener {
+                    findNavController().navigate(
+                        ViewNewsFragmentDirections.actionViewNewsToEditNews(args.id)
+                    )
+                }
+            }
         }
     }
 }

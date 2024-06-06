@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewNewsViewModel @Inject constructor(
-    private val repo: NewsRepo
+    private val newsRepo: NewsRepo
 ):ViewModel() {
     private val _news: MutableLiveData<News> = MutableLiveData()
     val news: MutableLiveData<News> = _news
@@ -28,7 +28,7 @@ class ViewNewsViewModel @Inject constructor(
 
     fun getNewsById(id: Int) {
         viewModelScope.launch (Dispatchers.IO){
-            _news.postValue(repo.getNewsById(id))
+            _news.postValue(newsRepo.getNewsById(id))
         }
     }
 
@@ -41,6 +41,13 @@ class ViewNewsViewModel @Inject constructor(
             tags.value = it.tags
             source.value = it.source
 
+        }
+    }
+
+    fun deleteNews() {
+        viewModelScope.launch (Dispatchers.IO){
+            newsRepo.deleteNews(news.value!!)
+            finish.emit(Unit)
         }
     }
 }

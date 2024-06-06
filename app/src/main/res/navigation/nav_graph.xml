@@ -17,7 +17,7 @@
             android:id="@+id/action_home_to_viewNews"
             app:destination="@id/viewNewsFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_addNewsFragment"
+            android:id="@+id/action_home_to_addNews"
             app:destination="@id/addNewsFragment" />
     </fragment>
     <fragment
@@ -36,4 +36,5 @@
         android:label="EditNewsFragment" >
         <argument android:name="id" app:argType="integer"/>
     </fragment>
+
 </navigation>

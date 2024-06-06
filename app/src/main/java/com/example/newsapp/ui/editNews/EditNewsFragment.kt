@@ -37,15 +37,12 @@ class EditNewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.run {
-            viewModel = viewModel
-            lifecycleOwner = viewLifecycleOwner
-        }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        lifecycleScope.launch (Dispatchers.IO){
+        lifecycleScope.launch {
             viewModel.run {
-                getWordById(args.id)
-                news.observe(viewLifecycleOwner) {setNews()}
+                getNewsById(args.id)
                 finish.collect{findNavController().popBackStack()}
             }
         }

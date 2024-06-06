@@ -1,5 +1,6 @@
 package com.example.newsapp.data.repository.newsRepo
 
+import android.util.Log
 import com.example.newsapp.data.db.NewsDao
 import com.example.newsapp.data.model.News
 import kotlinx.coroutines.flow.Flow
@@ -19,11 +20,12 @@ class NewsRepoImple(
         dao.addNews(news)
     }
 
-    override fun deleteNews(id: Int) {
-        dao.deleteNews(id)
+    override fun deleteNews(news: News) {
+        dao.deleteNews(news)
     }
 
     override fun updateNews(news: News) {
+        Log.d("debugging 2", news.toString())
         dao.updateNews(news)
     }
 
