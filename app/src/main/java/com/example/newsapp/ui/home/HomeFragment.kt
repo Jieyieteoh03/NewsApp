@@ -41,6 +41,12 @@ class HomeFragment : Fragment() {
         viewModel.tvTitle.observe(viewLifecycleOwner) { query ->
             binding.svWord.setQuery(query, false)
         }
+
+        binding.btnFabAdd.setOnClickListener{
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToAddNewsFragment()
+            )
+        }
     }
 
     private fun setupAdapter() {

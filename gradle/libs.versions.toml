@@ -1,5 +1,5 @@
 [versions]
-agp = "8.3.0"
+agp = "8.3.2"
 androidxNavigationSafeargsGradlePlugin = "2.7.7"
 fragmentKtx = "1.7.1"
 kotlin = "1.9.0"
@@ -13,6 +13,7 @@ activity = "1.9.0"
 constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.7.7"
 roomRuntime = "2.6.1"
+navigationUiKtx = "2.7.7"
 
 [libraries]
 androidx-androidx-navigation-safeargs-gradle-plugin = { module = "androidx.navigation.safeargs:androidx.navigation.safeargs.gradle.plugin", version.ref = "androidxNavigationSafeargsGradlePlugin" }

@@ -6,6 +6,21 @@
     app:startDestination="@id/containerFragment">
 
     <fragment
+        android:id="@+id/addNewsFragment"
+        android:name="com.example.newsapp.ui.add.AddNewsFragment"
+        android:label="addNewsFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.newsapp.ui.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_home_to_viewNews"
+            app:destination="@id/viewNewsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addNewsFragment"
+            app:destination="@id/addNewsFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/viewNewsFragment"
         android:name="com.example.newsapp.ui.viewNews.ViewNewsFragment"
         android:label="fragment_view_news"
