@@ -77,4 +77,9 @@ class EditUserViewModel @Inject constructor(
         }
         Log.d("debugging", "${userName.value}, ${email.value}, ${phoneNumber.value}, ${password.value}")
     }
+
+    fun loggedInUser() {
+        repo.getLoggedInUser()
+    }
+
 }

@@ -6,13 +6,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.example.newsapp.R
 import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.data.model.user.User
 import com.example.newsapp.data.repository.userRepo.UserRepo
+import com.example.newsapp.ui.account.login.LoginFragment
+import com.example.newsapp.ui.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,9 +32,33 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+//        if (userRepo.isLoggedIn()) {
 //
-//        lifecycleScope.launch (Dispatchers.IO){
-//            userRepo.addUser(User(1,  "jane","jane.smith@example.com", Role.USER, 0,"12222222"))
 //        }
+//
+//        lifecycleScope.launch(Dispatchers.Main) {
+//            if (withContext(Dispatchers.IO) { userRepo.isLoggedIn() }) {
+//                navigateToHomeFragment()
+//            } else {
+//                navigateToLoginFragment()
+//            }
+//        }
+
     }
+
+//        private fun navigateToHomeFragment() {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.navHostFragment, HomeFragment())
+//                .commit()
+//        }
+//
+//        private fun navigateToLoginFragment() {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.navHostFragment, LoginFragment())
+//                .commit()
+//        }
+
+
+
 }

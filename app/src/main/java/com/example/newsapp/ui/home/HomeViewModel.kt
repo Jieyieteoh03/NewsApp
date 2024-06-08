@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,28 +24,56 @@ class HomeViewModel @Inject constructor(
 //    private val _news: MutableLiveData<List<News>> = MutableLiveData()
 //    val news: LiveData<List<News>> = _news
 //    val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
+
 //
 
     init {
+        getAllUser()
+    }
+
+
+    fun getAllUser() {
         viewModelScope.launch(Dispatchers.IO) {
             val users = userRepo.getAllUser()
             Log.d("debugging", "${users?.toString()}")
         }
+    }
 
+    fun getNewsById() {
         viewModelScope.launch(Dispatchers.IO) {
             val user = newsRepo.getNewsById(1)
             Log.d("debugging", "${user?.toString()}")
         }
+    }
 
-        fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
+    fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
 
-        fun addUser(user: User) {
-            viewModelScope.launch(Dispatchers.IO) {
-                userRepo.addUser(user)
-            }
+    fun addUser(user: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepo.addUser(user)
         }
     }
 
+//    fun loggedIn() {
+//        userRepo.isLoggedIn()
+//    }
+//
+//    fun logOut() {
+//            userRepo.logOut()
+//    }
 
+     fun loggedIn(): Boolean {
+        return userRepo.isLoggedIn()
+    }
+
+    fun logOut() {
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepo.logOut()
+        }
+    }
+
+    fun loggedInUser() {
+        userRepo.getLoggedInUser()
+    }
 
 }

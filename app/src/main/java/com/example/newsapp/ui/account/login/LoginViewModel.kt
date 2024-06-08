@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.account.login
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,6 +23,7 @@ class LoginViewModel @Inject constructor(
     val snackbar: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
+    fun isLoggedIn() = repo.isLoggedIn()
 
     fun userLogin() {
         if (email.value.isNullOrEmpty()) {
@@ -36,9 +38,10 @@ class LoginViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO) {
             val login = repo.verifyLoginUser(email.value!!, password.value!!)
+            Log.d("", login.toString())
 
-            val user = login.first()
-            if (user != null) {
+//            val user = login.first()
+            if (login != null) {
                 finish.emit(Unit)
             } else {
                 snackbar.postValue("Incorrect email or passwowrd ")

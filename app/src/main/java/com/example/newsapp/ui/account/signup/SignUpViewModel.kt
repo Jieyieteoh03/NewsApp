@@ -13,6 +13,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.springframework.security.crypto.bcrypt.BCrypt
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,19 +43,21 @@ class SignUpViewModel @Inject constructor(
             return
         }
 
+
         if (confirmPassword != password) {
             snackbar.value = "Confirm Password does not match your Password"
             return
         }
 
         viewModelScope.launch(Dispatchers.IO) {
+            val bcrypt = BCryptPasswordEncoder()
             try {
 //                val encryptedPassword = EncryptionHelper.encrypt(password)
                 val user = User(
                     userName = userName,
                     email = email,
                     phoneNumber = phoneNumber,
-                    password = password
+                    password = bcrypt.encode(password)
 //                    encryptedPassword = encryptedPassword
                 )
                 repo.addUser(user)

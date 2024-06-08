@@ -28,4 +28,10 @@ interface UserDao {
 
     @Query("SELECT * FROM user_table WHERE email = :email AND password = :password ")
     fun userLogin(email: String, password: String): Flow<User?>
+
+    @Query("SELECT password FROM user_table WHERE email = :email LIMIT 1")
+    fun getHashedPsw(email: String): String?
+
+    @Query("SELECT * FROM user_table WHERE email = :email")
+    fun getUserByEmail(email: String): User?
 }

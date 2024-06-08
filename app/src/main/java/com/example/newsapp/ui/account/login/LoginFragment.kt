@@ -33,6 +33,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        checkLoginStatus()
+
         binding.btnSignIn.setOnClickListener {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
@@ -60,8 +62,14 @@ class LoginFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.finish.collect {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToEditUserFragment(id))
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
             }
+        }
+    }
+
+    private fun checkLoginStatus() {
+        if (viewModel.isLoggedIn()) {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
         }
     }
 }

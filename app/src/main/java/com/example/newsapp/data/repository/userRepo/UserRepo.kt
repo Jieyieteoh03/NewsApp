@@ -13,6 +13,8 @@ interface UserRepo {
 
     fun getUserById(id: Int) : User?
 
+    fun getUserByEmail(email: String) : User?  //new
+
     fun addUser(user: User): Int?
 
     fun deleteUser(id: Int)
@@ -33,6 +35,14 @@ interface UserRepo {
 //        } ?: emit(null)
 //    }
 
-    fun verifyLoginUser(email: String, password: String) : Flow<User?>
+    fun verifyLoginUser(email: String, password: String) : User?
+
+    fun getHashedPsw(email: String): String
+
+    fun getLoggedInUser(): Int?
+
+    fun isLoggedIn(): Boolean
+
+    fun logOut()
 
 }

@@ -17,7 +17,6 @@ import androidx.databinding.BindingAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.databinding.FragmentAddNewsBinding
 import dagger.hilt.android.AndroidEntryPoint
