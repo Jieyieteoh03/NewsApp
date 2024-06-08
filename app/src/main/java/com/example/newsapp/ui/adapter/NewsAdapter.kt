@@ -42,6 +42,7 @@ class NewsAdapter(
         private val binding: LayoutNewsCardItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(news: News) {
+            binding.ivImage.setImageResource(0)
             binding.tvTitle.text = news.title
             binding.tvDesc.text = news.description
             binding.tvCategory.text = news.categories.toString()
