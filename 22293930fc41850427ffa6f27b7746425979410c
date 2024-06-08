@@ -1,0 +1,247 @@
+[33mcommit 22293930fc41850427ffa6f27b7746425979410c[m[33m ([m[1;36mHEAD -> [m[1;32mdashboard[m[33m, [m[1;31morigin/dashboard[m[33m)[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Sat Jun 8 20:24:24 2024 +0800
+
+    update dashboard
+
+[33mcommit 1e061d636e9b1a716a09bed417b6eda0e7e9d6d9[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Thu Jun 6 16:31:35 2024 +0800
+
+    update dashboard
+
+[33mcommit dab551d4b3c2e299ca6772c2c737bbed5d229c71[m
+Merge: 4ea3f76 7d6651e
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Thu Jun 6 16:11:33 2024 +0800
+
+    Merge branch 'editNews' into dashboard
+    
+    # Conflicts:
+    #       app/src/main/java/com/example/newsapp/ui/home/HomeFragment.kt
+    #       app/src/main/java/com/example/newsapp/ui/home/HomeViewModel.kt
+    #       app/src/main/res/drawable/ic_add.xml
+    #       app/src/main/res/layout/layout_news_card_item.xml
+    #       app/src/main/res/navigation/nav_graph.xml
+
+[33mcommit 7d6651ecdfc28a62ede9edc116e27791e55f3de8[m[33m ([m[1;31morigin/editNews[m[33m, [m[1;32meditNews[m[33m)[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Thu Jun 6 15:47:19 2024 +0800
+
+    update editNews
+
+[33mcommit 0b13f4a32458aafddf5134b60f842effd7916915[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Thu Jun 6 15:45:50 2024 +0800
+
+    update editNews
+
+[33mcommit 1070175b87513ea9b98ee61cfbfd1270f7664ec5[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Thu Jun 6 15:10:53 2024 +0800
+
+    update editNews
+
+[33mcommit 4ea3f76d3f3529e6dea374efd1de7ac1d766795e[m
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my>
+Date:   Thu Jun 6 15:08:02 2024 +0800
+
+    update dashboard
+
+[33mcommit 60851185c9489f0d83957f1c332fdfc87cf9f9a3[m
+Merge: 978a347 ae8d9a6
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my>
+Date:   Thu Jun 6 14:42:32 2024 +0800
+
+    Merge branch 'addNews' into dashboard
+    
+    # Conflicts:
+    #       app/src/main/java/com/example/newsapp/ui/home/HomeFragment.kt
+    #       app/src/main/res/drawable/ic_add.xml
+    #       app/src/main/res/navigation/nav_graph.xml
+
+[33mcommit 978a34747a65a0cf6c596d9bb1c65bc21f072498[m
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my>
+Date:   Thu Jun 6 14:39:04 2024 +0800
+
+    update dashboard
+
+[33mcommit a65df2f4b32e00f417d63150b8a822c4653ef57b[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Thu Jun 6 14:15:15 2024 +0800
+
+    update editNews
+
+[33mcommit f31b37a4d93040e6548e4ff1bf1a1ec5a551d7c3[m
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my>
+Date:   Thu Jun 6 14:14:29 2024 +0800
+
+    update add news page
+
+[33mcommit 9601a6b18427155a778db0180f3c1b3455bb665f[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Thu Jun 6 09:30:38 2024 +0800
+
+    update dashboard
+
+[33mcommit 5b712617eb429942a4f6c906a494ddb6629e0789[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Thu Jun 6 09:28:25 2024 +0800
+
+    update edit page
+
+[33mcommit 31681799b1ce3ffb4b686d0fcf728cb3e3f66a8b[m
+Merge: 88bf18a 333cffc
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Wed Jun 5 17:24:55 2024 +0800
+
+    Merge branch 'addNews' into editNews
+    
+    # Conflicts:
+    #       app/src/main/java/com/example/newsapp/data/model/News.kt
+    #       app/src/main/java/com/example/newsapp/ui/account/LoginFragment.kt
+    #       app/src/main/res/drawable/ic_add.xml
+    #       app/src/main/res/layout/fragment_add_news.xml
+
+[33mcommit 333cffce681da8ecdfe751e9dfe2c710e5994855[m[33m ([m[1;31morigin/addNews[m[33m, [m[1;32maddNews[m[33m)[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Wed Jun 5 17:11:09 2024 +0800
+
+    update add page
+
+[33mcommit 5258ad74bb7b68b5e09a1d2be9b5ed2a86ffec7f[m
+Merge: d70ff2f ae8d9a6
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Wed Jun 5 14:27:54 2024 +0800
+
+    Merge branch 'addNews' of https://github.com/Jieyieteoh03/NewsApp into addNews
+    
+    # Conflicts:
+    #       app/src/main/java/com/example/newsapp/NewsApp.kt
+    #       app/src/main/res/navigation/nav_graph.xml
+
+[33mcommit ae8d9a62b2b394456ffa01d4aa53c63d4ac71434[m
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my>
+Date:   Wed Jun 5 14:25:25 2024 +0800
+
+    update add news page
+
+[33mcommit 162ef53cf3dfd414fcb0294084a80bda14ca55f7[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Wed Jun 5 13:18:50 2024 +0800
+
+    update dashboard
+
+[33mcommit d87687bab8a47daaf4938af8acf833bc8cb1654c[m
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my>
+Date:   Wed Jun 5 13:18:07 2024 +0800
+
+    update add news page
+
+[33mcommit b1f3b037cbf752ba6a45b3d9ad7bab848354290c[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Wed Jun 5 09:48:09 2024 +0800
+
+    update dashboard
+
+[33mcommit 88bf18a2e4124efacb5afa633e0fffaa66d46a47[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Tue Jun 4 16:17:36 2024 +0800
+
+    update editNews
+
+[33mcommit 00c06f01d62894aa8683cc5b419a9d23e0a763ee[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Tue Jun 4 15:21:20 2024 +0800
+
+    update editNews
+
+[33mcommit 27b7f968b6c7ca55164108a132a51a3c05cac4ee[m
+Merge: e565432 c31fa38
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Tue Jun 4 11:42:04 2024 +0800
+
+    Merge branch 'dev' of https://github.com/Jieyieteoh03/NewsApp into editNews
+    
+    # Conflicts:
+    #       app/src/main/res/drawable/ic_add.xml
+    #       app/src/main/res/layout/fragment_login.xml
+    #       app/src/main/res/values/strings.xml
+
+[33mcommit 721fa2239339ffefea91a350ba96e1a705f4877c[m
+Merge: 53ccfd2 c31fa38
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my>
+Date:   Tue Jun 4 10:47:25 2024 +0800
+
+    Merge branch 'dev' of https://github.com/Jieyieteoh03/NewsApp into addNews
+    
+    # Conflicts:
+    #       app/build.gradle.kts
+    #       app/src/main/java/com/example/newsapp/NewsApp.kt
+    #       app/src/main/java/com/example/newsapp/data/db/NewsDb/NewsDatabase.kt
+    #       app/src/main/java/com/example/newsapp/data/model/Categories.kt
+    #       app/src/main/java/com/example/newsapp/ui/adapter/NewsAdapter.kt
+    #       app/src/main/res/drawable/ic_add.xml
+    #       app/src/main/res/navigation/nav_graph.xml
+
+[33mcommit 53ccfd2db4a02696d79a04b581e712435db4668b[m
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my>
+Date:   Tue Jun 4 10:45:10 2024 +0800
+
+    update user add page
+
+[33mcommit d70ff2ff66b9c32f64dfbfb86c0afe548950841f[m
+Merge: 215b205 c31fa38
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Tue Jun 4 10:44:18 2024 +0800
+
+    Merge branch 'dev' of https://github.com/Jieyieteoh03/NewsApp into addNews
+    
+    # Conflicts:
+    #       app/build.gradle.kts
+    #       app/src/main/java/com/example/newsapp/NewsApp.kt
+    #       app/src/main/java/com/example/newsapp/data/model/Categories.kt
+    #       app/src/main/java/com/example/newsapp/ui/adapter/NewsAdapter.kt
+    #       app/src/main/res/drawable/ic_add.xml
+    #       app/src/main/res/navigation/nav_graph.xml
+
+[33mcommit c31fa38f75e8e9fe44e3b50e0b8a698c48b0fa25[m[33m ([m[1;31morigin/dev[m[33m)[m
+Merge: 1be76b1 b6be3c3
+Author: Jieyieteoh03 <128445177+Jieyieteoh03@users.noreply.github.com>
+Date:   Tue Jun 4 10:35:12 2024 +0800
+
+    Merge pull request #4 from Jieyieteoh03/dashboard
+    
+    update dashboard to dev
+
+[33mcommit b6be3c39830ad3e8222243d13b7cb01b8b00eb55[m
+Author: Teoh Jie Yie <jieyiet2003@gmail.com>
+Date:   Tue Jun 4 10:32:34 2024 +0800
+
+    update dashboard
+
+[33mcommit 215b205a1cf9f93acd07a10b8fc525c176a4d014[m
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my>
+Date:   Tue Jun 4 10:25:55 2024 +0800
+
+    update user add page
+
+[33mcommit fe8d6f93581d4b3e1dace69b4c8f56267885d3c4[m
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my>
+Date:   Tue Jun 4 09:39:35 2024 +0800
+
+    update user add page
+
+[33mcommit 9247a34ba51c3322b1d7d347bb9813cd43556dcd[m
+Merge: 02ce9c4 1be76b1
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my>
+Date:   Wed May 29 11:59:29 2024 +0800
+
+    Merge branch 'dev' of https://github.com/Jieyieteoh03/NewsApp into addNews
+    
+    # Conflicts:
+    #       app/src/main/res/values/strings.xml
+    #       gradle/libs.versions.toml
+
+[33mcommit 02ce9c43fbb94434571b1fcc6e0fb4c1a8b1ae85[m
+Author: Foo Fang Woei <fangwoei22f@forward.edu.my
