@@ -32,6 +32,11 @@
     <string name="hello">Hello</string>
     <string name="user">User</string>
     <string name="for_you">For you</string>
+    <string name="add_edit_news">%s News</string>
+    <string name="enter_comment">Enter comment</string>
+    <string name="send">Send</string>
+    <string name="comment">comment</string>
+    <string name="username">Username</string>
 
 
     <string-array name="category_options">

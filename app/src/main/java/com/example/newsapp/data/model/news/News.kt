@@ -1,4 +1,4 @@
-package com.example.newsapp.data.model
+package com.example.newsapp.data.model.news
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -24,5 +24,5 @@ data class News(
     val tags: String,
     val categories: Categories = Categories.NORMAL_NEWS,
     val source: String,
-    val userId: Int? = null
+    val userId: Int
 )

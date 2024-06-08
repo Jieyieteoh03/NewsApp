@@ -9,7 +9,7 @@
 //import androidx.navigation.fragment.findNavController
 //import androidx.recyclerview.widget.LinearLayoutManager
 //import com.example.newsapp.R
-//import com.example.newsapp.data.model.News
+//import com.example.newsapp.data.model.news.News
 //import com.example.newsapp.databinding.FragmentSavedNewsBinding
 //import com.example.newsapp.ui.ContainerFragmentDirections
 //import com.example.newsapp.ui.adapter.NewsAdapter

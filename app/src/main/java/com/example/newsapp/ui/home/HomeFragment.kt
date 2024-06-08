@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.newsapp.data.model.News
+import com.example.newsapp.data.model.news.News
 import com.example.newsapp.databinding.FragmentHomeBinding
 import com.example.newsapp.ui.ContainerFragmentDirections
 import com.example.newsapp.ui.adapter.NewsAdapter
@@ -40,9 +40,6 @@ class HomeFragment : Fragment() {
 
         setupAdapter()
 
-        viewModel.tvTitle.observe(viewLifecycleOwner) { query ->
-            binding.svWord.setQuery(query, false)
-        }
         lifecycleScope.launch {
             viewModel.run {
                 getAll().collect{
@@ -51,13 +48,17 @@ class HomeFragment : Fragment() {
             }
         }
 
+        viewModel.tvTitle.observe(viewLifecycleOwner) { query ->
+            binding.svWord.setQuery(query, false)
+        }
+
         viewModel.news.observe(viewLifecycleOwner) { newsList ->
             filterNewsList(query = binding.svWord.query.toString(), newsList = newsList)
         }
 
         binding.btnAddNews.setOnClickListener{
             findNavController().navigate(
-                ContainerFragmentDirections.actionContainerToAddNews()
+                ContainerFragmentDirections.actionContainerToAddEditNews("Add", 0)
             )
         }
     }
@@ -69,8 +70,6 @@ class HomeFragment : Fragment() {
             override fun onClick(id: Int) {
                 val action = ContainerFragmentDirections.actionContainerToViewNews(id)
                 findNavController().navigate(action)
-
-
             }
         }
 
@@ -100,7 +99,7 @@ class HomeFragment : Fragment() {
                 it.title.contains(query, true) || it.description.contains(query, true)
             }
         }
-        adapter.setNews(filteredList)
+         adapter.setNews(filteredList)
     }
 
 }

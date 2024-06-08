@@ -1,8 +1,7 @@
 package com.example.newsapp.data.repository.newsRepo
 
-import android.util.Log
 import com.example.newsapp.data.db.NewsDao
-import com.example.newsapp.data.model.News
+import com.example.newsapp.data.model.news.News
 import kotlinx.coroutines.flow.Flow
 
 class NewsRepoImple(
@@ -29,7 +28,6 @@ class NewsRepoImple(
     }
 
     override fun updateNews(news: News) {
-        Log.d("debugging 2", news.toString())
         dao.updateNews(news)
     }
 

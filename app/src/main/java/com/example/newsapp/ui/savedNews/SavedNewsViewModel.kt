@@ -3,7 +3,7 @@ package com.example.newsapp.ui.savedNews
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.newsapp.data.model.News
+import com.example.newsapp.data.model.news.News
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

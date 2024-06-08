@@ -1,6 +1,6 @@
 package com.example.newsapp.data.repository.newsRepo
 
-import com.example.newsapp.data.model.News
+import com.example.newsapp.data.model.news.News
 import kotlinx.coroutines.flow.Flow
 
 interface NewsRepo {
@@ -10,7 +10,6 @@ interface NewsRepo {
     fun getSavedNews(): Flow<List<News>>
 
     fun getNewsById(id: Int) : News?
-
 
     fun addNews(news: News)
 

@@ -1,11 +1,10 @@
-package com.example.newsapp.ui.editNews
+package com.example.newsapp.ui.addEditNews
 
-import android.media.Image
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.newsapp.data.model.News
+import com.example.newsapp.data.model.news.News
 import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,20 +12,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.net.URL
 import javax.inject.Inject
 
 @HiltViewModel
-class EditNewsViewModel @Inject constructor(
+class AddEditNewsViewModel @Inject constructor (
     private val newsRepo: NewsRepo
-): ViewModel() {
+) :ViewModel() {
     private var news: News? = null
     val img: MutableLiveData<ByteArray?> = MutableLiveData()
     val title: MutableLiveData<String> = MutableLiveData("")
     val description: MutableLiveData<String> = MutableLiveData("")
-    val categories: MutableLiveData<String> = MutableLiveData()
     val tags: MutableLiveData<String> = MutableLiveData("")
+    val categories: MutableLiveData<String> = MutableLiveData("")
     val source: MutableLiveData<String> = MutableLiveData("")
+    val snackbar: MutableLiveData<String> = MutableLiveData("")
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
     fun getNewsById(id: Int) {
@@ -46,18 +45,43 @@ class EditNewsViewModel @Inject constructor(
         }
     }
 
+    fun submit() {
+        if (img.value != null &&
+            title.value != "" &&
+            description.value != ""
+        ) {
+            viewModelScope.launch(Dispatchers.IO) {
+                val categoryValue = Categories.fromString(categories.value!!)
+                try {
+                    newsRepo.addNews(
+                        News(
+                        img = img.value!!,
+                        title = title.value!!,
+                        description = description.value!!,
+                        tags = tags.value!!,
+                        categories = categoryValue ?: Categories.NORMAL_NEWS,
+                        source = source.value!!,
+                        userId = 1
+                    )
+                    )
+                    snackbar.postValue("Add successful")
+                } catch (e: Exception){ snackbar.postValue(e.message) }
+                finish.emit(Unit)
+            }
+        } else {
+            snackbar.postValue("Enter all required fields")
+        }
+    }
 
     fun editNews() {
         viewModelScope.launch(Dispatchers.IO) {
             val categoryValue = Categories.fromString(categories.value!!)
-            if (
-                title.value != "" &&
+            if (title.value != "" &&
                 description.value != "" &&
-                categories.value != "" &&
                 (title.value != news?.title ||
-                        description.value != news?.description ||
-                        tags.value != news?.tags ||
-                        source.value != news?.source)
+                description.value != news?.description ||
+                tags.value != news?.tags ||
+                source.value != news?.source)
             ) {
                 news?.let { newsTemp ->
                     newsRepo.updateNews(
@@ -75,6 +99,4 @@ class EditNewsViewModel @Inject constructor(
             }
         }
     }
-
-
 }

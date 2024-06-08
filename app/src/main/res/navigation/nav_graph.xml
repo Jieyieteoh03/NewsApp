@@ -6,35 +6,32 @@
     app:startDestination="@id/containerFragment">
 
     <fragment
-        android:id="@+id/addNewsFragment"
-        android:name="com.example.newsapp.ui.add.AddNewsFragment"
-        android:label="addNewsFragment" />
-    <fragment
         android:id="@+id/viewNewsFragment"
         android:name="com.example.newsapp.ui.viewNews.ViewNewsFragment"
         android:label="fragment_view_news"
         tools:layout="@layout/fragment_view_news" >
         <argument android:name="id" app:argType="integer"/>
         <action
-            android:id="@+id/action_viewNews_to_editNews"
-            app:destination="@id/editNewsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/editNewsFragment"
-        android:name="com.example.newsapp.ui.editNews.EditNewsFragment"
-        android:label="EditNewsFragment" >
-        <argument android:name="id" app:argType="integer"/>
+            android:id="@+id/action_viewNews_to_addEditNews"
+            app:destination="@id/addEditNewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/containerFragment"
         android:name="com.example.newsapp.ui.ContainerFragment"
         android:label="ContainerFragment" >
         <action
-            android:id="@+id/action_container_to_addNews"
-            app:destination="@id/addNewsFragment" />
-        <action
             android:id="@+id/action_container_to_viewNews"
             app:destination="@id/viewNewsFragment" />
+        <action
+            android:id="@+id/action_container_to_addEditNews"
+            app:destination="@id/addEditNewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEditNewsFragment"
+        android:name="com.example.newsapp.ui.addEditNews.AddEditNewsFragment"
+        android:label="AddEditNewsFragment" >
+        <argument android:name="type" app:argType="string" />
+        <argument android:name="id" app:argType="integer" />
     </fragment>
 
 </navigation>

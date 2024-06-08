@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.newsapp.ui.editNews.EditNewsViewModel" />
+            type="com.example.newsapp.ui.addEditNews.AddEditNewsViewModel" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -17,9 +17,9 @@
             android:layout_marginHorizontal="@dimen/m">
 
             <TextView
+                android:id="@+id/tvAddEditNews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/edit_news"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/m"/>
@@ -126,7 +126,7 @@
                 android:text="@={viewModel.source}"/>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnUpload"
+                android:id="@+id/btnAddEditNews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/edit_save_changes"
@@ -134,8 +134,7 @@
                 android:backgroundTint="@color/blue"
                 android:textSize="@dimen/giant_text_size"
                 android:layout_marginHorizontal="@dimen/xxxl"
-                android:layout_marginVertical="@dimen/xxxl"
-                android:onClick="@{() -> viewModel.editNews()}"/>
+                android:layout_marginVertical="@dimen/xxxl"/>
 
 
         </LinearLayout>
