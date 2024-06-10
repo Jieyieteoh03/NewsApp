@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             }
             if (loggedIn) {
                 findViewById<View>(R.id.navHostFragment).findNavController().navigate(
-                    R.id.homeFragment
+                    R.id.containerFragment
                 )
             }
         }

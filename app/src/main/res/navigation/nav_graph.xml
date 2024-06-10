@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_viewNews_to_addEditNews"
             app:destination="@id/addEditNewsFragment" />
+        <action
+            android:id="@+id/action_viewNewsFragment_to_containerFragment"
+            app:destination="@id/containerFragment" />
     </fragment>
     <fragment
         android:id="@+id/containerFragment"
@@ -58,7 +61,7 @@
         android:id="@+id/editUserFragment"
         android:name="com.example.newsapp.ui.editUserProfile.EditUserFragment"
         android:label="EditUserFragment">
-        <argument android:name="id" app:argType="integer"/>
+        <argument android:name="userId" app:argType="integer"/>
     </fragment>
 
 </navigation>

@@ -17,11 +17,6 @@ class NewsAdapter(
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var listener: Listener? = null
 
-    fun updateList(newList: List<News>) {
-        news = newList
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
        val binding = LayoutNewsCardItemBinding.inflate(
            LayoutInflater.from(parent.context),
@@ -38,6 +33,12 @@ class NewsAdapter(
         if(holder is NewsCardItemViewHolder) {
             return holder.bind(new)
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(newList: List<News>) {
+        news = newList
+        notifyDataSetChanged()
     }
 
     fun getNews() = news

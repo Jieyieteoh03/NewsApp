@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NewsDao {
-    @Query("SELECT * FROM News")
+    @Query("SELECT * FROM News WHERE isSaved = 0")
     fun getAllNews(): Flow<List<News>>
 
-    @Query("SELECT * FROM News")
+    @Query("SELECT * FROM News WHERE isSaved = 1")
     fun getSavedNews(): Flow<List<News>>
 
     @Query("SELECT * FROM News WHERE id = :id")

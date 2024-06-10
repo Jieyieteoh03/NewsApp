@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.R
-import com.example.newsapp.data.model.News
+import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.data.repository.userRepo.UserRepo
 import com.example.newsapp.databinding.FragmentHomeBinding
 import com.example.newsapp.ui.ContainerFragmentDirections
@@ -26,7 +26,7 @@ import kotlinx.coroutines.withContext
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private val viewModel: HomeViewModel by viewModels ()
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: NewsAdapter
     private lateinit var hotAdapter: HotAdapter
@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
                     return@launch
                 }
             }
-        viewModel.getUsersAndNews()
+            viewModel.getUsersAndNews()
 
             lifecycleScope.launch {
                 viewModel.run {
@@ -78,69 +78,72 @@ class HomeFragment : Fragment() {
                 }
             }
 
+            binding.run {
+                btnAddNews.setOnClickListener {
+                    findNavController().navigate(
+                        ContainerFragmentDirections.actionContainerToAddEditNews("Add", 0)
+                    )
+                }
+
+                btnEditUser.setOnClickListener {
+                    findNavController().navigate(
+                        ContainerFragmentDirections.actionContainerToEditUser(id)
+                    )
+                }
+
+                btnLogout.setOnClickListener {
+                    viewModel.doLogout()
+                    findNavController().navigate(
+                        ContainerFragmentDirections.actionContainerToLogin()
+                    )
+                }
+            }
+        }
+
+    }
+
+    private fun setupAdapter() {
+        val layoutManager = LinearLayoutManager(requireContext())
+        adapter = NewsAdapter(emptyList())
+        adapter.listener = object : NewsAdapter.Listener {
+            override fun onClick(id: Int) {
+                val action = ContainerFragmentDirections.actionContainerToViewNews(id)
+                findNavController().navigate(action)
+            }
+        }
         binding.run {
-            btnFabAdd.setOnClickListener{
-                findNavController().navigate(
-                    HomeFragmentDirections.actionHomeToAddNews()
-                )
-            }
+            rvNews.adapter = adapter
+            rvNews.layoutManager = layoutManager
+            svWord.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean = false
 
-            btnEditUser.setOnClickListener {
-                findNavController().navigate(
-                    HomeFragmentDirections.actionHomeToEditUser(userId = id)
-                )
-            }
-
-            btnLogOut.setOnClickListener {
-                viewModel.doLogout()
-                findNavController().navigate(
-                    HomeFragmentDirections.actionHomeFragmentToLoginFragment()
-                )
-            }
+                override fun onQueryTextChange(query: String?): Boolean {
+                    filterNewsList(query, viewModel.news.value ?: emptyList())
+                    return true
+                }
+            })
+            viewModel.fetchNewsData()
         }
     }
 
-        private fun setupAdapter() {
-            val layoutManager = LinearLayoutManager(requireContext())
-            adapter = NewsAdapter(emptyList())
-            adapter.listener = object : NewsAdapter.Listener {
-                override fun onClick(id: Int) {
-                    val action = ContainerFragmentDirections.actionContainerToViewNews(id)
-                    findNavController().navigate(action)
-                }
-            }
-            binding.run {
-                rvNews.adapter = adapter
-                rvNews.layoutManager = layoutManager
-                svWord.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                    override fun onQueryTextSubmit(query: String?): Boolean = false
-
-                    override fun onQueryTextChange(query: String?): Boolean {
-                        filterNewsList(query, viewModel.news.value ?: emptyList())
-                        return true
-                    }
-                })
-                viewModel.fetchNewsData()
+    fun filterNewsList(query: String?, newsList: List<News>) {
+        val filteredList = if (query.isNullOrBlank()) {
+            newsList
+        } else {
+            newsList.filter {
+                it.title.contains(query, true)
+                        || it.description.contains(query, true)
             }
         }
-
-        fun filterNewsList(query: String?, newsList: List<News>) {
-            val filteredList = if (query.isNullOrBlank()) {
-                newsList
-            } else {
-                newsList.filter {
-                    it.title.contains(query, true)
-                            || it.description.contains(query, true)
-                }
-            }
-            adapter.setNews(filteredList)
-        }
+        adapter.setNews(filteredList)
+    }
 
     private fun setupHotAdapter() {
-        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         hotAdapter = HotAdapter(emptyList())
-        hotAdapter.listener = object: HotAdapter.Listener, NewsAdapter.Listener {
+        hotAdapter.listener = object : HotAdapter.Listener, NewsAdapter.Listener {
             override fun onClick(id: Int) {
                 val action = ContainerFragmentDirections.actionContainerToViewNews(id)
                 findNavController().navigate(action)
@@ -170,3 +173,6 @@ class HomeFragment : Fragment() {
         adapter.setNews(normalNewsList)
     }
 }
+
+
+

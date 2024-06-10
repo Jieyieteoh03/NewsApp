@@ -38,6 +38,7 @@
     <string name="send">Send</string>
     <string name="comment">comment</string>
     <string name="username">Username</string>
+    <string name="alert_ques">%s?</string>
 
 
     <string-array name="category_options">
