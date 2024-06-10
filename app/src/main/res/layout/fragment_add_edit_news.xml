@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.newsapp.ui.addEditNews.AddEditNewsViewModel" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/m">
+
+            <TextView
+                android:id="@+id/tvAddEditNews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/m"/>
+
+            <ImageView
+                android:id="@+id/imgGallery"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginVertical="@dimen/xl"
+                android:layout_marginHorizontal="@dimen/xxxxxl"
+                android:src="@drawable/cat1"
+                app:imageByteArray="@{viewModel.img}"
+                />
+
+            <Button
+                android:id="@+id/btnSelectImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_image" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_title"
+                android:textSize="@dimen/giant_text_size"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/etTitle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/xxxxxl"
+                android:paddingHorizontal="@dimen/xs"
+                android:hint="@string/edit_news_title"
+                android:background="@drawable/input_box"
+                android:text="@={viewModel.title}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_description"
+                android:layout_marginTop="@dimen/xl"
+                android:textSize="@dimen/giant_text_size"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:gravity="center"
+                android:hint="@string/edit_news_desc"
+                android:background="@drawable/input_box"
+                android:text="@={viewModel.description}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_tags"
+                android:layout_marginTop="@dimen/xl"
+                android:textSize="@dimen/giant_text_size"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/etTags"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/xxxxxl"
+                android:paddingHorizontal="@dimen/xs"
+                android:hint="@string/edit_news_tags"
+                android:background="@drawable/input_box"
+                android:text="@={viewModel.tags}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_categories"
+                android:layout_marginTop="@dimen/xl"
+                android:textSize="@dimen/giant_text_size"
+                android:textStyle="bold"/>
+
+            <Spinner
+                android:id="@+id/etCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/xxs"
+                android:spinnerMode="dropdown"
+                android:background="@drawable/input_box"
+                android:entries="@array/category_options"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_source"
+                android:layout_marginTop="@dimen/xl"
+                android:textSize="@dimen/giant_text_size"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/etSource"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/xxxxxl"
+                android:paddingHorizontal="@dimen/xs"
+                android:hint="@string/edit_url"
+                android:background="@drawable/input_box"
+                android:text="@={viewModel.source}"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddEditNews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_save_changes"
+                android:textStyle="bold"
+                android:backgroundTint="@color/blue"
+                android:textSize="@dimen/giant_text_size"
+                android:layout_marginHorizontal="@dimen/xxxl"
+                android:layout_marginVertical="@dimen/xxxl"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</layout>

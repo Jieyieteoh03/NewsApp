@@ -3,18 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/containerFragment">
+    app:startDestination="@id/loginFragment">
 
-    <fragment
-        android:id="@+id/addNewsFragment"
-        android:name="com.example.newsapp.ui.add.AddNewsFragment"
-        android:label="addNewsFragment" />
     <fragment
         android:id="@+id/viewNewsFragment"
         android:name="com.example.newsapp.ui.viewNews.ViewNewsFragment"
         android:label="fragment_view_news"
         tools:layout="@layout/fragment_view_news" >
         <argument android:name="id" app:argType="integer"/>
+        <action
+            android:id="@+id/action_viewNews_to_addEditNews"
+            app:destination="@id/addEditNewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/containerFragment"
@@ -24,7 +23,42 @@
             android:id="@+id/action_container_to_viewNews"
             app:destination="@id/viewNewsFragment" />
         <action
-            android:id="@+id/action_container_to_addNews"
-            app:destination="@id/addNewsFragment" />
+            android:id="@+id/action_container_to_addEditNews"
+            app:destination="@id/addEditNewsFragment" />
+        <action
+            android:id="@+id/action_container_to_login"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_container_to_editUser"
+            app:destination="@id/editUserFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addEditNewsFragment"
+        android:name="com.example.newsapp.ui.addEditNews.AddEditNewsFragment"
+        android:label="AddEditNewsFragment" >
+        <argument android:name="type" app:argType="string" />
+        <argument android:name="id" app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.newsapp.ui.account.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_login_to_signUp"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_login_to_container"
+            app:destination="@id/containerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.newsapp.ui.account.signup.SignUpFragment"
+        android:label="SignUpFragment" />
+    <fragment
+        android:id="@+id/editUserFragment"
+        android:name="com.example.newsapp.ui.user.EditUserFragment"
+        android:label="EditUserFragment">
+        <argument android:name="id" app:argType="integer"/>
+    </fragment>
+
 </navigation>

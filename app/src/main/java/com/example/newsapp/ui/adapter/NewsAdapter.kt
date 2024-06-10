@@ -2,12 +2,13 @@ package com.example.newsapp.ui.adapter
 
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.newsapp.data.model.News
+import com.example.newsapp.data.model.news.News
 import com.example.newsapp.databinding.LayoutNewsCardItemBinding
 
 class NewsAdapter(
@@ -49,12 +50,11 @@ class NewsAdapter(
         private val binding: LayoutNewsCardItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(news: News) {
-            val bitmap = BitmapFactory.decodeByteArray(news.img, 0, news.img.size)
-            Glide.with(binding.root.context)
-                .load(news.img)
-                .into(binding.ivImage)
             binding.tvTitle.text = news.title
             binding.tvDesc.text = news.description
+            Glide.with(binding.ivImage.context)
+                .load(news.img)
+                .into(binding.ivImage)
             binding.tvCategory.text = news.categories.toString()
             binding.cvNews.setOnClickListener { listener?.onClick(news.id!!) }
         }

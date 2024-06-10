@@ -1,11 +1,13 @@
 package com.example.newsapp.ui.add
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.newsapp.data.model.News
 import com.example.newsapp.data.model.news.Categories
+import com.example.newsapp.data.model.news.News
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
+import com.example.newsapp.data.repository.userRepo.UserRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -25,7 +27,6 @@ class AddNewViewModel @Inject constructor(
     val source: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
-
     fun submit() {
         if (img.value != null &&
             title.value != null &&
@@ -40,7 +41,7 @@ class AddNewViewModel @Inject constructor(
                         title = title.value!!,
                         description = description.value!!,
                         tags = tags.value!!,
-                        categories = categoryValue!!,
+                        categories = categoryValue ?: Categories.NORMAL_NEWS,
                         source = source.value!!,
                         userId = 1
                     )

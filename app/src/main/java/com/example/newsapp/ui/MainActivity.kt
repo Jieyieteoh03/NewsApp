@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        lifecycleScope.launch (Dispatchers.IO){
-            userRepo.addUser(User(1,  "jane","jane.smith@example.com", Role.USER, 0,"12222222"))
-        }
+//        lifecycleScope.launch (Dispatchers.IO){
+//            userRepo.addUser(User(1,  "jane","jane.smith@example.com", Role.USER, 0,"12222222"))
+//        }
     }
 }

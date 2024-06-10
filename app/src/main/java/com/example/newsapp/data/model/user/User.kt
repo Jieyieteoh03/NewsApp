@@ -1,16 +1,23 @@
 package com.example.newsapp.data.model.user
 
-import android.provider.MediaStore
+import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
+import javax.crypto.EncryptedPrivateKeyInfo
 
-@Entity
+@Entity(tableName = "user_table", indices = [Index(value = ["email"],
+    unique = true)])
 data class User(
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    @ColumnInfo(name = "user_id")
+    val userId: Int? = null,
+    @ColumnInfo(name = "user_name")
     val userName: String,
+    @ColumnInfo(name = "email")
     val email: String,
     val role: Role = Role.USER,
-    val phoneNumber: Int,
-    val password: String
+    val phoneNumber: String,
+    @ColumnInfo(name = "password")
+    val password: String,
 )

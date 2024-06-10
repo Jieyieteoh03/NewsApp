@@ -3,6 +3,8 @@ package com.example.newsapp.core.di
 import android.content.Context
 import androidx.room.Room
 import com.example.newsapp.data.db.NewsDatabase
+import com.example.newsapp.data.repository.commentsRepo.CommentsRepo
+import com.example.newsapp.data.repository.commentsRepo.CommentsRepoImple
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import com.example.newsapp.data.repository.newsRepo.NewsRepoImple
 import com.example.newsapp.data.repository.userRepo.UserRepo
@@ -33,7 +35,13 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideUserRepo(db: NewsDatabase): UserRepo {
-        return UserRepoImple(db.getUserDao())
+    fun provideUserRepo(@ApplicationContext context: Context, db: NewsDatabase): UserRepo {
+        return UserRepoImple(context, db.getUserDao())
+    }
+
+    @Provides
+    @Singleton
+    fun provideCommentsRepo(db: NewsDatabase): CommentsRepo {
+        return CommentsRepoImple(db.getCommentsDao())
     }
 }
