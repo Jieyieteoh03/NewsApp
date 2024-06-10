@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.home
 
+import android.media.CamcorderProfile.getAll
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,11 +10,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.newsapp.R
 import com.example.newsapp.data.model.News
+import com.example.newsapp.data.repository.userRepo.UserRepo
 import com.example.newsapp.databinding.FragmentHomeBinding
 import com.example.newsapp.ui.adapter.NewsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -30,6 +35,7 @@ class HomeFragment : Fragment() {
             container,
             false
         )
+
         return binding.root
     }
 
@@ -38,7 +44,9 @@ class HomeFragment : Fragment() {
 
         setupAdapter()
 
-        lifecycleScope.launch {
+        viewModel.getUsersAndNews()
+
+        lifecycleScope.launch{
             viewModel.run {
                 getAll().collect{
                     adapter.setNews(it)
@@ -46,16 +54,30 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.btnFabAdd.setOnClickListener{
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToAddNewsFragment()
-            )
+        binding.run {
+            btnFabAdd.setOnClickListener{
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeToAddNews()
+                )
+            }
+
+            btnEditUser.setOnClickListener {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeToEditUser(userId = id)
+                )
+            }
+
+            btnLogOut.setOnClickListener {
+                viewModel.doLogout()
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+                )
+            }
         }
     }
 
     private fun setupAdapter() {
         val layoutManager = LinearLayoutManager(requireContext())
-//        val dummyNewsData = generateDummyNews(10)
         adapter = NewsAdapter(emptyList())
         adapter.listener = object: NewsAdapter.Listener {
             override fun onClick(id: Int) {

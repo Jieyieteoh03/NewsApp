@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,12 +21,11 @@ class HomeViewModel @Inject constructor(
     private val newsRepo: NewsRepo,
     private val userRepo: UserRepo
 ): ViewModel() {
-//    private val _news: MutableLiveData<List<News>> = MutableLiveData()
-//    val news: LiveData<List<News>> = _news
-//    val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
-//
+    private val _news: MutableLiveData<List<News>> = MutableLiveData()
+    val news: LiveData<List<News>> = _news
+    val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
-    init {
+    fun getUsersAndNews() {
         viewModelScope.launch(Dispatchers.IO) {
             val users = userRepo.getAllUser()
             Log.d("debugging", "${users?.toString()}")
@@ -35,16 +35,9 @@ class HomeViewModel @Inject constructor(
             val user = newsRepo.getNewsById(1)
             Log.d("debugging", "${user?.toString()}")
         }
-
-        fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
-
-        fun addUser(user: User) {
-            viewModelScope.launch(Dispatchers.IO) {
-                userRepo.addUser(user)
-            }
-        }
     }
+    fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
 
-
+    fun doLogout() = userRepo.logOut()
 
 }

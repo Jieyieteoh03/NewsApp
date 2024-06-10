@@ -24,23 +24,12 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
-<!--        <action-->
-<!--            android:id="@+id/action_loginFragment_to_homeFragment"-->
-<!--            app:destination="@id/homeFragment" />-->
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_loginFragment_to_editUserFragment"
             app:destination="@id/editUserFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.newsapp.ui.home.HomeFragment"
-        android:label="HomeFragment" >
-        <action
-            android:id="@+id/action_home_to_viewNews"
-            app:destination="@id/viewNewsFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_addNewsFragment"
-            app:destination="@id/addNewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/viewNewsFragment"
@@ -51,10 +40,27 @@
     </fragment>
     <fragment
         android:id="@+id/editUserFragment"
-        android:name="com.example.newsapp.ui.user.EditUserFragment"
+        android:name="com.example.newsapp.ui.editUserProfile.EditUserFragment"
         android:label="EditUserFragment">
         <argument
-            android:name="id"
+            android:name="userId"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.newsapp.ui.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_home_to_addNews"
+            app:destination="@id/addNewsFragment" />
+        <action
+            android:id="@+id/action_home_to_viewNews"
+            app:destination="@id/viewNewsFragment" />
+        <action
+            android:id="@+id/action_home_to_editUser"
+            app:destination="@id/editUserFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>

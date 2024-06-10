@@ -10,9 +10,12 @@ import com.example.newsapp.R
 import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.data.model.user.User
 import com.example.newsapp.data.repository.userRepo.UserRepo
+import com.example.newsapp.ui.account.login.LoginFragment
+import com.example.newsapp.ui.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,9 +31,5 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-//
-//        lifecycleScope.launch (Dispatchers.IO){
-//            userRepo.addUser(User(1,  "jane","jane.smith@example.com", Role.USER, 0,"12222222"))
-//        }
     }
 }

@@ -3,6 +3,7 @@ package com.example.newsapp.ui.account.login
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,9 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -32,6 +35,18 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            val loggedIn = withContext(Dispatchers.IO) {
+                viewModel.isLoggedin()
+            }
+            Log.d("auth", viewModel.isLoggedin().toString())
+            if (loggedIn) {
+                findNavController().navigate(
+                    LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                )
+            }
+        }
 
         binding.btnSignIn.setOnClickListener {
             val email = binding.etEmail.text.toString()
@@ -60,7 +75,7 @@ class LoginFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.finish.collect {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToEditUserFragment(id))
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
             }
         }
     }

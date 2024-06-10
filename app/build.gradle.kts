@@ -10,6 +10,12 @@ android {
     namespace = "com.example.newsapp"
     compileSdk = 34
 
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+        // If you have other paths to exclude, you can add them here
+        // exclude 'META-INF/other.path'
+    }
+
     defaultConfig {
         applicationId = "com.example.newsapp"
         minSdk = 28
@@ -29,6 +35,8 @@ android {
             )
         }
     }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -74,6 +82,8 @@ dependencies {
 
     implementation("com.github.bumptech.glide:glide:4.14.2")
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
+
+    implementation ("org.springframework.security:spring-security-core:5.6.1")
 
 }
 
