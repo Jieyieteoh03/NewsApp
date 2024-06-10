@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
             btnEditUser.setOnClickListener {
 //                viewModel.logOut()
                 findNavController().navigate(
-                    ContainerFragmentDirections.actionContainerToEditUser()
+                    ContainerFragmentDirections.actionContainerToEditUser(1)
                 )
             }
             btnLogout.setOnClickListener {
