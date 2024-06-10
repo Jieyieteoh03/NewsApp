@@ -37,7 +37,6 @@ class SignUpFragment : Fragment() {
             Log.d("signupViewModel", "${binding.etUsername.text}, ${binding.etEmail.text}")
         }
 
-
         signupViewModel.snackbar.observe(viewLifecycleOwner) { message ->
             message?.let {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()

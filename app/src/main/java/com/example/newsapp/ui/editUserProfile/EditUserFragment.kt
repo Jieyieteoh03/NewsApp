@@ -1,4 +1,4 @@
-package com.example.newsapp.ui.user
+package com.example.newsapp.ui.editUserProfile
 
 import android.os.Bundle
 import android.util.Log
@@ -10,53 +10,54 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.newsapp.R
-import com.example.newsapp.data.model.user.User
+import androidx.navigation.fragment.navArgs
 import com.example.newsapp.databinding.FragmentEditUserBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class EditUserFragment : Fragment() {
     private lateinit var binding: FragmentEditUserBinding
-    private val EditUserViewModel: EditUserViewModel by viewModels()
-    private var userDetail = 0
+    private val editUserViewModel: EditUserViewModel by viewModels()
+    private val args: EditUserFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentEditUserBinding.inflate(
             layoutInflater,
             container,
             false
         )
 
-        EditUserViewModel.userDetails.observe(viewLifecycleOwner) { user ->
-            user.let {
-                EditUserViewModel.setUser(it)
+        editUserViewModel.userDetails.observe(viewLifecycleOwner) { user ->
+            user?.let {
+                binding.etUsername.setText(it.userName)
+                binding.etEmail.setText(it.email)
+                binding.etPhoneNumber.setText(it.phoneNumber)
+                binding.etPassword.setText(it.password)
             }
         }
 
-        arguments?.let {
-            userDetail = EditUserFragmentArgs.fromBundle(it).id
-            EditUserViewModel.getUserById(userDetail)
-        }
+        val userId = args.userId
+        editUserViewModel.getUserById(userId)
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.updateUser = EditUserViewModel
+        binding.updateUser = editUserViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        editUserViewModel.loggedInUser()
+
         lifecycleScope.launch {
-            EditUserViewModel.finish.collect{
+            editUserViewModel.finish.collect {
                 findNavController().popBackStack()
             }
         }
 
-        EditUserViewModel.snackbar.observe(viewLifecycleOwner) { message ->
+        editUserViewModel.snackbar.observe(viewLifecycleOwner) { message ->
             message?.let {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }

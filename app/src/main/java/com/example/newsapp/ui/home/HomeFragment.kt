@@ -12,7 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.R
-import com.example.newsapp.data.model.news.Categories
+import com.example.newsapp.data.model.News
+import com.example.newsapp.data.repository.userRepo.UserRepo
 import com.example.newsapp.databinding.FragmentHomeBinding
 import com.example.newsapp.ui.ContainerFragmentDirections
 import com.example.newsapp.ui.adapter.HotAdapter
@@ -37,6 +38,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(
             layoutInflater, container, false
         )
+
         return binding.root
     }
 
@@ -60,6 +62,7 @@ class HomeFragment : Fragment() {
                     return@launch
                 }
             }
+        viewModel.getUsersAndNews()
 
             lifecycleScope.launch {
                 viewModel.run {
@@ -75,28 +78,24 @@ class HomeFragment : Fragment() {
                 }
             }
 
+        binding.run {
+            btnFabAdd.setOnClickListener{
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeToAddNews()
+                )
+            }
 
+            btnEditUser.setOnClickListener {
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeToEditUser(userId = id)
+                )
+            }
 
-            binding.run {
-                btnAddNews.setOnClickListener {
-                    findNavController().navigate(
-                        ContainerFragmentDirections.actionContainerToAddEditNews("Add", 0)
-                    )
-                }
-                btnEditUser.setOnClickListener {
-//                viewModel.logOut()
-                    findNavController().navigate(
-                        ContainerFragmentDirections.actionContainerToEditUser(1)
-                    )
-                }
-                btnLogout.setOnClickListener {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        viewModel.logOut()
-                        withContext(Dispatchers.Main) {
-                            findNavController().navigate(R.id.loginFragment)
-                        }
-                    }
-                }
+            btnLogOut.setOnClickListener {
+                viewModel.doLogout()
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+                )
             }
         }
     }

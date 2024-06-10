@@ -79,6 +79,8 @@
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
                 android:hint="@string/login_paswword"
+                android:inputType="textPassword"
+                android:password="true"
                 />
 
             <com.google.android.material.button.MaterialButton

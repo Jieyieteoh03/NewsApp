@@ -1,6 +1,5 @@
 package com.example.newsapp.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,6 +29,15 @@ class HomeViewModel @Inject constructor(
     private val _loggedInUser = MutableLiveData<User?>()
     val loggedInUser: LiveData<User?> = _loggedInUser
 
+    fun getUsersAndNews() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val users = userRepo.getAllUser()
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val user = newsRepo.getNewsById(1)
+        }
+    }
     fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
 
     fun fetchNewsData() {
@@ -44,33 +52,9 @@ class HomeViewModel @Inject constructor(
         tvTitle.value = query
     }
 
-    fun addUser(user: User) {
-        viewModelScope.launch(Dispatchers.IO) {
-            userRepo.addUser(user)
-        }
-    }
-
-//    fun loggedIn() {
-//        userRepo.isLoggedIn()
-//    }
-//
-//    fun logOut() {
-//            userRepo.logOut()
-//    }
-
      fun loggedIn(): Boolean {
         return userRepo.isLoggedIn()
     }
-
-    fun logOut() {
-        viewModelScope.launch(Dispatchers.IO) {
-            userRepo.logOut()
-        }
-    }
-
-    fun loggedInUser() {
-        userRepo.getLoggedInUser()
-    }
-
+    fun doLogout() = userRepo.logOut()
 
 }

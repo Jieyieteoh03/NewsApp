@@ -117,6 +117,8 @@
                         android:paddingHorizontal="@dimen/xs"
                         android:text="@={SignUpViewModel.password}"
                         android:hint="Enter the Password"
+                        android:inputType="textPassword"
+                        android:password="true"
                         android:background="@drawable/input_box" />
 
                     <TextView
@@ -134,6 +136,8 @@
                         android:paddingHorizontal="@dimen/xs"
                         android:text="@={SignUpViewModel.confirm_password}"
                         android:hint="Enter the Password"
+                        android:inputType="textPassword"
+                        android:password="true"
                         android:background="@drawable/input_box" />
 
 

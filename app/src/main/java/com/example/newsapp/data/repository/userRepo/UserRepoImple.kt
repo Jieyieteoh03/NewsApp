@@ -1,14 +1,12 @@
 package com.example.newsapp.data.repository.userRepo
 
 import android.content.Context
-import android.util.Log
 import com.example.newsapp.data.db.UserDao
 import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.data.model.user.User
 import kotlinx.coroutines.flow.Flow
 import org.springframework.security.crypto.bcrypt.BCrypt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import kotlin.math.log
 
 class UserRepoImple(
     private val context: Context,
@@ -16,6 +14,7 @@ class UserRepoImple(
 ): UserRepo {
 
     private val sharedPreferences = context.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+
     override fun getAllUser(): Flow<List<User>> {
         return dao.getAllUser()
     }
@@ -25,7 +24,7 @@ class UserRepoImple(
     }
 
     override fun getUserByEmail(email: String): User? {
-        return dao.getUserByEmail(email)  //new
+        return dao.getUserByEmail(email)
     }
 
     override fun addUser(user: User): Int? {
@@ -37,13 +36,12 @@ class UserRepoImple(
         dao.deleteUser(id)
     }
 
-    override fun updateUser(id: Int, user: User) {
-        dao.updateUser(user.copy(userId = id))
+    override fun updateUser(user_id: Int, user: User) {
+        dao.updateUser(user.copy(userId = user_id))
     }
 
 
     override fun verifyLoginUser(email: String, password: String): User? {
-//        return dao.userLogin(email, password)
         val bcrypth =  BCryptPasswordEncoder()
         val hashedPsw = getHashedPsw(email)
         val isValid = bcrypth.matches(password, hashedPsw)
@@ -52,7 +50,6 @@ class UserRepoImple(
 
         if (isValid) {
             val user = dao.getUserByEmail(email)
-            Log.d("login", user?.userId.toString())
             saveLoggedInUser(user?.userId!!);
             return dao.getUserByEmail(email)
         } else {
@@ -68,23 +65,20 @@ class UserRepoImple(
         return getLoggedInUser() != null
     }
 
-    override fun logOut() {
-        clearLoggedInUser()
-    }
 
     override fun getLoggedInUser(): Int? {
-        return sharedPreferences.getString("user_email", null)?.toInt()
+        return sharedPreferences.getString("user_id", null)?.toInt()
+    }
+
+    override fun logOut() {
+        val editor = sharedPreferences.edit()
+        editor.remove("user_id")
+        editor.apply()
     }
 
     private fun saveLoggedInUser(user_id: Int) {
         val editor = sharedPreferences.edit()
-        editor.putString("user_email", user_id.toString())
-        editor.apply()
-    }
-
-    private fun clearLoggedInUser() {
-        val editor = sharedPreferences.edit()
-        editor.remove("user_id")
+        editor.putString("user_id", user_id.toString())
         editor.apply()
     }
 

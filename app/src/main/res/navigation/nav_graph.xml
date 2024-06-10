@@ -56,7 +56,7 @@
         android:label="SignUpFragment" />
     <fragment
         android:id="@+id/editUserFragment"
-        android:name="com.example.newsapp.ui.user.EditUserFragment"
+        android:name="com.example.newsapp.ui.editUserProfile.EditUserFragment"
         android:label="EditUserFragment">
         <argument android:name="id" app:argType="integer"/>
     </fragment>

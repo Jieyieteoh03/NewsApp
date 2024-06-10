@@ -4,16 +4,13 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.data.model.user.User
-import com.example.newsapp.data.repository.EncryptionHelper
 import com.example.newsapp.data.repository.userRepo.UserRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.springframework.security.crypto.bcrypt.BCrypt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.inject.Inject
 
@@ -29,7 +26,6 @@ class SignUpViewModel @Inject constructor(
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
     val snackbar: MutableLiveData<String> = MutableLiveData()
 
-//    private val key = EncryptionHelper.generateKey()
 
     fun register() {
         val userName = userName.value
@@ -52,13 +48,12 @@ class SignUpViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val bcrypt = BCryptPasswordEncoder()
             try {
-//                val encryptedPassword = EncryptionHelper.encrypt(password)
                 val user = User(
+                    img = byteArrayOf(1,2,3,4,5),
                     userName = userName,
                     email = email,
                     phoneNumber = phoneNumber,
                     password = bcrypt.encode(password)
-//                    encryptedPassword = encryptedPassword
                 )
                 repo.addUser(user)
                 withContext(Dispatchers.Main) {

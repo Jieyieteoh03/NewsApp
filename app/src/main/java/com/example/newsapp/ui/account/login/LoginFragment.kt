@@ -14,7 +14,9 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -33,7 +35,6 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        checkLoginStatus()
 
         binding.btnSignIn.setOnClickListener {
             val email = binding.etEmail.text.toString()
@@ -64,12 +65,6 @@ class LoginFragment : Fragment() {
             viewModel.finish.collect {
                 findNavController().navigate(LoginFragmentDirections.actionLoginToContainer())
             }
-        }
-    }
-
-    private fun checkLoginStatus() {
-        if (viewModel.isLoggedIn()) {
-            findNavController().navigate(LoginFragmentDirections.actionLoginToContainer())
         }
     }
 }
