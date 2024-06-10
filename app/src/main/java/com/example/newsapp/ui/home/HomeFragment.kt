@@ -10,16 +10,20 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.data.model.News
+import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.databinding.FragmentHomeBinding
 import com.example.newsapp.ui.ContainerFragmentDirections
+import com.example.newsapp.ui.adapter.HotAdapter
 import com.example.newsapp.ui.adapter.NewsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+
     private val viewModel: HomeViewModel by viewModels ()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: NewsAdapter
+    private lateinit var hotAdapter: HotAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,13 +41,14 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupAdapter()
+        setupHotAdapter()
 
         viewModel.tvTitle.observe(viewLifecycleOwner) { query ->
             binding.svWord.setQuery(query, false)
         }
 
         viewModel.news.observe(viewLifecycleOwner) { newsList ->
-            filterNewsList(query = binding.svWord.query.toString(), newsList = newsList)
+            filterAndSetNewsList(query = binding.svWord.query.toString(), newsList = newsList)
         }
 
         binding.btnAddNews.setOnClickListener{
@@ -67,11 +72,11 @@ class HomeFragment : Fragment() {
 
         binding.svWord.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                filterNewsList(query, viewModel.news.value ?: emptyList())
+                filterAndSetNewsList(query, viewModel.news.value ?: emptyList())
                 return true
             }
             override fun onQueryTextChange(query: String?): Boolean {
-                filterNewsList(query, viewModel.news.value ?: emptyList())
+                filterAndSetNewsList(query, viewModel.news.value ?: emptyList())
                 return true
             }
         })
@@ -83,15 +88,38 @@ class HomeFragment : Fragment() {
         viewModel.fetchNewsData()
     }
 
-    private fun filterNewsList(query: String?, newsList: List<News>) {
-        val filteredList = if (query.isNullOrBlank()) {
+
+    private fun setupHotAdapter() {
+        val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        hotAdapter = HotAdapter(emptyList())
+        hotAdapter.listener = object: HotAdapter.Listener, NewsAdapter.Listener {
+            override fun onClick(id: Int) {
+                val action = ContainerFragmentDirections.actionContainerToViewNews(id)
+                findNavController().navigate(action)
+
+
+            }
+        }
+
+        binding.rvHotNews.adapter = hotAdapter
+        binding.rvHotNews.layoutManager = layoutManager
+
+    }
+
+    private fun filterAndSetNewsList(query: String?, newsList: List<News>) {
+        val filteredNewsList = if (query.isNullOrBlank()) {
             newsList
         } else {
-           newsList.filter {
+            newsList.filter {
                 it.title.contains(query, true) || it.description.contains(query, true)
             }
         }
-        adapter.setNews(filteredList)
-    }
 
+        val hotNewsList = filteredNewsList.filter { it.categories == Categories.HOT_NEWS }
+        val normalNewsList = filteredNewsList.filter { it.categories != Categories.HOT_NEWS }
+
+        hotAdapter.setNews(hotNewsList)
+        adapter.setNews(normalNewsList)
+    }
 }

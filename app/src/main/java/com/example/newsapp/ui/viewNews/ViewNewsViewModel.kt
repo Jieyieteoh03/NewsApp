@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.model.News
+import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +20,7 @@ class ViewNewsViewModel @Inject constructor(
     val news: MutableLiveData<News> = _news
     val title: MutableLiveData<String> = MutableLiveData()
     val description: MutableLiveData<String> = MutableLiveData()
-//    val categories: MutableLiveData<String> = MutableLiveData()
+    val categories: MutableLiveData<String> = MutableLiveData()
     val tags: MutableLiveData<String> = MutableLiveData()
     val source: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
@@ -34,10 +35,19 @@ class ViewNewsViewModel @Inject constructor(
         news.value?.let {
             title.value = it.title
             description.value = it.description
-//            categories.value = it.categories
+            categories.value = it.categories.toString()
             tags.value= it.tags
             source.value = it.source
 
         }
     }
+
+//    fun savedNews() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val savedNew = news.value?.copy(isCompleted = true)
+//            repo.updateWord(savedNew!!)
+//            finish.emit(Unit)
+//        }
+//
+//    }
 }

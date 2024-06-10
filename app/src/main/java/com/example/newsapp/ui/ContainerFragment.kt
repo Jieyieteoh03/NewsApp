@@ -10,6 +10,7 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentContainerBinding
 import com.example.newsapp.ui.adapter.TabAdapter
 import com.example.newsapp.ui.home.HomeFragment
+import com.example.newsapp.ui.savedNews.SavedNewsFragment
 //import com.example.newsapp.ui.savedNews.SavedNewsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +36,7 @@ class ContainerFragment : Fragment() {
         binding.run {
             vpTabs.adapter = TabAdapter(
                 this@ContainerFragment,
-                listOf(HomeFragment())
+                listOf(HomeFragment(), SavedNewsFragment())
             )
         }
 

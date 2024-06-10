@@ -40,7 +40,7 @@ class AddNewViewModel @Inject constructor(
                         title = title.value!!,
                         description = description.value!!,
                         tags = tags.value!!,
-                        categories = Categories.NORMAL_NEWS,
+                        categories = categoryValue!!,
                         source = source.value!!,
                         userId = 1
                     )
