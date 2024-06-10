@@ -5,9 +5,6 @@ import androidx.room.Room
 import com.example.newsapp.data.db.NewsDatabase
 import com.example.newsapp.data.repository.userRepo.UserRepo
 import com.example.newsapp.data.repository.userRepo.UserRepoImple
-import androidx.databinding.DataBindingUtil
-//import androidx.room.Room
-//import com.example.newsapp.data.db.NewsDatabase
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import dagger.hilt.android.HiltAndroidApp
 

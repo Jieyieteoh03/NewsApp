@@ -1,6 +1,5 @@
 package com.example.newsapp.ui.home
 
-import android.media.CamcorderProfile.getAll
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -78,6 +77,7 @@ class HomeFragment : Fragment() {
 
     private fun setupAdapter() {
         val layoutManager = LinearLayoutManager(requireContext())
+//        val dummyNewsData = generateDummyNews(10)
         adapter = NewsAdapter(emptyList())
         adapter.listener = object: NewsAdapter.Listener {
             override fun onClick(id: Int) {
@@ -88,4 +88,6 @@ class HomeFragment : Fragment() {
         binding.rvNews.adapter = adapter
         binding.rvNews.layoutManager = layoutManager
     }
+
+
 }

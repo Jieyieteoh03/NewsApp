@@ -1,6 +1,5 @@
 package com.example.newsapp.ui.add
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -29,17 +28,16 @@ class AddNewViewModel @Inject constructor(
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
     fun submit() {
-        if (img.value == null &&
+        if (img.value != null &&
             title.value != null &&
             description.value != null &&
             categories.value != null
         ) {
             viewModelScope.launch(Dispatchers.IO) {
-                Log.d("news_debug", userRepo.getLoggedInUser().toString())
-                    val categoryValue = Categories.fromString(categories.value!!)
+                val categoryValue = Categories.fromString(categories.value!!)
                 repo.addNews(
                     News(
-                        img = byteArrayOf(1,2,3,4,5),
+                        img = img.value!!,
                         title = title.value!!,
                         description = description.value!!,
                         tags = tags.value!!,

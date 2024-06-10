@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.example.newsapp.R
 import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.data.model.user.User
@@ -31,5 +32,9 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+//
+//        lifecycleScope.launch (Dispatchers.IO){
+//            userRepo.addUser(User(1,  "jane","jane.smith@example.com", Role.USER, 0,"12222222"))
+//        }
     }
 }

@@ -2,6 +2,8 @@ package com.example.newsapp.data.repository.userRepo
 
 import com.example.newsapp.data.model.user.User
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 
 interface UserRepo {
 

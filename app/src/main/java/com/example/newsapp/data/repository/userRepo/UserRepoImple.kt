@@ -1,7 +1,6 @@
 package com.example.newsapp.data.repository.userRepo
 
 import android.content.Context
-import android.util.Log
 import com.example.newsapp.data.db.UserDao
 import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.data.model.user.User
