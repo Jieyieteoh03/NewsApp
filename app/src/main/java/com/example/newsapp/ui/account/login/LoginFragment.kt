@@ -35,17 +35,6 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch(Dispatchers.Main) {
-            val loggedIn = withContext(Dispatchers.IO) {
-                viewModel.isLoggedin()
-            }
-            Log.d("auth", viewModel.isLoggedin().toString())
-            if (loggedIn) {
-                findNavController().navigate(
-                    LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                )
-            }
-        }
 
         binding.btnSignIn.setOnClickListener {
             val email = binding.etEmail.text.toString()

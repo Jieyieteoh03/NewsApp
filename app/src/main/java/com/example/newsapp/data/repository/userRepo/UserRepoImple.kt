@@ -50,7 +50,6 @@ class UserRepoImple(
 
         if (isValid) {
             val user = dao.getUserByEmail(email)
-            Log.d("login", user?.userId.toString())
             saveLoggedInUser(user?.userId!!);
             return dao.getUserByEmail(email)
         } else {

@@ -27,12 +27,10 @@ class HomeViewModel @Inject constructor(
     fun getUsersAndNews() {
         viewModelScope.launch(Dispatchers.IO) {
             val users = userRepo.getAllUser()
-            Log.d("debugging", "${users?.toString()}")
         }
 
         viewModelScope.launch(Dispatchers.IO) {
             val user = newsRepo.getNewsById(1)
-            Log.d("debugging", "${user?.toString()}")
         }
     }
     fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
