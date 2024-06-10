@@ -35,8 +35,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideUserRepo(db: NewsDatabase): UserRepo {
-        return UserRepoImple(db.getUserDao())
+    fun provideUserRepo(@ApplicationContext context: Context, db: NewsDatabase): UserRepo {
+        return UserRepoImple(context, db.getUserDao())
     }
 
     @Provides

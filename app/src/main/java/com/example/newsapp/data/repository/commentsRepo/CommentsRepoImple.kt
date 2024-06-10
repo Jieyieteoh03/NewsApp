@@ -16,6 +16,10 @@ class CommentsRepoImple(
         return dao.getCommentsById(id)
     }
 
+    override fun getCommentsByNewsId(newsId: Int): List<Comments> {
+        return dao.getCommentsByNewsId(newsId)
+    }
+
     override fun addComment(comments: Comments) {
         dao.addComment(comments)
     }

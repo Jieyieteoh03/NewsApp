@@ -1,5 +1,7 @@
 package com.example.newsapp.data.model.news
 
+import android.provider.MediaStore.Images
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -9,7 +11,7 @@ import com.example.newsapp.data.model.user.User
 @Entity(
     foreignKeys = [ForeignKey(
         entity = User::class,
-        parentColumns = ["id"],
+        parentColumns = ["userId"],
         childColumns = ["userId"],
         onDelete = ForeignKey.CASCADE
     )]

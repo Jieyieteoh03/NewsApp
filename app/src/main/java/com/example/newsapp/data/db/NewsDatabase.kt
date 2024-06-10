@@ -6,7 +6,7 @@ import com.example.newsapp.data.model.Comments
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.data.model.user.User
 
-@Database(entities = [News::class, User::class, Comments::class], version = 3)
+@Database(entities = [News::class, User::class, Comments::class], version = 4)
 abstract class NewsDatabase: RoomDatabase() {
 
     abstract fun getNewsDao(): NewsDao
