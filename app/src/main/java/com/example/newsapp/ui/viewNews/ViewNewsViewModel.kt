@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.newsapp.data.model.Comments
 import com.example.newsapp.data.model.news.News
-import com.example.newsapp.data.repository.commentsRepo.CommentsRepo
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,12 +15,9 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewNewsViewModel @Inject constructor(
     private val newsRepo: NewsRepo,
-    private val commentsRepo: CommentsRepo
 ):ViewModel() {
     private val _news: MutableLiveData<News> = MutableLiveData()
     val news: LiveData<News> = _news
-    private val _comments: MutableLiveData<List<Comments>> = MutableLiveData()
-    val comments: LiveData<List<Comments>> = _comments
     val img: MutableLiveData<ByteArray?> = MutableLiveData()
     val title: MutableLiveData<String> = MutableLiveData()
     val description: MutableLiveData<String> = MutableLiveData()
@@ -47,14 +42,9 @@ class ViewNewsViewModel @Inject constructor(
             source.value = it.source
 
         }
-        getCommentsByNewsId(news.value?.id!!)
     }
 
-    private fun getCommentsByNewsId(newsId:Int) {
-        viewModelScope.launch {
-            _comments.postValue(commentsRepo.getCommentsByNewsId(newsId))
-        }
-    }
+
 
     fun deleteNews() {
         viewModelScope.launch (Dispatchers.IO){
@@ -63,20 +53,12 @@ class ViewNewsViewModel @Inject constructor(
         }
     }
 
-    fun addComments(comment: Comments) {
-        if(comment.comments != "") {
-            viewModelScope.launch (Dispatchers.IO){
-                commentsRepo.addComment(comment)
-            }
+    fun savedNews() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val savedNew = news.value?.copy(isSaved = true)
+            newsRepo.updateNews(savedNew!!)
+            finish.emit(Unit)
         }
-    }
 
-//    fun savedNews() {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val savedNew = news.value?.copy(isCompleted = true)
-//            repo.updateWord(savedNew!!)
-//            finish.emit(Unit)
-//        }
-//
-//    }
+    }
 }

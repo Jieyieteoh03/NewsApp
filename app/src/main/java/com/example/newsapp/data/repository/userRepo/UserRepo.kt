@@ -45,4 +45,6 @@ interface UserRepo {
 
     fun logOut()
 
+    fun getCurrentUser(): User?
+
 }

@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.data.model.news.Categories
+import com.example.newsapp.data.model.user.User
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
+import com.example.newsapp.data.repository.userRepo.UserRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -16,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddEditNewsViewModel @Inject constructor (
-    private val newsRepo: NewsRepo
+    private val newsRepo: NewsRepo,
+    private val userRepo: UserRepo
 ) :ViewModel() {
     private var news: News? = null
     val img: MutableLiveData<ByteArray?> = MutableLiveData()
@@ -52,7 +55,10 @@ class AddEditNewsViewModel @Inject constructor (
         ) {
             viewModelScope.launch(Dispatchers.IO) {
                 val categoryValue = Categories.fromString(categories.value!!)
+                val currentUser = userRepo.getCurrentUser()
+                if (currentUser != null) {
                 try {
+                    Log.d("debugging", currentUser.userId.toString())
                     newsRepo.addNews(
                         News(
                         img = img.value!!,
@@ -61,11 +67,17 @@ class AddEditNewsViewModel @Inject constructor (
                         tags = tags.value!!,
                         categories = categoryValue ?: Categories.NORMAL_NEWS,
                         source = source.value!!,
-                        userId = 1
-                    )
+                        userId = currentUser.userId ?: throw Exception("User not found")
+                        )
                     )
                     snackbar.postValue("Add successful")
-                } catch (e: Exception){ snackbar.postValue(e.message) }
+                } catch (e: Exception) {
+                    throw e
+                    snackbar.postValue(e.message)
+                }
+                } else {
+                    snackbar.postValue("Failed to get current user")
+                }
                 finish.emit(Unit)
             }
         } else {

@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.newsapp.databinding.FragmentSignUpBinding
+import com.example.newsapp.ui.account.login.LoginFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
@@ -42,7 +43,7 @@ class SignUpFragment : Fragment() {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                 if (it == "User added Successfully") {
                     findNavController().navigate(
-                        SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+                        LoginFragmentDirections.actionLoginToSignUp())
                 }
             }
         }

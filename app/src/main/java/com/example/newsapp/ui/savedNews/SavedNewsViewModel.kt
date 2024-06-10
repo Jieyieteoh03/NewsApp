@@ -19,5 +19,6 @@ class SavedNewsViewModel @Inject constructor(
     val news: LiveData<List<News>> = _news
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
-    fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
+
+    fun getAll(): Flow<List<News>> = newsRepo.getSavedNews()
 }

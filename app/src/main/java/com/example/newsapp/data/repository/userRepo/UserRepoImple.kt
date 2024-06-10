@@ -88,5 +88,14 @@ class UserRepoImple(
         editor.apply()
     }
 
+    override fun getCurrentUser(): User? {
+        val userId = getLoggedInUser()
+        return if (userId != null) {
+            getUserById(userId)
+        } else {
+            null
+        }
+    }
+
 
 }

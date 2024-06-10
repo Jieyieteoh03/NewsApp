@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.newsapp.data.model.News
+import com.example.newsapp.data.model.news.News
 import com.example.newsapp.databinding.LayoutHotNewsCardItemBinding
 import com.example.newsapp.databinding.LayoutNewsCardItemBinding
 
@@ -49,7 +49,7 @@ class HotAdapter(
             binding.ivImage.background = drawable
             binding.tvTitle.text = news.title
             binding.tvDesc.text = news.description
-            binding.rvHotNews.setOnClickListener { listener?.onClick(news.id!!) }
+            binding.cvHotNews.setOnClickListener { listener?.onClick(news.id!!) }
         }
     }
 

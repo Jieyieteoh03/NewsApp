@@ -50,6 +50,7 @@
                     android:text="@string/hello"
                     android:textSize="12sp"/>
                 <TextView
+                    android:id="@+id/tvUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -119,7 +120,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/fab_add"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/ic_edit"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"/>
 
@@ -128,7 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/fab_add"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/ic_logout"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"/>
 

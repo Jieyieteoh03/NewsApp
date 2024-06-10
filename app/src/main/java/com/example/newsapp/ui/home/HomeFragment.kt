@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.R
+import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.databinding.FragmentHomeBinding
 import com.example.newsapp.ui.ContainerFragmentDirections
 import com.example.newsapp.ui.adapter.HotAdapter
@@ -50,46 +51,50 @@ class HomeFragment : Fragment() {
 
         viewModel.news.observe(viewLifecycleOwner) { newsList ->
             filterAndSetNewsList(query = binding.svWord.query.toString(), newsList = newsList)
-        lifecycleScope.launch(Dispatchers.Main) {
-            val loggedIn = withContext(Dispatchers.IO) {
-                viewModel.loggedIn()
-            }
-            if(!loggedIn) {
-                findNavController().navigate(R.id.loginFragment)
-                return@launch
-            }
-        }
-        lifecycleScope.launch {
-            viewModel.run {
-                tvTitle.observe(viewLifecycleOwner) { query ->
-                    binding.svWord.setQuery(query, false)
+            lifecycleScope.launch(Dispatchers.Main) {
+                val loggedIn = withContext(Dispatchers.IO) {
+                    viewModel.loggedIn()
                 }
-                news.observe(viewLifecycleOwner) { newsList ->
-                    filterNewsList(query = binding.svWord.query.toString(), newsList = newsList)
-                }
-                getAll().collect {
-                    adapter.setNews(it)
+                if (!loggedIn) {
+                    findNavController().navigate(R.id.loginFragment)
+                    return@launch
                 }
             }
-        }
 
-        binding.run {
-            btnAddNews.setOnClickListener {
-                findNavController().navigate(
-                    ContainerFragmentDirections.actionContainerToAddEditNews("Add", 0)
-                )
+            lifecycleScope.launch {
+                viewModel.run {
+                    tvTitle.observe(viewLifecycleOwner) { query ->
+                        binding.svWord.setQuery(query, false)
+                    }
+                    news.observe(viewLifecycleOwner) { newsList ->
+                        filterNewsList(query = binding.svWord.query.toString(), newsList = newsList)
+                    }
+                    getAll().collect {
+                        adapter.setNews(it)
+                    }
+                }
             }
-            btnEditUser.setOnClickListener {
+
+
+
+            binding.run {
+                btnAddNews.setOnClickListener {
+                    findNavController().navigate(
+                        ContainerFragmentDirections.actionContainerToAddEditNews("Add", 0)
+                    )
+                }
+                btnEditUser.setOnClickListener {
 //                viewModel.logOut()
-                findNavController().navigate(
-                    ContainerFragmentDirections.actionContainerToEditUser(1)
-                )
-            }
-            btnLogout.setOnClickListener {
-                lifecycleScope.launch(Dispatchers.IO) {
-                    viewModel.logOut()
-                    withContext(Dispatchers.Main) {
-                        findNavController().navigate(R.id.loginFragment)
+                    findNavController().navigate(
+                        ContainerFragmentDirections.actionContainerToEditUser(1)
+                    )
+                }
+                btnLogout.setOnClickListener {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        viewModel.logOut()
+                        withContext(Dispatchers.Main) {
+                            findNavController().navigate(R.id.loginFragment)
+                        }
                     }
                 }
             }
@@ -119,25 +124,8 @@ class HomeFragment : Fragment() {
                 viewModel.fetchNewsData()
             }
         }
-        binding.svWord.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                filterAndSetNewsList(query, viewModel.news.value ?: emptyList())
-                return true
-            }
-            override fun onQueryTextChange(query: String?): Boolean {
-                filterAndSetNewsList(query, viewModel.news.value ?: emptyList())
-                return true
-            }
-        })
 
-
-        binding.rvNews.adapter = adapter
-        binding.rvNews.layoutManager = layoutManager
-
-        viewModel.fetchNewsData()
-    }
-
-        private fun filterNewsList(query: String?, newsList: List<News>) {
+        fun filterNewsList(query: String?, newsList: List<News>) {
             val filteredList = if (query.isNullOrBlank()) {
                 newsList
             } else {
@@ -148,7 +136,6 @@ class HomeFragment : Fragment() {
             }
             adapter.setNews(filteredList)
         }
-    }
 
     private fun setupHotAdapter() {
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

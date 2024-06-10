@@ -5,20 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.newsapp.R
-import com.example.newsapp.data.model.Comments
 import com.example.newsapp.databinding.FragmentViewNewsBinding
-import com.example.newsapp.ui.ContainerFragmentDirections
-import com.example.newsapp.ui.adapter.CommentsAdapter
-import com.example.newsapp.ui.adapter.NewsAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -26,7 +19,6 @@ class ViewNewsFragment : Fragment() {
     private lateinit var binding: FragmentViewNewsBinding
     private val viewModel: ViewNewsViewModel by viewModels ()
     private val args: ViewNewsFragmentArgs by navArgs()
-    private lateinit var adapter: CommentsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +36,6 @@ class ViewNewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupAdapter()
-
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel.run {
@@ -59,6 +49,10 @@ class ViewNewsFragment : Fragment() {
                         findNavController().graph.startDestinationId,false
                     )
                 }
+            }
+
+            binding.btnSaveNews.setOnClickListener {
+                savedNews()
             }
 
             binding.btnAddComment.setOnClickListener {
@@ -76,14 +70,5 @@ class ViewNewsFragment : Fragment() {
             }
 
         }
-    }
-
-    private fun setupAdapter() {
-        val layoutManager = LinearLayoutManager(requireContext())
-        adapter = CommentsAdapter(emptyList())
-
-        binding.rvComments.adapter = adapter
-        binding.rvComments.layoutManager = layoutManager
-
     }
 }

@@ -27,6 +27,9 @@ class HomeViewModel @Inject constructor(
     val news: LiveData<List<News>> = _news
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
+    private val _loggedInUser = MutableLiveData<User?>()
+    val loggedInUser: LiveData<User?> = _loggedInUser
+
     fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
 
     fun fetchNewsData() {
@@ -68,5 +71,6 @@ class HomeViewModel @Inject constructor(
     fun loggedInUser() {
         userRepo.getLoggedInUser()
     }
+
 
 }

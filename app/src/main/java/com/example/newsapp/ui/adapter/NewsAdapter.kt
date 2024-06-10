@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -41,6 +42,7 @@ class NewsAdapter(
 
     fun getNews() = news
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setNews(news: List<News>) {
         this.news = news
         notifyDataSetChanged()

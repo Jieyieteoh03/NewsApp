@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
-import com.example.newsapp.data.model.News
 import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.databinding.FragmentSavedNewsBinding
 import com.example.newsapp.databinding.LayoutNewsSortBinding
@@ -49,6 +48,12 @@ class SavedNewsFragment : Fragment() {
         sortNews(sortOrder)
 
         binding.ivSort.setOnClickListener { showSort() }
+
+        lifecycleScope.launch {
+            viewModel.run {
+
+            }
+        }
 
     }
 
