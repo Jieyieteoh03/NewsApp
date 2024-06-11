@@ -51,9 +51,7 @@ class ViewNewsFragment : Fragment() {
             }
             lifecycleScope.launch {
                 viewModel.finish.collect{
-                    findNavController().popBackStack(
-                        findNavController().graph.startDestinationId,false
-                    )
+                    findNavController().popBackStack()
                 }
             }
 

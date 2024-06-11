@@ -13,7 +13,7 @@ import java.net.URL
     foreignKeys = [ForeignKey(
         entity = User::class,
         parentColumns = ["user_id"],
-        childColumns = ["userId"],
+        childColumns = ["id"],
         onDelete = ForeignKey.CASCADE
     )]
 )
@@ -27,6 +27,5 @@ data class News(
     val tags: String,
     val categories: Categories = Categories.NORMAL_NEWS,
     val source: String,
-    val userId: Int,
     val isSaved: Boolean = false
 )

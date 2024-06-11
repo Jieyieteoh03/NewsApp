@@ -4,8 +4,9 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.data.model.user.User
+import com.example.newsapp.data.model.user.UserSavedNews
 
-@Database(entities = [News::class, User::class], version = 2)
+@Database(entities = [News::class, User::class, UserSavedNews::class], version = 3)
 abstract class NewsDatabase: RoomDatabase() {
 
     abstract fun getNewsDao(): NewsDao

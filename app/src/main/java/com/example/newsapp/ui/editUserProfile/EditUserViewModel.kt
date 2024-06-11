@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EditUserViewModel @Inject constructor(
-    private val repo: UserRepo
+    private val userRepo: UserRepo
 ): ViewModel() {
     private val _user: MutableLiveData<User> = MutableLiveData()
     val img: MutableLiveData<ByteArray?> = MutableLiveData()
@@ -32,9 +32,9 @@ class EditUserViewModel @Inject constructor(
 
     fun loggedInUser() {
         viewModelScope.launch(Dispatchers.IO) {
-            val userId = repo.getLoggedInUser()
+            val userId = userRepo.getLoggedInUser()
             if (userId != null) {
-                val user = repo.getUserById(userId)
+                val user = userRepo.getUserById(userId)
                 user?.let {
                     withContext(Dispatchers.Main) {
                         setUser(it)
@@ -46,7 +46,7 @@ class EditUserViewModel @Inject constructor(
 
     fun getUserById(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val user = repo.getUserById(id)
+            val user = userRepo.getUserById(id)
             user?.let {
                 withContext(Dispatchers.Main) {
                     _user.value = it
@@ -62,7 +62,11 @@ class EditUserViewModel @Inject constructor(
     }
 
     fun updateProfile() {
-        if (userName.value.isNullOrEmpty() || email.value.isNullOrEmpty() || phoneNumber.value.isNullOrEmpty() || password.value.isNullOrEmpty() || confirmPassword.value.isNullOrEmpty()) {
+        if (userName.value.isNullOrEmpty() ||
+            email.value.isNullOrEmpty() ||
+            phoneNumber.value.isNullOrEmpty() ||
+            password.value.isNullOrEmpty() ||
+            confirmPassword.value.isNullOrEmpty()) {
             snackbar.value = "Please fill in all fields"
             return
         }
@@ -73,10 +77,10 @@ class EditUserViewModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            val userId = repo.getLoggedInUser()
+            val userId = userRepo.getLoggedInUser()
             val bcrypt = BCryptPasswordEncoder()
             if (userId != null) {
-                val user = repo.getUserById(userId)
+                val user = userRepo.getUserById(userId)
                 user?.let {
                     val updateUser = it.copy(
                         img = byteArrayOf(1,2,3,4,5),
@@ -85,7 +89,7 @@ class EditUserViewModel @Inject constructor(
                         phoneNumber = phoneNumber.value!!,
                         password = bcrypt.encode(password.value)!!
                     )
-                    repo.updateUser(userId, updateUser)
+                    userRepo.updateUser(userId, updateUser)
                     withContext(Dispatchers.Main) {
                         snackbar.value = "User details updated successfully"
                     }
@@ -93,6 +97,5 @@ class EditUserViewModel @Inject constructor(
                 }
             }
         }
-        Log.d("userDetailDebugging", "${userName.value}, ${email.value}, ${phoneNumber.value}, ${password.value}")
     }
 }

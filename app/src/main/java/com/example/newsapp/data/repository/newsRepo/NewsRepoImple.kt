@@ -2,6 +2,7 @@ package com.example.newsapp.data.repository.newsRepo
 
 import com.example.newsapp.data.db.NewsDao
 import com.example.newsapp.data.model.news.News
+import com.example.newsapp.data.model.user.UserSavedNews
 import kotlinx.coroutines.flow.Flow
 
 class NewsRepoImple(
@@ -11,8 +12,12 @@ class NewsRepoImple(
         return dao.getAllNews()
     }
 
-    override fun getSavedNews(): Flow<List<News>> {
-       return dao.getSavedNews()
+    override fun addSavedNews(savedNews: UserSavedNews) {
+        dao.addSavedNews(savedNews)
+    }
+
+    override fun updateSavedNews(savedNews: UserSavedNews) {
+        dao.updateSavedNews(savedNews)
     }
 
     override fun getNewsById(id: Int): News? {
