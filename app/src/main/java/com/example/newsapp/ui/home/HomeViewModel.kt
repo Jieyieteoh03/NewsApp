@@ -13,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,9 +21,22 @@ class HomeViewModel @Inject constructor(
     private val newsRepo: NewsRepo,
     private val userRepo: UserRepo
 ): ViewModel() {
+    private val _user: MutableLiveData<User> = MutableLiveData()
+    val userDetails: LiveData<User> = _user
     private val _news: MutableLiveData<List<News>> = MutableLiveData()
     val news: LiveData<List<News>> = _news
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
+
+    fun getUserById(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val user = userRepo.getUserById(id)
+            user?.let {
+                withContext(Dispatchers.Main) {
+                    _user.value = it
+                }
+            }
+        }
+    }
 
     fun getUsersAndNews() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -33,7 +47,11 @@ class HomeViewModel @Inject constructor(
             val user = newsRepo.getNewsById(1)
         }
     }
+
+
     fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
+
+    fun getLoggedInUser(): Int? = userRepo.getLoggedInUser()
 
     fun doLogout() = userRepo.logOut()
 

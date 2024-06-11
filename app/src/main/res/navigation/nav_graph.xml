@@ -62,5 +62,18 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDetailFragment"
+        android:name="com.example.newsapp.ui.viewUserProfile.UserDetailFragment"
+        android:label="userDetailFragment">
+        <argument android:name="id" app:argType="integer"/>
+        <action
+            android:id="@+id/action_userDetailFragment_to_editUserFragment"
+            app:destination="@id/editUserFragment" />
+
     </fragment>
 </navigation>

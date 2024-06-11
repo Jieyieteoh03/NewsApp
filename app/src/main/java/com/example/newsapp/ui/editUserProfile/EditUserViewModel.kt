@@ -22,9 +22,9 @@ class EditUserViewModel @Inject constructor(
     private val _user: MutableLiveData<User> = MutableLiveData()
     val img: MutableLiveData<ByteArray?> = MutableLiveData()
     val userDetails: LiveData<User> = _user
-    val userName: MutableLiveData<String> = MutableLiveData()
-    val email: MutableLiveData<String> = MutableLiveData()
-    val phoneNumber: MutableLiveData<String> = MutableLiveData()
+    val userName: MutableLiveData<String> = MutableLiveData("")
+    val email: MutableLiveData<String> = MutableLiveData("")
+    val phoneNumber: MutableLiveData<String> = MutableLiveData("")
     val password: MutableLiveData<String> = MutableLiveData()
     val confirmPassword: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
@@ -55,7 +55,7 @@ class EditUserViewModel @Inject constructor(
         }
     }
 
-    fun setUser(user: User) {
+    private fun setUser(user: User) {
         userName.value = user.userName
         email.value = user.email
         phoneNumber.value = user.phoneNumber

@@ -2,6 +2,7 @@ package com.example.newsapp.data.repository.userRepo
 
 import android.content.Context
 import com.example.newsapp.data.db.UserDao
+import com.example.newsapp.data.model.News
 import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.data.model.user.User
 import kotlinx.coroutines.flow.Flow
@@ -22,6 +23,7 @@ class UserRepoImple(
     override fun getUserById(id: Int): User? {
         return dao.getUserById(id)
     }
+
 
     override fun getUserByEmail(email: String): User? {
         return dao.getUserByEmail(email)

@@ -1,6 +1,7 @@
 package com.example.newsapp.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -60,9 +61,10 @@ class HomeFragment : Fragment() {
                 )
             }
 
-            btnEditUser.setOnClickListener {
+            btnViewUser.setOnClickListener {
+                Log.d("id", id.toString())
                 findNavController().navigate(
-                    HomeFragmentDirections.actionHomeToEditUser(userId = id)
+                    HomeFragmentDirections.actionHomeFragmentToUserDetailFragment(viewModel.getLoggedInUser()!!)
                 )
             }
 
@@ -77,7 +79,6 @@ class HomeFragment : Fragment() {
 
     private fun setupAdapter() {
         val layoutManager = LinearLayoutManager(requireContext())
-//        val dummyNewsData = generateDummyNews(10)
         adapter = NewsAdapter(emptyList())
         adapter.listener = object: NewsAdapter.Listener {
             override fun onClick(id: Int) {
