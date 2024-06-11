@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.home
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.R
 import com.example.newsapp.data.model.news.Categories
@@ -87,7 +89,14 @@ class HomeFragment : Fragment() {
             }
         }
 
+        viewModel.loggedInUser.observe(viewLifecycleOwner) { user ->
+            user?.let {
+                binding.tvUser.text = it.userName
+                binding.tvImg.setImageBitmap(BitmapFactory.decodeByteArray(it.img, 0, it.img.size))
+            }
+        }
     }
+
 
     private fun setupAdapter() {
         val layoutManager = LinearLayoutManager(requireContext())
@@ -118,8 +127,7 @@ class HomeFragment : Fragment() {
             newsList
         } else {
             newsList.filter {
-                it.title.contains(query, true)
-                        || it.description.contains(query, true)
+                it.title.contains(query, true) || it.description.contains(query, true)
             }
         }
         adapter.setNews(filteredList)

@@ -31,13 +31,16 @@ class HomeViewModel @Inject constructor(
 
     fun getUsersAndNews() {
         viewModelScope.launch(Dispatchers.IO) {
-            val users = userRepo.getAllUser()
+            val currentUser = getCurrentUser()
+            _loggedInUser.postValue(currentUser)
         }
 
         viewModelScope.launch(Dispatchers.IO) {
             val user = newsRepo.getNewsById(1)
         }
     }
+
+
     fun getAll(): Flow<List<News>> = newsRepo.getAllNews()
 
     fun fetchNewsData() {
@@ -55,6 +58,12 @@ class HomeViewModel @Inject constructor(
      fun loggedIn(): Boolean {
         return userRepo.isLoggedIn()
     }
+
+    fun getCurrentUser(): User? {
+        return userRepo.getCurrentUser()
+    }
+
+
 
 
 }
