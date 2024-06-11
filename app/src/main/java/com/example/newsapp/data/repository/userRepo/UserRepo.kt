@@ -1,6 +1,7 @@
 package com.example.newsapp.data.repository.userRepo
 
 import com.example.newsapp.data.model.user.User
+import com.example.newsapp.data.model.user.UserSavedNews
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
@@ -8,6 +9,8 @@ import kotlinx.coroutines.flow.flow
 interface UserRepo {
 
     fun getAllUser(): Flow<List<User>>
+
+    fun getUserSavedNews(userId: Int): Flow<UserSavedNews?>
 
     fun getUserById(id: Int) : User?
 
@@ -18,7 +21,6 @@ interface UserRepo {
     fun deleteUser(id: Int)
 
     fun updateUser(id: Int, user: User)
-
 
     fun verifyLoginUser(email: String, password: String) : User?
 

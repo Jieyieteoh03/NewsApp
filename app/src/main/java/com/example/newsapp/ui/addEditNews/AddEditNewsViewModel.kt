@@ -58,7 +58,6 @@ class AddEditNewsViewModel @Inject constructor (
                 val currentUser = userRepo.getCurrentUser()
                 if (currentUser != null) {
                 try {
-                    Log.d("debugging", currentUser.userId.toString())
                     newsRepo.addNews(
                         News(
                         img = img.value!!,
@@ -67,7 +66,6 @@ class AddEditNewsViewModel @Inject constructor (
                         tags = tags.value!!,
                         categories = categoryValue ?: Categories.NORMAL_NEWS,
                         source = source.value!!,
-                        userId = currentUser.userId ?: throw Exception("User not found")
                         )
                     )
                     snackbar.postValue("Add successful")

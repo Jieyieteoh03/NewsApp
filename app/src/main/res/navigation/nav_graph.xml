@@ -14,9 +14,9 @@
         <action
             android:id="@+id/action_viewNews_to_addEditNews"
             app:destination="@id/addEditNewsFragment" />
-        <action
-            android:id="@+id/action_viewNewsFragment_to_containerFragment"
-            app:destination="@id/containerFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_viewNews_to_container"-->
+<!--            app:destination="@id/containerFragment" />-->
     </fragment>
     <fragment
         android:id="@+id/containerFragment"

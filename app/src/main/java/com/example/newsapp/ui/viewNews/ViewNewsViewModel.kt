@@ -10,6 +10,7 @@ import com.example.newsapp.data.model.news.News
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import java.net.URL
@@ -56,6 +57,9 @@ class ViewNewsViewModel @Inject constructor(
             finish.emit(Unit)
         }
     }
+
+    fun getSavedNews(): Flow<List<News>> = newsRepo.getSavedNews()
+
 
     fun savedNews() {
         viewModelScope.launch(Dispatchers.IO) {

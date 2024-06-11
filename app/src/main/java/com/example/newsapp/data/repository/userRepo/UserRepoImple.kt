@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.newsapp.data.db.UserDao
 import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.data.model.user.User
+import com.example.newsapp.data.model.user.UserSavedNews
 import kotlinx.coroutines.flow.Flow
 import org.springframework.security.crypto.bcrypt.BCrypt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -21,6 +22,10 @@ class UserRepoImple(
 
     override fun getUserById(id: Int): User? {
         return dao.getUserById(id)
+    }
+
+    override fun getUserSavedNews(userId: Int): Flow<UserSavedNews?> {
+        return dao.getAllUserSavedNews(userId)
     }
 
     override fun getUserByEmail(email: String): User? {

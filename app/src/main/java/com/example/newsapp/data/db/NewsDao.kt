@@ -7,15 +7,19 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.newsapp.data.model.news.News
+import com.example.newsapp.data.model.user.UserSavedNews
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NewsDao {
-    @Query("SELECT * FROM News WHERE isSaved = 0 || 1")
+    @Query("SELECT * FROM News")
     fun getAllNews(): Flow<List<News>>
 
-    @Query("SELECT * FROM News WHERE isSaved = 1")
-    fun getSavedNews(): Flow<List<News>>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun addSavedNews(savedNews: UserSavedNews)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateSavedNews(savedNews: UserSavedNews)
 
     @Query("SELECT * FROM News WHERE id = :id")
     fun getNewsById(id: Int): News?

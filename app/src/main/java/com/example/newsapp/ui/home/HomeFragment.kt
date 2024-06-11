@@ -84,19 +84,6 @@ class HomeFragment : Fragment() {
                         ContainerFragmentDirections.actionContainerToAddEditNews("Add", 0)
                     )
                 }
-
-                btnEditUser.setOnClickListener {
-                    findNavController().navigate(
-                        ContainerFragmentDirections.actionContainerToEditUser(id)
-                    )
-                }
-
-                btnLogout.setOnClickListener {
-                    viewModel.doLogout()
-                    findNavController().navigate(
-                        ContainerFragmentDirections.actionContainerToLogin()
-                    )
-                }
             }
         }
 

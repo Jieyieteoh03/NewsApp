@@ -64,14 +64,7 @@
                 android:layout_marginTop="@dimen/xl"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/toSignUpPage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/green"
-                android:textStyle="bold"
-                android:text="@string/create_an_account" />
+
 
             <EditText
                 android:id="@+id/etPassword"
@@ -90,6 +83,15 @@
                 android:text="@string/title_sign_in"
                 android:layout_marginHorizontal="@dimen/xxxl"
                 android:layout_marginVertical="@dimen/xxl"/>
+
+            <TextView
+                android:id="@+id/toSignUpPage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                android:text="@string/create_an_account" />
 
 
 

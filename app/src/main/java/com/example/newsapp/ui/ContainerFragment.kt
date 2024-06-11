@@ -11,6 +11,7 @@ import com.example.newsapp.databinding.FragmentContainerBinding
 import com.example.newsapp.ui.adapter.TabAdapter
 import com.example.newsapp.ui.home.HomeFragment
 import com.example.newsapp.ui.savedNews.SavedNewsFragment
+import com.example.newsapp.ui.viewUserProfile.ViewUserFragment
 //import com.example.newsapp.ui.savedNews.SavedNewsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,14 +37,15 @@ class ContainerFragment : Fragment() {
         binding.run {
             vpTabs.adapter = TabAdapter(
                 this@ContainerFragment,
-                listOf(HomeFragment(), SavedNewsFragment())
+                listOf(HomeFragment(), SavedNewsFragment(), ViewUserFragment())
             )
         }
 
         TabLayoutMediator(binding.tlTabs, binding.vpTabs) { tab, position ->
             when (position) {
                 0 -> tab.text = "News"
-                else -> tab.text = "Saved News"
+                1 -> tab.text = "Saved News"
+                else -> tab.text = "User Profile"
             }
         }.attach()
     }
