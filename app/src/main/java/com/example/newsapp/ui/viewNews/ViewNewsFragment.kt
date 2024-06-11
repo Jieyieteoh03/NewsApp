@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
+import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.databinding.AlertSavedNewsBinding
 import com.example.newsapp.databinding.FragmentViewNewsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,9 +46,17 @@ class ViewNewsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel.run {
             getNewsById(args.id)
-            news.observe(viewLifecycleOwner){
+            news.observe(viewLifecycleOwner) { news ->
                 setNews()
-                binding.btnSaveNews.isInvisible = it.isSaved == true
+                binding.btnSaveNews.isInvisible = news.isSaved == true
+
+                loggedInUser.observe(viewLifecycleOwner) { user ->
+                    user?.let {
+                        val isAdmin = it.role == Role.ADMIN
+                        binding.btnDeleteNews.isInvisible = !(isAdmin)
+                        binding.btnEditNews.isInvisible = !(isAdmin)
+                    }
+                }
             }
             lifecycleScope.launch {
                 viewModel.finish.collect{

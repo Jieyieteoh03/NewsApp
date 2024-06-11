@@ -21,7 +21,7 @@
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/svWord"
-                android:layout_width="180dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/user_bg"
@@ -33,13 +33,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/l"
+                android:background="@drawable/input_box"
+                android:padding="10dp"
                 >
 
             <ImageView
                 android:id="@+id/tvImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_profile"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_profile"
+                android:paddingLeft="10dp"
+                />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,17 +66,13 @@
             </LinearLayout>
         </LinearLayout>
 
-        <HorizontalScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHotNews"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvHotNews"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="8dp" />
-        </HorizontalScrollView>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"

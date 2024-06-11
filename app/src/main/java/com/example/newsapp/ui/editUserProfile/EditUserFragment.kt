@@ -1,6 +1,9 @@
 package com.example.newsapp.ui.editUserProfile
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.newsapp.databinding.FragmentEditUserBinding
+import com.example.newsapp.ui.addEditNews.AddEditNewsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -49,6 +53,9 @@ class EditUserFragment : Fragment() {
         binding.updateUser = editUserViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        setupImagePicker()
+
+
         editUserViewModel.loggedInUser()
 
         lifecycleScope.launch {
@@ -61,6 +68,30 @@ class EditUserFragment : Fragment() {
             message?.let {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun setupImagePicker() {
+        binding.btnSelectImage.setOnClickListener {
+            openImagePicker()
+        }
+    }
+
+    fun openImagePicker() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, AddEditNewsFragment.REQUEST_IMAGE_PICK)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == AddEditNewsFragment.REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
+            val selectedImageUri = data.data
+            val inputStream = requireContext().contentResolver.openInputStream(selectedImageUri!!)
+            val bytes = inputStream?.readBytes()
+            if (bytes != null) {
+                editUserViewModel.img.value = bytes
+            }
+            binding.imgGallery.setImageURI(selectedImageUri)
         }
     }
 

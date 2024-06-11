@@ -21,5 +21,5 @@ data class News(
     val categories: Categories = Categories.NORMAL_NEWS,
 //    val source: URL? = null,
     val source: String,
-    val isSaved: Boolean = false
+    val isSaved: Boolean = false,
 )

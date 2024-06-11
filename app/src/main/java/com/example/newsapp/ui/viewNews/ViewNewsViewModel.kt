@@ -7,7 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.model.news.News
+import com.example.newsapp.data.model.user.User
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
+import com.example.newsapp.data.repository.userRepo.UserRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -19,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewNewsViewModel @Inject constructor(
     private val newsRepo: NewsRepo,
+    private val userRepo: UserRepo
 ):ViewModel() {
     private val _news: MutableLiveData<News> = MutableLiveData()
     val news: LiveData<News> = _news
@@ -31,9 +34,14 @@ class ViewNewsViewModel @Inject constructor(
     val source: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
+
+    private val _loggedInUser = MutableLiveData<User?>()
+    val loggedInUser: LiveData<User?> = _loggedInUser
+
     fun getNewsById(id: Int) {
         viewModelScope.launch (Dispatchers.IO){
             _news.postValue(newsRepo.getNewsById(id))
+            _loggedInUser.postValue(userRepo.getCurrentUser())
         }
     }
 
