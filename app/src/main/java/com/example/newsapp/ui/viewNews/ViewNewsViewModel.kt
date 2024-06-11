@@ -58,7 +58,7 @@ class ViewNewsViewModel @Inject constructor(
         }
     }
 
-    fun getSavedNews(): Flow<List<News>> = newsRepo.getSavedNews()
+//    fun getSavedNews(): Flow<List<News>> = newsRepo.getSavedNews()
 
 
     fun savedNews() {

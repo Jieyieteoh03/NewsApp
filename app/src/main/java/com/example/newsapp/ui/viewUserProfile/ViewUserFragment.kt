@@ -21,7 +21,7 @@ class ViewUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        val binding = FragmentViewUserBinding.inflate(
+        binding = FragmentViewUserBinding.inflate(
             layoutInflater,
             container,
             false

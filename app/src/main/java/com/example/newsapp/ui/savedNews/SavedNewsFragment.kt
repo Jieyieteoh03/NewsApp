@@ -46,7 +46,7 @@ class SavedNewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
 
-        sortNews(sortOrder)
+//        sortNews(sortOrder)
 
         binding.ivSort.setOnClickListener { showSort() }
 
@@ -97,7 +97,7 @@ class SavedNewsFragment : Fragment() {
                 }
             }
             btnConfirm.setOnClickListener {
-                sortNews(sortOrder)
+//                sortNews(sortOrder)
                 sortDialog.dismiss()
             }
         }
@@ -106,16 +106,16 @@ class SavedNewsFragment : Fragment() {
         sortDialog.show()
     }
 
-    private fun sortNews(sortOrder: Categories) {
-        lifecycleScope.launch {
-            viewModel.getSavedNews().collect { newsList ->
-                val sortedList = when (sortOrder) {
-                    Categories.HOT_NEWS -> newsList.filter { it.categories == Categories.HOT_NEWS }
-                    Categories.NORMAL_NEWS -> newsList.filter { it.categories == Categories.NORMAL_NEWS }
-                    Categories.ALL_NEWS -> newsList
-                }
-                adapter.updateList(sortedList)
-            }
-        }
-    }
+//    private fun sortNews(sortOrder: Categories) {
+//        lifecycleScope.launch {
+//            viewModel.getSavedNews().collect { newsList ->
+//                val sortedList = when (sortOrder) {
+//                    Categories.HOT_NEWS -> newsList.filter { it.categories == Categories.HOT_NEWS }
+//                    Categories.NORMAL_NEWS -> newsList.filter { it.categories == Categories.NORMAL_NEWS }
+//                    Categories.ALL_NEWS -> newsList
+//                }
+//                adapter.updateList(sortedList)
+//            }
+//        }
+//    }
 }
