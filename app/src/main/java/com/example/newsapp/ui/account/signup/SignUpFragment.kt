@@ -41,7 +41,9 @@ class SignUpFragment : Fragment() {
             message?.let {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                 if (it == "User added Successfully") {
-                    findNavController().popBackStack()
+                    findNavController().navigate(
+                        SignUpFragmentDirections.actionSignUpToLogin()
+                    )
                 }
             }
         }
