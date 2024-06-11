@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NewsDao {
-    @Query("SELECT * FROM News WHERE isSaved = 0")
+    @Query("SELECT * FROM News WHERE isSaved = 0 || 1")
     fun getAllNews(): Flow<List<News>>
 
     @Query("SELECT * FROM News WHERE isSaved = 1")

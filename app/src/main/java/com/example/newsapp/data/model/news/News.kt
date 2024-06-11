@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 import com.example.newsapp.data.model.news.Categories
 import com.example.newsapp.data.model.user.User
 import java.net.URL
+import javax.xml.transform.Source
 
 @Entity(
     foreignKeys = [ForeignKey(
@@ -26,6 +27,7 @@ data class News(
     val description: String,
     val tags: String,
     val categories: Categories = Categories.NORMAL_NEWS,
+//    val source: URL? = null,
     val source: String,
     val userId: Int,
     val isSaved: Boolean = false

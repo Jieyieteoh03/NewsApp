@@ -1,5 +1,7 @@
 package com.example.newsapp.ui.viewNews
 
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
+import java.net.URL
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,6 +26,7 @@ class ViewNewsViewModel @Inject constructor(
     val description: MutableLiveData<String> = MutableLiveData()
     val categories: MutableLiveData<String> = MutableLiveData()
     val tags: MutableLiveData<String> = MutableLiveData()
+//    val source: MutableLiveData<URL?> = MutableLiveData()
     val source: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
@@ -61,4 +65,11 @@ class ViewNewsViewModel @Inject constructor(
         }
 
     }
+//    companion object {
+//        @JvmStatic
+//        @BindingAdapter("app:urlToString")
+//        fun bindUrlToString(textView: TextView, url: MutableLiveData<URL?>) {
+//            textView.text = url.value?.toString() ?: ""
+//        }
+//    }
 }

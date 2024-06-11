@@ -27,7 +27,7 @@ class SavedNewsFragment : Fragment() {
     private lateinit var binding: FragmentSavedNewsBinding
     private val viewModel: SavedNewsViewModel by viewModels()
     private lateinit var adapter: NewsAdapter
-    private var sortOrder: Categories = Categories.NORMAL_NEWS
+    private var sortOrder: Categories = Categories.ALL_NEWS
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -100,13 +100,23 @@ class SavedNewsFragment : Fragment() {
         val sortDialog = AlertDialog.Builder(requireContext()).create()
         val alertBox = LayoutNewsSortBinding.inflate(layoutInflater)
 
+        when (sortOrder) {
+            Categories.HOT_NEWS -> alertBox.btnHot.isChecked = true
+            Categories.NORMAL_NEWS -> alertBox.btnNormal.isChecked = true
+            Categories.ALL_NEWS -> alertBox.btnAll.isChecked = true
+        }
         alertBox.run {
-            mrbAsc.setOnCheckedChangeListener { _, isChecked ->
+            btnAll.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    sortOrder = Categories.ALL_NEWS
+                }
+            }
+            btnHot.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     sortOrder = Categories.HOT_NEWS
                 }
             }
-            mrbDesc.setOnCheckedChangeListener { _, isChecked ->
+            btnNormal.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     sortOrder = Categories.NORMAL_NEWS
                 }
@@ -127,6 +137,7 @@ class SavedNewsFragment : Fragment() {
                 val sortedList = when (sortOrder) {
                     Categories.HOT_NEWS -> newsList.filter { it.categories == Categories.HOT_NEWS }
                     Categories.NORMAL_NEWS -> newsList.filter { it.categories == Categories.NORMAL_NEWS }
+                    Categories.ALL_NEWS -> newsList
                 }
                 adapter.updateList(sortedList)
             }
