@@ -10,15 +10,7 @@ import com.example.newsapp.data.model.user.User
 import java.net.URL
 import javax.xml.transform.Source
 
-@Entity(
-    foreignKeys = [ForeignKey(
-        entity = User::class,
-        parentColumns = ["user_id"],
-        childColumns = ["id"],
-        onDelete = ForeignKey.CASCADE
-    )]
-)
-
+@Entity
 data class News(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,

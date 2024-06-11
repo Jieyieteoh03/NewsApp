@@ -69,10 +69,7 @@ class AddEditNewsViewModel @Inject constructor (
                         )
                     )
                     snackbar.postValue("Add successful")
-                } catch (e: Exception) {
-                    throw e
-                    snackbar.postValue(e.message)
-                }
+                } catch (e: Exception) { snackbar.postValue(e.message) }
                 } else {
                     snackbar.postValue("Failed to get current user")
                 }

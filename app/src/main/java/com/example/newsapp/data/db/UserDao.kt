@@ -12,16 +12,16 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UserDao {
 
-    @Query("SELECT * FROM user_table")
+    @Query("SELECT * FROM User")
     fun getAllUser(): Flow<List<User>>
 
     @Query("SELECT * FROM UserSavedNews WHERE userId = :userId")
     fun getAllUserSavedNews(userId: Int): Flow<UserSavedNews?>
 
-    @Query("SELECT * FROM user_table WHERE user_id = :id")
+    @Query("SELECT * FROM User WHERE userId = :id")
     fun getUserById(id: Int): User?
 
-    @Query("SELECT * FROM user_table WHERE user_email = :email")
+    @Query("SELECT * FROM User WHERE email = :email")
     fun getUserByEmail(email: String): User?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -30,13 +30,13 @@ interface UserDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateUser(user: User)
 
-    @Query("DELETE FROM user_table WHERE user_id = :id")
+    @Query("DELETE FROM User WHERE userId = :id")
     fun deleteUser(id: Int)
 
-    @Query("SELECT * FROM user_table WHERE user_email = :email AND password = :password ")
+    @Query("SELECT * FROM User WHERE email = :email AND password = :password ")
     fun userLogin(email: String, password: String): Flow<User?>
 
-    @Query("SELECT password FROM user_table WHERE user_email = :email LIMIT 1")
+    @Query("SELECT password FROM User WHERE email = :email LIMIT 1")
     fun getHashedPsw(email: String): String?
 
 }

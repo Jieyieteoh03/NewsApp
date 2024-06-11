@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentViewUserBinding
 import com.example.newsapp.ui.ContainerFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ViewUserFragment : Fragment() {
     private lateinit var binding:FragmentViewUserBinding
-    private val viewModel: viewUserViewModel by viewModels()
+    private val viewModel: ViewUserViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

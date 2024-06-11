@@ -6,7 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class viewUserViewModel @Inject constructor(
+class ViewUserViewModel @Inject constructor(
     private val userRepo: UserRepo
 ): ViewModel() {
     fun doLogout() = userRepo.logOut()

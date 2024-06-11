@@ -41,8 +41,8 @@ class UserRepoImple(
         dao.deleteUser(id)
     }
 
-    override fun updateUser(user_id: Int, user: User) {
-        dao.updateUser(user.copy(userId = user_id))
+    override fun updateUser(userId: Int, user: User) {
+        dao.updateUser(user.copy(userId = userId))
     }
 
 
@@ -72,18 +72,18 @@ class UserRepoImple(
 
 
     override fun getLoggedInUser(): Int? {
-        return sharedPreferences.getString("user_id", null)?.toInt()
+        return sharedPreferences.getString("userId", null)?.toInt()
     }
 
     override fun logOut() {
         val editor = sharedPreferences.edit()
-        editor.remove("user_id")
+        editor.remove("userId")
         editor.apply()
     }
 
-    private fun saveLoggedInUser(user_id: Int) {
+    private fun saveLoggedInUser(userId: Int) {
         val editor = sharedPreferences.edit()
-        editor.putString("user_id", user_id.toString())
+        editor.putString("userId", userId.toString())
         editor.apply()
     }
 
