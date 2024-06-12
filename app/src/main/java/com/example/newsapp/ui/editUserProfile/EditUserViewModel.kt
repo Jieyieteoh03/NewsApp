@@ -83,7 +83,7 @@ class EditUserViewModel @Inject constructor(
                 val user = userRepo.getUserById(userId)
                 user?.let {
                     val updateUser = it.copy(
-                        img = byteArrayOf(1,2,3,4,5),
+                        img = img.value!!,
                         userName = userName.value!!,
                         email = email.value!!,
                         phoneNumber = phoneNumber.value!!,

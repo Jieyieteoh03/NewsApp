@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.model.news.News
+import com.example.newsapp.data.model.user.User
 import com.example.newsapp.data.model.user.UserSavedNews
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import com.example.newsapp.data.repository.userRepo.UserRepo
@@ -36,9 +37,14 @@ class ViewNewsViewModel @Inject constructor(
     private var _savedNews: MutableLiveData<UserSavedNews> = MutableLiveData()
     val savedNews: LiveData<UserSavedNews> = _savedNews
 
+
+    private val _loggedInUser = MutableLiveData<User?>()
+    val loggedInUser: LiveData<User?> = _loggedInUser
+
     fun getNewsById(id: Int) {
         viewModelScope.launch (Dispatchers.IO){
             _news.postValue(newsRepo.getNewsById(id))
+            _loggedInUser.postValue(userRepo.getCurrentUser())
         }
     }
 
@@ -92,14 +98,4 @@ class ViewNewsViewModel @Inject constructor(
 
         }
     }
-
-//    fun savedNews() {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            val savedNew = news.value?.copy(isSaved = true)
-//            newsRepo.updateNews(savedNew!!)
-//            finish.emit(Unit)
-//        }
-//
-//    }
-
 }

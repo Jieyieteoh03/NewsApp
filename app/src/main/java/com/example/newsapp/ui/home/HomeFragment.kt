@@ -1,12 +1,15 @@
 package com.example.newsapp.ui.home
 
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -15,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.R
 import com.example.newsapp.data.model.news.Categories
+import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.data.repository.userRepo.UserRepo
 import com.example.newsapp.databinding.FragmentHomeBinding
 import com.example.newsapp.ui.ContainerFragmentDirections
@@ -27,7 +31,6 @@ import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: NewsAdapter
@@ -80,19 +83,25 @@ class HomeFragment : Fragment() {
                 }
             }
 
+            viewModel.loggedInUser.observe(viewLifecycleOwner) { user ->
+                user?.let {
+                    binding.tvUser.text = it.userName
+                    binding.tvImg.setImageBitmap(BitmapFactory.decodeByteArray(it.img, 0, it.img.size))
+                    // Show or hide the add news button based on user role
+                    if (it.role == Role.ADMIN) {
+                        binding.btnAddNews.visibility = View.VISIBLE
+                    } else {
+                        binding.btnAddNews.visibility = View.GONE
+                    }
+                }
+            }
+
             binding.run {
                 btnAddNews.setOnClickListener {
                     findNavController().navigate(
                         ContainerFragmentDirections.actionContainerToAddEditNews("Add", 0)
                     )
                 }
-            }
-        }
-
-        viewModel.loggedInUser.observe(viewLifecycleOwner) { user ->
-            user?.let {
-                binding.tvUser.text = it.userName
-                binding.tvImg.setImageBitmap(BitmapFactory.decodeByteArray(it.img, 0, it.img.size))
             }
         }
     }
@@ -119,6 +128,7 @@ class HomeFragment : Fragment() {
                 }
             })
             viewModel.fetchNewsData()
+
         }
     }
 

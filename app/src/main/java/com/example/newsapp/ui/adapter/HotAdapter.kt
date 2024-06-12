@@ -3,6 +3,7 @@ package com.example.newsapp.ui.adapter
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +40,9 @@ class HotAdapter(
     fun getNews() = news
 
     fun setNews(news: List<News>) {
+        Log.d("debugging", news.toString())
+        Log.d("debugging", this.news.toString())
+
         this.news = news
         notifyDataSetChanged()
     }

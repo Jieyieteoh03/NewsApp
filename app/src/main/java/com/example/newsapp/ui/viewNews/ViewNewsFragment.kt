@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.newsapp.R
+import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.databinding.AlertSavedNewsBinding
 import com.example.newsapp.databinding.FragmentViewNewsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,6 +49,7 @@ class ViewNewsFragment : Fragment() {
         viewModel.run {
             getNewsById(args.id)
             news.observe(viewLifecycleOwner) {
+//            news.observe(viewLifecycleOwner) { news ->
                 setNews()
                 it?.let {
                     val image = File(it.img ?: "")
@@ -58,6 +60,14 @@ class ViewNewsFragment : Fragment() {
                     }
                 }
                 binding.btnSaveNews.isInvisible = it.isSaved == true
+
+                loggedInUser.observe(viewLifecycleOwner) { user ->
+                    user?.let {
+                        val isAdmin = it.role == Role.ADMIN
+                        binding.btnDeleteNews.isInvisible = !(isAdmin)
+                        binding.btnEditNews.isInvisible = !(isAdmin)
+                    }
+                }
             }
             lifecycleScope.launch {
                 viewModel.finish.collect{
