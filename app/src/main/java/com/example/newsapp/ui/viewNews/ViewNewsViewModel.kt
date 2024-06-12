@@ -7,7 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.model.news.News
+import com.example.newsapp.data.model.user.UserSavedNews
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
+import com.example.newsapp.data.repository.userRepo.UserRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -19,17 +21,20 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewNewsViewModel @Inject constructor(
     private val newsRepo: NewsRepo,
+    private val userRepo: UserRepo
 ):ViewModel() {
     private val _news: MutableLiveData<News> = MutableLiveData()
     val news: LiveData<News> = _news
-    val img: MutableLiveData<ByteArray?> = MutableLiveData()
+    val img: MutableLiveData<String?> = MutableLiveData()
     val title: MutableLiveData<String> = MutableLiveData()
     val description: MutableLiveData<String> = MutableLiveData()
     val categories: MutableLiveData<String> = MutableLiveData()
     val tags: MutableLiveData<String> = MutableLiveData()
-//    val source: MutableLiveData<URL?> = MutableLiveData()
     val source: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
+
+    private var _savedNews: MutableLiveData<UserSavedNews> = MutableLiveData()
+    val savedNews: LiveData<UserSavedNews> = _savedNews
 
     fun getNewsById(id: Int) {
         viewModelScope.launch (Dispatchers.IO){
@@ -45,11 +50,8 @@ class ViewNewsViewModel @Inject constructor(
             categories.value = it.categories.toString()
             tags.value = it.tags
             source.value = it.source
-
         }
     }
-
-
 
     fun deleteNews() {
         viewModelScope.launch (Dispatchers.IO){
@@ -58,22 +60,46 @@ class ViewNewsViewModel @Inject constructor(
         }
     }
 
-//    fun getSavedNews(): Flow<List<News>> = newsRepo.getSavedNews()
-
-
-    fun savedNews() {
+    fun addEditSavedNews() {
         viewModelScope.launch(Dispatchers.IO) {
-            val savedNew = news.value?.copy(isSaved = true)
-            newsRepo.updateNews(savedNew!!)
-            finish.emit(Unit)
+            val userId = userRepo.getLoggedInUser()
+            userId?.let {
+                val existingSavedNews = userRepo.getUserSavedNewsById(it)
+                if(existingSavedNews != null) {
+                    val newsList = existingSavedNews.savedNews.toMutableList()
+                    if(!newsList.contains(news.value!!)) {
+                        newsList.add(news.value!!)
+                    } else {
+                        newsList.remove(news.value!!)
+                    }
+                    newsRepo.updateSavedNews(existingSavedNews.copy(savedNews = newsList.toList()))
+                } else {
+                    newsRepo.addSavedNews(UserSavedNews(
+                        userId = it,
+                        savedNews = listOf(news.value!!)
+                    ))
+                }
+            }
         }
-
     }
-//    companion object {
-//        @JvmStatic
-//        @BindingAdapter("app:urlToString")
-//        fun bindUrlToString(textView: TextView, url: MutableLiveData<URL?>) {
-//            textView.text = url.value?.toString() ?: ""
+
+    fun getSavedNewsById(){
+        viewModelScope.launch (Dispatchers.IO){
+            val userId = userRepo.getLoggedInUser()
+            userId?.let {
+              _savedNews.postValue(userRepo.getUserSavedNewsById(userId))
+            }
+
+        }
+    }
+
+//    fun savedNews() {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            val savedNew = news.value?.copy(isSaved = true)
+//            newsRepo.updateNews(savedNew!!)
+//            finish.emit(Unit)
 //        }
+//
 //    }
+
 }

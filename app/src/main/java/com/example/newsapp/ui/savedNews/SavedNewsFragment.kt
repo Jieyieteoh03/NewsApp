@@ -49,18 +49,23 @@ class SavedNewsFragment : Fragment() {
 //        sortNews(sortOrder)
 
         binding.ivSort.setOnClickListener { showSort() }
-
-        lifecycleScope.launch {
-            viewModel.run {
-
+        viewModel.run {
+            lifecycleScope.launch {
+                getSavedNewsById()
+                savedNews.observe(viewLifecycleOwner) {
+                    it?.let {
+                        adapter.setNews(it.savedNews)
+                    }
+                }
             }
         }
+
 
     }
 
     private fun setupAdapter() {
         val layoutManager = LinearLayoutManager(requireContext())
-        adapter = NewsAdapter(emptyList())
+        adapter = NewsAdapter(requireContext(), emptyList())
         adapter.listener = object : NewsAdapter.Listener {
             override fun onClick(id: Int) {
                 val action = ContainerFragmentDirections.actionContainerToViewNews(id)
@@ -108,7 +113,7 @@ class SavedNewsFragment : Fragment() {
 
 //    private fun sortNews(sortOrder: Categories) {
 //        lifecycleScope.launch {
-//            viewModel.getSavedNews().collect { newsList ->
+//            viewModel.addEditSavedNews().collect { newsList ->
 //                val sortedList = when (sortOrder) {
 //                    Categories.HOT_NEWS -> newsList.filter { it.categories == Categories.HOT_NEWS }
 //                    Categories.NORMAL_NEWS -> newsList.filter { it.categories == Categories.NORMAL_NEWS }

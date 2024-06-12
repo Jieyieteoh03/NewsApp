@@ -2,6 +2,7 @@ package com.example.newsapp.ui.addEditNews
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -15,11 +16,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentAddEditNewsBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.io.File
 
 @AndroidEntryPoint
 class AddEditNewsFragment : Fragment() {
@@ -29,7 +32,7 @@ class AddEditNewsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentAddEditNewsBinding.inflate(
             layoutInflater,
@@ -51,7 +54,6 @@ class AddEditNewsFragment : Fragment() {
             } else  {
                 viewModel.submit()
             }
-
         }
 
 
@@ -80,22 +82,40 @@ class AddEditNewsFragment : Fragment() {
         }
     }
 
-    fun openImagePicker() {
+    private fun openImagePicker() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, Companion.REQUEST_IMAGE_PICK)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Companion.REQUEST_IMAGE_PICK && resultCode == Activity.RESULT_OK && data != null) {
             val selectedImageUri = data.data
-            val inputStream = requireContext().contentResolver.openInputStream(selectedImageUri!!)
-            val bytes = inputStream?.readBytes()
-            if (bytes != null) {
-                viewModel.img.value = bytes
+            val file = getFileFromUri(selectedImageUri!!)
+            if(file != null) {
+                Log.d("debugging", file)
+                viewModel.img.value = file
+                val image = File(file)
+                if(image.exists()) {
+                    Glide.with(requireContext())
+                        .load(image)
+                        .into(binding.ivImage)
+                }
             }
-            binding.imgGallery.setImageURI(selectedImageUri)
         }
+    }
+
+    private fun getFileFromUri(uri: Uri): String? {
+        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = requireContext().contentResolver.query(uri, filePathColumn, null, null, null)
+        cursor?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                val columnIndex = cursor.getColumnIndex(filePathColumn[0])
+                return cursor.getString(columnIndex)
+            }
+        }
+        return null
     }
 
     private fun setupCategorySpinner() {

@@ -8,7 +8,7 @@ import com.example.newsapp.data.model.news.News
 import com.example.newsapp.data.model.user.User
 import com.example.newsapp.data.model.user.UserSavedNews
 
-@Database(entities = [News::class, User::class, UserSavedNews::class], version = 1)
+@Database(entities = [News::class, User::class, UserSavedNews::class], version = 2)
 abstract class NewsDatabase: RoomDatabase() {
 
     abstract fun getNewsDao(): NewsDao

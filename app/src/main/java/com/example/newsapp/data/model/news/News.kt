@@ -14,7 +14,7 @@ import javax.xml.transform.Source
 data class News(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
-    val img: ByteArray,
+    val img: String?,
     val title: String,
     val description: String,
     val tags: String,

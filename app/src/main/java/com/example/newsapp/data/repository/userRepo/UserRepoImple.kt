@@ -5,12 +5,13 @@ import com.example.newsapp.data.db.UserDao
 import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.data.model.user.User
 import com.example.newsapp.data.model.user.UserSavedNews
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import org.springframework.security.crypto.bcrypt.BCrypt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 class UserRepoImple(
-    private val context: Context,
+    @ApplicationContext private val context: Context,
     private val dao: UserDao
 ): UserRepo {
 
@@ -24,7 +25,7 @@ class UserRepoImple(
         return dao.getUserById(id)
     }
 
-    override fun getUserSavedNews(userId: Int): Flow<UserSavedNews?> {
+    override fun getUserSavedNewsById(userId: Int): UserSavedNews? {
         return dao.getAllUserSavedNews(userId)
     }
 
@@ -32,33 +33,30 @@ class UserRepoImple(
         return dao.getUserByEmail(email)
     }
 
-    override fun addUser(user: User): Int? {
+    override fun addUser(user: User) {
         dao.addUser(user)
-        return null
     }
 
     override fun deleteUser(id: Int) {
         dao.deleteUser(id)
     }
 
-    override fun updateUser(userId: Int, user: User) {
-        dao.updateUser(user.copy(userId = userId))
+    override fun updateUser(id: Int, user: User) {
+        dao.updateUser(user.copy(userId = id))
     }
 
 
     override fun verifyLoginUser(email: String, password: String): User? {
-        val bcrypth =  BCryptPasswordEncoder()
+        val bcrypt =  BCryptPasswordEncoder()
         val hashedPsw = getHashedPsw(email)
-        val isValid = bcrypth.matches(password, hashedPsw)
+        val isValid = bcrypt.matches(password, hashedPsw)
 
-
-
-        if (isValid) {
+        return if (isValid) {
             val user = dao.getUserByEmail(email)
             saveLoggedInUser(user?.userId!!);
-            return dao.getUserByEmail(email)
+            dao.getUserByEmail(email)
         } else {
-            return null
+            null
         }
     }
 
@@ -95,6 +93,4 @@ class UserRepoImple(
             null
         }
     }
-
-
 }

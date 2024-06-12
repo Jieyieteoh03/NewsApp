@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.adapter
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.databinding.LayoutHotNewsCardItemBinding
 import com.example.newsapp.databinding.LayoutNewsCardItemBinding
+import dagger.hilt.android.qualifiers.ApplicationContext
+import java.io.File
 
 class HotAdapter(
     private var news: List<News>
@@ -44,11 +47,14 @@ class HotAdapter(
         private val binding: LayoutHotNewsCardItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(news: News) {
-            val bitmap = BitmapFactory.decodeByteArray(news.img, 0, news.img.size)
-            val drawable = BitmapDrawable(binding.root.context.resources, bitmap)
-            binding.ivImage.background = drawable
             binding.tvTitle.text = news.title
             binding.tvDesc.text = news.description
+            val image = File(news.img ?: "")
+            if(image.exists()) {
+                Glide.with(binding.ivImage.context)
+                    .load(image)
+                    .into(binding.ivImage)
+            }
             binding.cvHotNews.setOnClickListener { listener?.onClick(news.id!!) }
         }
     }

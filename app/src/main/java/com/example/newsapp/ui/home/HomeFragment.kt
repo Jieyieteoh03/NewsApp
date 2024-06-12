@@ -100,7 +100,7 @@ class HomeFragment : Fragment() {
 
     private fun setupAdapter() {
         val layoutManager = LinearLayoutManager(requireContext())
-        adapter = NewsAdapter(emptyList())
+        adapter = NewsAdapter(requireContext(), emptyList())
         adapter.listener = object : NewsAdapter.Listener {
             override fun onClick(id: Int) {
                 val action = ContainerFragmentDirections.actionContainerToViewNews(id)

@@ -10,13 +10,13 @@ interface UserRepo {
 
     fun getAllUser(): Flow<List<User>>
 
-    fun getUserSavedNews(userId: Int): Flow<UserSavedNews?>
+    fun getUserSavedNewsById(userId: Int): UserSavedNews?
 
     fun getUserById(id: Int) : User?
 
     fun getUserByEmail(email: String) : User?
 
-    fun addUser(user: User): Int?
+    fun addUser(user: User)
 
     fun deleteUser(id: Int)
 

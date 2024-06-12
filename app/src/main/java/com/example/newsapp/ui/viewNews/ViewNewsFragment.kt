@@ -13,11 +13,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.newsapp.R
 import com.example.newsapp.databinding.AlertSavedNewsBinding
 import com.example.newsapp.databinding.FragmentViewNewsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.io.File
 
 @AndroidEntryPoint
 class ViewNewsFragment : Fragment() {
@@ -45,8 +47,16 @@ class ViewNewsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel.run {
             getNewsById(args.id)
-            news.observe(viewLifecycleOwner){
+            news.observe(viewLifecycleOwner) {
                 setNews()
+                it?.let {
+                    val image = File(it.img ?: "")
+                    if(image.exists()) {
+                        Glide.with(binding.ivImage.context)
+                            .load(image)
+                            .into(binding.ivImage)
+                    }
+                }
                 binding.btnSaveNews.isInvisible = it.isSaved == true
             }
             lifecycleScope.launch {
@@ -81,7 +91,7 @@ class ViewNewsFragment : Fragment() {
             btnNo.setOnClickListener { alertDialog.dismiss() }
             btnYes.setOnClickListener {
                 if(type == "Do you want to delete this news?") viewModel.deleteNews()
-                else if(type == "Do you want save this news?") viewModel.savedNews()
+                else if(type == "Do you want save this news?") viewModel.addEditSavedNews()
                 alertDialog.dismiss()
             }
         }

@@ -22,7 +22,7 @@ class AddEditNewsViewModel @Inject constructor (
     private val userRepo: UserRepo
 ) :ViewModel() {
     private var news: News? = null
-    val img: MutableLiveData<ByteArray?> = MutableLiveData()
+    val img: MutableLiveData<String?> = MutableLiveData("")
     val title: MutableLiveData<String> = MutableLiveData("")
     val description: MutableLiveData<String> = MutableLiveData("")
     val tags: MutableLiveData<String> = MutableLiveData("")
@@ -49,7 +49,7 @@ class AddEditNewsViewModel @Inject constructor (
     }
 
     fun submit() {
-        if (img.value != null &&
+        if (img.value != "" &&
             title.value != "" &&
             description.value != ""
         ) {

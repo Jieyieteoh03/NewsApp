@@ -1,6 +1,7 @@
 package com.example.newsapp.ui.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.databinding.LayoutNewsCardItemBinding
+import dagger.hilt.android.qualifiers.ApplicationContext
+import java.io.File
 
 class NewsAdapter(
+    @ApplicationContext private val context: Context,
     private var news: List<News>
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var listener: Listener? = null
@@ -55,9 +59,12 @@ class NewsAdapter(
         fun bind(news: News) {
             binding.tvTitle.text = news.title
             binding.tvDesc.text = news.description
-            Glide.with(binding.ivImage.context)
-                .load(news.img)
-                .into(binding.ivImage)
+            val image = File(news.img!!)
+            if(image.exists()) {
+                Glide.with(context)
+                    .load(image)
+                    .into(binding.ivImage)
+            }
             binding.tvCategory.text = news.categories.toString()
             binding.cvNews.setOnClickListener { listener?.onClick(news.id!!) }
         }
