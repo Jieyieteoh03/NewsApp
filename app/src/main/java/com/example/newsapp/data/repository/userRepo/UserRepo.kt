@@ -30,4 +30,6 @@ interface UserRepo {
 
     fun logOut()
 
+    fun changePsw(inputPassword: String): User?
+
 }

@@ -35,7 +35,6 @@ class EditUserFragment : Fragment() {
                 binding.etUsername.setText(it.userName)
                 binding.etEmail.setText(it.email)
                 binding.etPhoneNumber.setText(it.phoneNumber)
-                binding.etPassword.setText(it.password)
             }
         }
 
@@ -51,9 +50,14 @@ class EditUserFragment : Fragment() {
 
         editUserViewModel.loggedInUser()
 
+        binding.btnEditPsw.setOnClickListener {
+            findNavController().navigate(
+                EditUserFragmentDirections.actionEditUserFragmentToEditUserPasswordFragment(editUserViewModel.getLoggedInUser()!!)
+            )
+        }
+
         lifecycleScope.launch {
             editUserViewModel.finish.collect {
-                Log.d("UserProfile", "Updated Successfully")
                 findNavController().popBackStack()
             }
         }

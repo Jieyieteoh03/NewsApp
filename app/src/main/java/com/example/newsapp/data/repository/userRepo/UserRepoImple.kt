@@ -78,6 +78,19 @@ class UserRepoImple(
         editor.apply()
     }
 
+    override  fun changePsw(inputPassword: String): User? {
+        val userId = getLoggedInUser()
+        return userId?.let {
+            val user = dao.getUserById(it)
+            val bcrypt = BCryptPasswordEncoder()
+            if (user != null && bcrypt.matches(inputPassword, user.password)) {
+                user
+            } else {
+                null
+            }
+        }
+    }
+
     private fun saveLoggedInUser(user_id: Int) {
         val editor = sharedPreferences.edit()
         editor.putString("user_id", user_id.toString())

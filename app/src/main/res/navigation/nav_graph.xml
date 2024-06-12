@@ -45,6 +45,9 @@
         <argument
             android:name="userId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_editUserFragment_to_editUserPasswordFragment"
+            app:destination="@id/editUserPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -75,5 +78,11 @@
             android:id="@+id/action_userDetailFragment_to_editUserFragment"
             app:destination="@id/editUserFragment" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/editUserPasswordFragment"
+        android:name="com.example.newsapp.ui.changePassword.EditUserPasswordFragment"
+        android:label="EditUserPasswordFragment">
+        <argument android:name="id" app:argType="integer"/>
     </fragment>
 </navigation>
