@@ -128,6 +128,7 @@ class HomeFragment : Fragment() {
                 }
             })
             viewModel.fetchNewsData()
+
         }
     }
 
