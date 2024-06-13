@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<data>
+    <variable
+        name="addViewModel"
+        type="com.example.newsapp.ui.add.AddNewViewModel" />
+</data>
+
+    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/m">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD NEWS"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/m"/>
+
+        <ImageView
+            android:id="@+id/imgGallery"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/cat1"
+            app:imageByteArray="@{addViewModel.img}"
+            />
+
+        <Button
+            android:id="@+id/btnSelectImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Image" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="@dimen/giant_text_size"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/etTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/xs"
+            android:hint="Enter the News Title"
+            android:text="@={addViewModel.title}"
+            android:background="@drawable/input_box"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:layout_marginTop="@dimen/xl"
+            android:textSize="@dimen/giant_text_size"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/xs"
+            android:gravity="start"
+            android:hint="Enter the description regarding the News here"
+            android:text="@={addViewModel.description}"
+            android:minLines="5"
+            android:background="@drawable/input_box" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tags"
+            android:layout_marginTop="@dimen/xl"
+            android:textSize="@dimen/giant_text_size"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/etTags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/xs"
+            android:hint="#tags"
+            android:text="@={addViewModel.tags}"
+            android:background="@drawable/input_box" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Categories"
+            android:layout_marginTop="@dimen/xl"
+            android:textSize="@dimen/giant_text_size"
+            android:textStyle="bold"/>
+
+        <Spinner
+            android:id="@+id/etCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/xxs"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/input_box"
+            android:entries="@array/category_options"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Source"
+            android:layout_marginTop="@dimen/xl"
+            android:textSize="@dimen/giant_text_size"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/etSource"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/xs"
+            android:hint="URL"
+            android:text="@={addViewModel.source}"
+            android:background="@drawable/input_box"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:onClick="@{() -> addViewModel.submit()}"
+            android:textStyle="bold"
+            android:backgroundTint="@color/green"
+            android:textSize="@dimen/l"
+            android:layout_marginHorizontal="@dimen/xxxl"
+            android:layout_marginVertical="@dimen/xxxl"/>
+
+
+    </LinearLayout>
+
+</ScrollView>
+</layout>

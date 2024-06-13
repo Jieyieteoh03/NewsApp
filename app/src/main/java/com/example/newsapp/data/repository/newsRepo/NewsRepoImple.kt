@@ -1,7 +1,8 @@
-package com.example.newsapp.data.repository
+package com.example.newsapp.data.repository.newsRepo
 
-import com.example.newsapp.data.db.NewsDb.NewsDao
-import com.example.newsapp.data.model.news.News
+import com.example.newsapp.data.db.NewsDao
+import com.example.newsapp.data.model.News
+import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import kotlinx.coroutines.flow.Flow
 
 class NewsRepoImple(
@@ -15,9 +16,8 @@ class NewsRepoImple(
         return dao.getNewsById(id)
     }
 
-    override fun addNews(news: News): Int? {
+    override fun addNews(news: News) {
         dao.addNews(news)
-        return null
     }
 
     override fun deleteNews(id: Int) {

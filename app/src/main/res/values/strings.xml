@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">NewsApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="category">Category</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="sign_up"><u>Sign Up</u></string>
+    <string name="signUp">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="fab_add">Add</string>
+    <string name="login_paswword">Enter the Password</string>
+    <string name="login_password_title">Password</string>
+    <string name="login_email">Enter the email</string>
+    <string name="login_email_title">Email</string>
+    <string name="title_sign_in">Sign In</string>
+    <string name="source">Source</string>
+
+
+    <string-array name="category_options">
+        <item>HOT_NEWS</item>
+        <item>NORMAL_NEWS</item>
+    </string-array>
 </resources>

@@ -2,18 +2,25 @@
 agp = "8.3.0"
 fragmentKtx = "1.7.1"
 hiltAndroid = "2.49"
+agp = "8.3.2"
+androidxNavigationSafeargsGradlePlugin = "2.7.7"
+fragmentKtx = "1.7.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
-appcompat = "1.6.1"
+appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.8.0"
+activity = "1.9.0"
 constraintlayout = "2.1.4"
+navigationUiKtx = "2.7.7"
+navigationFragmentKtx = "2.7.7"
+roomRuntime = "2.6.1"
 navigationUiKtx = "2.7.7"
 
 [libraries]
+androidx-androidx-navigation-safeargs-gradle-plugin = { module = "androidx.navigation.safeargs:androidx.navigation.safeargs.gradle.plugin", version.ref = "androidxNavigationSafeargsGradlePlugin" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragmentKtx" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationUiKtx" }
