@@ -65,13 +65,13 @@ class AddEditNewsFragment : Fragment() {
         }
 
         viewModel.run {
-            Log.d("argsId", args.id.toString())
             if(args.type == "Edit") {
                 getNewsById(args.id)
             }
             snackbar.observe(viewLifecycleOwner) {
                 Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
             }
+
 
         }
     }

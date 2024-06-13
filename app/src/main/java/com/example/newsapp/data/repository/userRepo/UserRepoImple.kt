@@ -93,4 +93,17 @@ class UserRepoImple(
             null
         }
     }
+
+    override  fun changePsw(inputPassword: String): User? {
+        val userId = getLoggedInUser()
+        return userId?.let {
+            val user = dao.getUserById(it)
+            val bcrypt = BCryptPasswordEncoder()
+            if (user != null && bcrypt.matches(inputPassword, user.password)) {
+                user
+            } else {
+                null
+            }
+        }
+    }
 }

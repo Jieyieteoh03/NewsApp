@@ -11,8 +11,6 @@
     <string name="edit_source">Source</string>
     <string name="edit_url">URL</string>
     <string name="edit_save_changes">Save Changes</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="category">Category</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
@@ -22,13 +20,13 @@
     <string name="password">Password</string>
     <string name="email">Email</string>
     <string name="fab_add">Add</string>
-    <string name="login_paswword">Enter the Password</string>
+    <string name="login_password">Enter the Password</string>
     <string name="login_password_title">Password</string>
     <string name="login_email">Enter the email</string>
     <string name="login_email_title">Email</string>
     <string name="title_sign_in">Sign In</string>
     <string name="source">Source</string>
-    <string name="create_an_account"><a>Create an Account</a></string>
+    <string name="create_an_account"><a>Don\'t have an account? Create now!</a></string>
     <string name="select_image">Select Image</string>
     <string name="hello">Hello</string>
     <string name="user">User</string>
@@ -39,6 +37,28 @@
     <string name="comment">comment</string>
     <string name="username">Username</string>
     <string name="alert_ques">%s?</string>
+    <string name="user_profile">User Profile</string>
+    <string name="view_username">Username</string>
+    <string name="user_name_hint">User Name</string>
+    <string name="view_email">Email</string>
+    <string name="user_email_hint">User Email</string>
+    <string name="view_hp_number">Hp Number</string>
+    <string name="hp_number_hint">Hp Number</string>
+    <string name="edit_password">Edit Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="enter_old_password">Enter old password</string>
+    <string name="new_password">New Password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_your_new_password">Confirm your new password</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="edit_password_here">Edit password here!</string>
+    <string name="want_to_change_your_password">Want to change your password?</string>
+    <string name="_60x_xxxxxxxx">+60X-XXXXXXXX</string>
+    <string name="enter_the_email">Enter the email</string>
+    <string name="enter_username">Enter username</string>
+    <string name="choose_a_profile_picture">Choose a profile picture</string>
+    <string name="edit_profile">Edit Profile</string>
 
 
     <string-array name="category_options">

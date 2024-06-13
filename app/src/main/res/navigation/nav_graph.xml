@@ -14,9 +14,7 @@
         <action
             android:id="@+id/action_viewNews_to_addEditNews"
             app:destination="@id/addEditNewsFragment" />
-<!--        <action-->
-<!--            android:id="@+id/action_viewNews_to_container"-->
-<!--            app:destination="@id/containerFragment" />-->
+
     </fragment>
     <fragment
         android:id="@+id/containerFragment"
@@ -70,6 +68,16 @@
         android:name="com.example.newsapp.ui.editUserProfile.EditUserFragment"
         android:label="EditUserFragment">
         <argument android:name="userId" app:argType="integer"/>
+        <action
+            android:id="@+id/action_editUser_to_editUserPassword"
+            app:destination="@id/editUserPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editUserPasswordFragment"
+        android:name="com.example.newsapp.ui.editUserPassword.EditUserPasswordFragment"
+        android:label="fragment_edit_user_password"
+        tools:layout="@layout/fragment_edit_user_password" >
+        <argument android:name="id" app:argType="integer"/>
     </fragment>
 
 </navigation>

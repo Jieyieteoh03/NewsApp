@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
 import com.example.newsapp.data.model.news.Categories
+import com.example.newsapp.data.model.news.News
 import com.example.newsapp.databinding.FragmentSavedNewsBinding
 import com.example.newsapp.databinding.LayoutNewsSortBinding
 import com.example.newsapp.ui.ContainerFragmentDirections
@@ -46,8 +47,6 @@ class SavedNewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupAdapter()
 
-//        sortNews(sortOrder)
-
         binding.ivSort.setOnClickListener { showSort() }
         viewModel.run {
             lifecycleScope.launch {
@@ -55,6 +54,7 @@ class SavedNewsFragment : Fragment() {
                 savedNews.observe(viewLifecycleOwner) {
                     it?.let {
                         adapter.setNews(it.savedNews)
+                        sortNews()
                     }
                 }
             }
@@ -102,7 +102,7 @@ class SavedNewsFragment : Fragment() {
                 }
             }
             btnConfirm.setOnClickListener {
-//                sortNews(sortOrder)
+                sortNews()
                 sortDialog.dismiss()
             }
         }
@@ -111,16 +111,16 @@ class SavedNewsFragment : Fragment() {
         sortDialog.show()
     }
 
-//    private fun sortNews(sortOrder: Categories) {
-//        lifecycleScope.launch {
-//            viewModel.addEditSavedNews().collect { newsList ->
-//                val sortedList = when (sortOrder) {
-//                    Categories.HOT_NEWS -> newsList.filter { it.categories == Categories.HOT_NEWS }
-//                    Categories.NORMAL_NEWS -> newsList.filter { it.categories == Categories.NORMAL_NEWS }
-//                    Categories.ALL_NEWS -> newsList
-//                }
-//                adapter.updateList(sortedList)
-//            }
-//        }
-//    }
+    private fun sortNews() {
+        val data = viewModel.savedNews.value
+        data?.let { list ->
+            val savedNews = list.savedNews
+            val sortedList = when (sortOrder) {
+                Categories.HOT_NEWS -> savedNews.filter { it.categories == Categories.HOT_NEWS }
+                Categories.NORMAL_NEWS -> savedNews.filter { it.categories == Categories.NORMAL_NEWS }
+                Categories.ALL_NEWS -> savedNews
+            }
+            adapter.updateList(sortedList)
+        }
+    }
 }

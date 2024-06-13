@@ -1,5 +1,6 @@
 package com.example.newsapp.ui.viewNews
 
+import android.util.Log
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
@@ -71,20 +72,28 @@ class ViewNewsViewModel @Inject constructor(
             val userId = userRepo.getLoggedInUser()
             userId?.let {
                 val existingSavedNews = userRepo.getUserSavedNewsById(it)
-                if(existingSavedNews != null) {
-                    val newsList = existingSavedNews.savedNews.toMutableList()
-                    if(!newsList.contains(news.value!!)) {
-                        newsList.add(news.value!!)
-                    } else {
-                        newsList.remove(news.value!!)
-                    }
-                    newsRepo.updateSavedNews(existingSavedNews.copy(savedNews = newsList.toList()))
-                } else {
+                var isSaved = false
+                if(existingSavedNews == null) {
                     newsRepo.addSavedNews(UserSavedNews(
                         userId = it,
                         savedNews = listOf(news.value!!)
                     ))
+                    isSaved = true
+                } else {
+                    val newsList = existingSavedNews.savedNews.toMutableList()
+                    val checkList = newsList.filter { each -> each.id == news.value!!.id }
+                    isSaved = if(checkList.isEmpty()) {
+                        newsList.add(news.value!!)
+                        true
+                    } else {
+                        newsList.remove(news.value!!)
+                        false
+                    }
+                    newsRepo.updateSavedNews(
+                        existingSavedNews.copy(savedNews = newsList.toList())
+                    )
                 }
+                newsRepo.updateNews(news.value!!.copy(isSaved = isSaved))
             }
         }
     }

@@ -28,7 +28,7 @@ class AddEditNewsViewModel @Inject constructor (
     val tags: MutableLiveData<String> = MutableLiveData("")
     val categories: MutableLiveData<String> = MutableLiveData("")
     val source: MutableLiveData<String> = MutableLiveData("")
-    val snackbar: MutableLiveData<String> = MutableLiveData("")
+    val snackbar: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
     fun getNewsById(id: Int) {
@@ -91,18 +91,23 @@ class AddEditNewsViewModel @Inject constructor (
                 source.value != news?.source)
             ) {
                 news?.let { newsTemp ->
-                    newsRepo.updateNews(
-                        newsTemp.copy(
-                            img = img.value!!,
-                            title = title.value!!,
-                            description = description.value!!,
-                            categories = categoryValue ?: Categories.NORMAL_NEWS,
-                            tags = tags.value!!,
-                            source = source.value!!
+                    try {
+                        newsRepo.updateNews(
+                            newsTemp.copy(
+                                img = img.value!!,
+                                title = title.value!!,
+                                description = description.value!!,
+                                categories = categoryValue ?: Categories.NORMAL_NEWS,
+                                tags = tags.value!!,
+                                source = source.value!!
+                            )
                         )
-                    )
+                        snackbar.postValue("Edit successful")
+                    } catch (e: Exception) {snackbar.postValue(e.message)}
                     finish.emit(Unit)
                 }
+            } else {
+                snackbar.postValue("Enter all required fields")
             }
         }
     }

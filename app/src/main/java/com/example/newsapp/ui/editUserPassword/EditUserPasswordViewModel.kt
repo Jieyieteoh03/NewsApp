@@ -1,6 +1,5 @@
-package com.example.newsapp.ui.editUserProfile
+package com.example.newsapp.ui.editUserPassword
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,17 +15,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.inject.Inject
 
 @HiltViewModel
-class EditUserViewModel @Inject constructor(
+class EditUserPasswordViewModel @Inject constructor(
     private val userRepo: UserRepo
 ): ViewModel() {
     private val _user: MutableLiveData<User> = MutableLiveData()
-    val img: MutableLiveData<ByteArray?> = MutableLiveData()
     val userDetails: LiveData<User> = _user
-    val userName: MutableLiveData<String> = MutableLiveData()
-    val email: MutableLiveData<String> = MutableLiveData()
-    val phoneNumber: MutableLiveData<String> = MutableLiveData()
+    val oldPassword: MutableLiveData<String> = MutableLiveData()
+    val newPassword: MutableLiveData<String> = MutableLiveData()
+    val confirmPassword: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
     val snackbar: MutableLiveData<String> = MutableLiveData()
+
 
     fun loggedInUser() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -35,7 +34,7 @@ class EditUserViewModel @Inject constructor(
                 val user = userRepo.getUserById(userId)
                 user?.let {
                     withContext(Dispatchers.Main) {
-                        setUser(it)
+                        _user.postValue(it)
                     }
                 }
             }
@@ -47,39 +46,49 @@ class EditUserViewModel @Inject constructor(
             val user = userRepo.getUserById(id)
             user?.let {
                 withContext(Dispatchers.Main) {
-                    _user.value = it
+                    _user.postValue(it)
                 }
             }
         }
     }
 
-    private fun setUser(user: User) {
-        userName.value = user.userName
-        email.value = user.email
-        phoneNumber.value = user.phoneNumber
-        img.value = user.img
+    fun changePassword() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val user = userRepo.changePsw(oldPassword.value!!)
+            if (user != null) {
+                updatePassword()
+            } else {
+                withContext(Dispatchers.Main) {
+                    snackbar.postValue("Incorrect old password")
+                }
+            }
+        }
     }
 
-    fun updateProfile() {
-        if (userName.value.isNullOrEmpty() ||
-            email.value.isNullOrEmpty() ||
-            phoneNumber.value.isNullOrEmpty()) {
+
+    fun updatePassword() {
+        if (oldPassword.value.isNullOrEmpty() || newPassword.value.isNullOrEmpty() || confirmPassword.value.isNullOrEmpty()) {
             snackbar.value = "Please fill in all fields"
             return
         }
+        if (confirmPassword.value != newPassword.value) {
+            snackbar.postValue("Confirm Password does not match your Password")
+            return
+        }
+
         viewModelScope.launch(Dispatchers.IO) {
             val userId = userRepo.getLoggedInUser()
+            val bcrypt = BCryptPasswordEncoder()
             if (userId != null) {
                 val user = userRepo.getUserById(userId)
                 user?.let {
-                    val updateUser = it.copy(
-                        img = img.value!!,
-                        userName = userName.value!!,
-                        email = email.value!!,
-                        phoneNumber = phoneNumber.value!!
+                    val updatePassword = it.copy(
+                        password = bcrypt.encode(confirmPassword.value)!!
                     )
-                    userRepo.updateUser(userId, updateUser)
-                    snackbar.postValue("User details updated successfully")
+                    userRepo.updateUser(userId, updatePassword)
+                    withContext(Dispatchers.Main) {
+                        snackbar.value = "User details updated successfully"
+                    }
                     finish.emit(Unit)
                 }
             }

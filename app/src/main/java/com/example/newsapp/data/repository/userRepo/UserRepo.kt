@@ -34,4 +34,8 @@ interface UserRepo {
 
     fun getCurrentUser(): User?
 
+    fun changePsw(inputPassword: String): User?
+
+
+
 }

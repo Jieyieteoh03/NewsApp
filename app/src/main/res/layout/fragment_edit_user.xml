@@ -18,18 +18,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_rectangle"
         android:orientation="vertical"
         android:gravity="center"
         android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:layout_marginVertical="@dimen/xxxxxl"
+        android:layout_marginVertical="20dp"
         android:layout_marginHorizontal="@dimen/m">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/edit_profile"
+            android:textSize="@dimen/giant_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="@dimen/m"
+            android:layout_marginTop="24dp"/>
+
 
         <ImageView
             android:id="@+id/imgGallery"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:src="@drawable/cat1"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_image"
             app:imageByteArray="@{updateUser.img}"
             />
 
@@ -37,18 +48,10 @@
             android:id="@+id/btnSelectImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Image" />
+            android:text="@string/choose_a_profile_picture"
+            android:backgroundTint="@color/grey"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Edit Profile"
-            android:textSize="@dimen/giant_text_size"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_marginBottom="@dimen/m"
-            android:layout_marginTop="24dp"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,7 +67,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Username"
+                android:text="@string/username"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
 
@@ -74,13 +77,13 @@
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
                 android:text="@={updateUser.userName}"
-                android:hint="Enter the email"
+                android:hint="@string/enter_username"
                 android:background="@drawable/input_box"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="@string/email"
                 android:layout_marginTop="@dimen/xl"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
@@ -91,13 +94,13 @@
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
                 android:text="@={updateUser.email}"
-                android:hint="Enter the email"
+                android:hint="@string/enter_the_email"
                 android:background="@drawable/input_box"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phone Number"
+                android:text="@string/view_hp_number"
                 android:layout_marginTop="@dimen/xl"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
@@ -108,51 +111,34 @@
                 android:layout_height="@dimen/xxxxxl"
                 android:paddingHorizontal="@dimen/xs"
                 android:text="@={updateUser.phoneNumber}"
-                android:hint="+60X-XXXXXXXX"
+                android:hint="@string/_60x_xxxxxxxx"
                 android:background="@drawable/input_box"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Password"
+                android:text="@string/want_to_change_your_password"
                 android:layout_marginTop="@dimen/xl"
                 android:textSize="@dimen/giant_text_size"
                 android:textStyle="bold"/>
 
-            <EditText
-                android:id="@+id/etPassword"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/xxxxxl"
-                android:paddingHorizontal="@dimen/xs"
-                android:text="@={updateUser.password}"
-                android:hint="Enter the Password"
-                android:background="@drawable/input_box" />
-
-            <TextView
+            <Button
+                android:id="@+id/btnEditPsw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Confirm Password"
-                android:layout_marginTop="@dimen/xl"
-                android:textSize="@dimen/giant_text_size"
-                android:textStyle="bold"/>
+                android:text="@string/edit_password_here"
+                android:backgroundTint="@color/grey"/>
 
-            <EditText
-                android:id="@+id/etConfirmPassword"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/xxxxxl"
-                android:paddingHorizontal="@dimen/xs"
-                android:text="@={updateUser.confirmPassword}"
-                android:hint="Enter the Password"
-                android:background="@drawable/input_box" />
+
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save Changes"
+            android:text="@string/save_changes"
             android:onClick="@{() -> updateUser.updateProfile()}"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/grey"
             android:layout_marginHorizontal="@dimen/xxxl"
             android:layout_marginVertical="@dimen/xxl"
             android:layout_marginBottom="@dimen/xxxxxl"/>

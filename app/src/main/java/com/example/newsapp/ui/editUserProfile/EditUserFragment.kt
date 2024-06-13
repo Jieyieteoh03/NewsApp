@@ -27,7 +27,7 @@ class EditUserFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEditUserBinding.inflate(
             layoutInflater,
             container,
@@ -39,7 +39,6 @@ class EditUserFragment : Fragment() {
                 binding.etUsername.setText(it.userName)
                 binding.etEmail.setText(it.email)
                 binding.etPhoneNumber.setText(it.phoneNumber)
-                binding.etPassword.setText(it.password)
             }
         }
 
@@ -68,6 +67,12 @@ class EditUserFragment : Fragment() {
             message?.let {
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.btnEditPsw.setOnClickListener {
+            findNavController().navigate(
+                EditUserFragmentDirections.actionEditUserToEditUserPassword(args.userId)
+            )
         }
     }
 
