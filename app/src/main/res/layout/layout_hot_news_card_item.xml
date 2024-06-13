@@ -1,0 +1,55 @@
+<layout>
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cvHotNews"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="4dp"
+        android:layout_marginHorizontal="10dp">
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/xxs"
+        android:orientation="vertical" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/s"
+            >
+            <LinearLayout
+                android:id="@+id/tvUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s"
+                android:layout_marginEnd="@dimen/s"
+                android:background="@color/white1"
+                android:paddingVertical="@dimen/l"
+                android:paddingHorizontal="@dimen/xxl"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title"
+                    android:layout_marginVertical="@dimen/xxxs"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tvDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/description"
+                    android:textSize="10dp"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
