@@ -1,8 +1,9 @@
 package com.example.newsapp.data.repository.newsRepo
 
+import android.util.Log
 import com.example.newsapp.data.db.NewsDao
-import com.example.newsapp.data.model.News
-import com.example.newsapp.data.repository.newsRepo.NewsRepo
+import com.example.newsapp.data.model.news.News
+import com.example.newsapp.data.model.user.UserSavedNews
 import kotlinx.coroutines.flow.Flow
 
 class NewsRepoImple(
@@ -12,20 +13,29 @@ class NewsRepoImple(
         return dao.getAllNews()
     }
 
+    override fun addSavedNews(savedNews: UserSavedNews) {
+        dao.addSavedNews(savedNews)
+    }
+
+    override fun updateSavedNews(savedNews: UserSavedNews) {
+        dao.updateSavedNews(savedNews)
+    }
+
     override fun getNewsById(id: Int): News? {
         return dao.getNewsById(id)
     }
 
     override fun addNews(news: News) {
+        Log.d("debugging", news.toString())
         dao.addNews(news)
     }
 
-    override fun deleteNews(id: Int) {
-        dao.deleteNews(id)
+    override fun deleteNews(news: News) {
+        dao.deleteNews(news)
     }
 
-    override fun updateNews(id: Int, news: News) {
-        dao.updateNews(news.copy(id = id))
+    override fun updateNews(news: News) {
+        dao.updateNews(news)
     }
 
 

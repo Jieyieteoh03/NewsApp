@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.savedNews.SavedNewsFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/xs"
+            android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saved News"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:layout_marginRight="100dp"
+            android:textSize="@dimen/xxl"
+            />
+        <ImageView
+            android:id="@+id/ivSort"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center|right"
+            android:src="@drawable/ic_sort" />
+
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="8dp" />
+    </LinearLayout>
+</layout>
