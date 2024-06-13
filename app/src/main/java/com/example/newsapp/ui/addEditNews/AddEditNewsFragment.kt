@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -94,7 +93,6 @@ class AddEditNewsFragment : Fragment() {
             val selectedImageUri = data.data
             val file = getFileFromUri(selectedImageUri!!)
             if(file != null) {
-                Log.d("debugging", file)
                 viewModel.img.value = file
                 val image = File(file)
                 if(image.exists()) {
@@ -117,6 +115,7 @@ class AddEditNewsFragment : Fragment() {
         }
         return null
     }
+
 
     private fun setupCategorySpinner() {
         val categoryOptions = listOf("HOT_NEWS", "NORMAL_NEWS")

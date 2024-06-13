@@ -5,14 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
-import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentContainerBinding
 import com.example.newsapp.ui.adapter.TabAdapter
 import com.example.newsapp.ui.home.HomeFragment
 import com.example.newsapp.ui.savedNews.SavedNewsFragment
 import com.example.newsapp.ui.viewUserProfile.ViewUserFragment
-//import com.example.newsapp.ui.savedNews.SavedNewsFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +19,7 @@ class ContainerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentContainerBinding.inflate(
             layoutInflater,
