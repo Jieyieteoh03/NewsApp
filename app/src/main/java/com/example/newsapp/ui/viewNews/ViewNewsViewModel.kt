@@ -2,7 +2,6 @@ package com.example.newsapp.ui.viewNews
 
 import android.util.Log
 import android.widget.TextView
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,6 +32,7 @@ class ViewNewsViewModel @Inject constructor(
     val categories: MutableLiveData<String> = MutableLiveData()
     val tags: MutableLiveData<String> = MutableLiveData()
     val source: MutableLiveData<String> = MutableLiveData()
+    val snackbar: MutableLiveData<String> = MutableLiveData()
     val finish: MutableSharedFlow<Unit> = MutableSharedFlow()
 
     private var _savedNews: MutableLiveData<UserSavedNews> = MutableLiveData()
@@ -62,7 +62,10 @@ class ViewNewsViewModel @Inject constructor(
 
     fun deleteNews() {
         viewModelScope.launch (Dispatchers.IO){
-            newsRepo.deleteNews(news.value!!)
+            try {
+                newsRepo.deleteNews(news.value!!)
+                snackbar.postValue("Delete successful")
+            } catch (e: Exception) {e.message}
             finish.emit(Unit)
         }
     }
@@ -72,28 +75,23 @@ class ViewNewsViewModel @Inject constructor(
             val userId = userRepo.getLoggedInUser()
             userId?.let {
                 val existingSavedNews = userRepo.getUserSavedNewsById(it)
-                var isSaved = false
-                if(existingSavedNews == null) {
+                val finalNews: News?
+                if(existingSavedNews != null) {
+                    val newsList = existingSavedNews.savedNews.toMutableList()
+                    val temp = newsList.filter { each -> each.id == news.value!!.id }
+                    finalNews = news.value!!.copy(isSaved = temp.isEmpty())
+                    if(temp.isNotEmpty()) { newsList.remove(news.value!!) }
+                    else { newsList.add(finalNews) }
+                    newsRepo.updateNews(finalNews)
+                    newsRepo.updateSavedNews(existingSavedNews.copy(savedNews = newsList))
+                } else {
+                    finalNews = news.value!!.copy(isSaved = true)
+                    newsRepo.updateNews(finalNews)
                     newsRepo.addSavedNews(UserSavedNews(
                         userId = it,
-                        savedNews = listOf(news.value!!)
+                        savedNews = listOf(finalNews)
                     ))
-                    isSaved = true
-                } else {
-                    val newsList = existingSavedNews.savedNews.toMutableList()
-                    val checkList = newsList.filter { each -> each.id == news.value!!.id }
-                    isSaved = if(checkList.isEmpty()) {
-                        newsList.add(news.value!!)
-                        true
-                    } else {
-                        newsList.remove(news.value!!)
-                        false
-                    }
-                    newsRepo.updateSavedNews(
-                        existingSavedNews.copy(savedNews = newsList.toList())
-                    )
                 }
-                newsRepo.updateNews(news.value!!.copy(isSaved = isSaved))
             }
         }
     }
@@ -104,7 +102,6 @@ class ViewNewsViewModel @Inject constructor(
             userId?.let {
               _savedNews.postValue(userRepo.getUserSavedNewsById(userId))
             }
-
         }
     }
 }

@@ -20,6 +20,7 @@ import com.example.newsapp.R
 import com.example.newsapp.data.model.user.Role
 import com.example.newsapp.databinding.AlertSavedNewsBinding
 import com.example.newsapp.databinding.FragmentViewNewsBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.File
@@ -51,52 +52,50 @@ class ViewNewsFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel.run {
             getNewsById(args.id)
-            news.observe(viewLifecycleOwner) {
-                setNews()
-                it?.let {
-                    val image = File(it.img ?: "")
-                    if(image.exists()) {
-                        Glide.with(binding.ivImage.context)
-                            .load(image)
-                            .into(binding.ivImage)
-                    }
-                    Log.d("btn_debugging", it.isSaved.toString())
-                    binding.btnSaveNews.icon = ContextCompat.getDrawable(
-                        requireContext(),
-                        if(it.isSaved) R.drawable.ic_ribbon_filled else R.drawable.ic_ribbon
-                    )
-                    saveMessage = "Do you want to ${if(it.isSaved) "unsave" else "save"} this news?"
-                }
 
-                loggedInUser.observe(viewLifecycleOwner) { user ->
-                    user?.let {
-                        val isAdmin = user.role == Role.ADMIN
-                        binding.btnDeleteNews.isInvisible = !(isAdmin)
-                        binding.btnEditNews.isInvisible = !(isAdmin)
+            lifecycleScope.launch {
+                snackbar.observe(viewLifecycleOwner) {
+                    Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                }
+                news.observe(viewLifecycleOwner) {
+                    setNews()
+                    it?.let {
+                        val image = File(it.img ?: "")
+                        if(image.exists()) {
+                            Glide.with(binding.ivImage.context)
+                                .load(image)
+                                .into(binding.ivImage)
+                        }
+                        binding.btnSaveNews.icon = ContextCompat.getDrawable(
+                            requireContext(),
+                            if(it.isSaved) R.drawable.ic_ribbon_filled else R.drawable.ic_ribbon
+                        )
+                        saveMessage = "Do you want to ${if(it.isSaved) "unsave" else "save"} this news?"
+                    }
+
+                    loggedInUser.observe(viewLifecycleOwner) { user ->
+                        user?.let {
+                            val isAdmin = user.role == Role.ADMIN
+                            binding.btnDeleteNews.isInvisible = !(isAdmin)
+                            binding.btnEditNews.isInvisible = !(isAdmin)
+                        }
                     }
                 }
-            }
-            lifecycleScope.launch {
                 viewModel.finish.collect{ findNavController().popBackStack() }
             }
-
             binding.btnSaveNews.setOnClickListener {
                 showAlert(saveMessage)
             }
-
             binding.btnDeleteNews.setOnClickListener {
-                   showAlert("Do you want to delete this news?")
+                showAlert("Do you want to delete this news?")
             }
-
             binding.btnEditNews.setOnClickListener {
                 findNavController().navigate(
                     ViewNewsFragmentDirections.actionViewNewsToAddEditNews("Edit", args.id)
                 )
             }
-
         }
     }
-
     private fun showAlert(type: String) {
         val alertDialog = AlertDialog.Builder(requireContext()).create()
         val alertBox = AlertSavedNewsBinding.inflate(layoutInflater)
