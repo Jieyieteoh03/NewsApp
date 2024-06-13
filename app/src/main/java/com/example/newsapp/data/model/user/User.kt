@@ -1,17 +1,19 @@
 package com.example.newsapp.data.model.user
 
-import android.provider.MediaStore
+import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
-import com.example.newsapp.data.model.news.Categories
+import javax.crypto.EncryptedPrivateKeyInfo
 
 @Entity
 data class User(
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    val userId: Int? = null,
     val userName: String,
+    val img: ByteArray,
     val email: String,
-    val role: Role = Role.User,
-    val phoneNumber: Int,
-    val password: String
+    val role: Role = Role.USER,
+    val phoneNumber: String,
+    val password: String,
 )
