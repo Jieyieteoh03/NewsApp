@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.model.news.News
-import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.model.user.User
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import com.example.newsapp.data.repository.userRepo.UserRepo

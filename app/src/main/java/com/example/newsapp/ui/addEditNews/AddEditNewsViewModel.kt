@@ -1,12 +1,10 @@
 package com.example.newsapp.ui.addEditNews
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.data.model.news.Categories
-import com.example.newsapp.data.model.user.User
 import com.example.newsapp.data.repository.newsRepo.NewsRepo
 import com.example.newsapp.data.repository.userRepo.UserRepo
 import dagger.hilt.android.lifecycle.HiltViewModel

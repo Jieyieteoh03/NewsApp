@@ -10,19 +10,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.newsapp.R
 import com.example.newsapp.data.model.news.Categories
-import com.example.newsapp.data.model.news.News
 import com.example.newsapp.databinding.FragmentSavedNewsBinding
 import com.example.newsapp.databinding.LayoutNewsSortBinding
 import com.example.newsapp.ui.ContainerFragmentDirections
 import com.example.newsapp.ui.adapter.NewsAdapter
 import com.example.newsapp.ui.viewNews.ViewNewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
-import kotlin.io.encoding.Base64
-import kotlin.io.encoding.ExperimentalEncodingApi
+
 
 @AndroidEntryPoint
 class SavedNewsFragment : Fragment() {

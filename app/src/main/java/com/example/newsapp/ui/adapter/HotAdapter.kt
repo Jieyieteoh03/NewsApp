@@ -1,8 +1,6 @@
 package com.example.newsapp.ui.adapter
 
-import android.content.Context
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,8 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newsapp.data.model.news.News
 import com.example.newsapp.databinding.LayoutHotNewsCardItemBinding
-import com.example.newsapp.databinding.LayoutNewsCardItemBinding
-import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 
 class HotAdapter(

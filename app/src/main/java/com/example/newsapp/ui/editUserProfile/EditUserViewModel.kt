@@ -1,6 +1,5 @@
 package com.example.newsapp.ui.editUserProfile
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import javax.inject.Inject
 
 @HiltViewModel
