@@ -1,12 +1,10 @@
 [versions]
 agp = "8.3.2"
 androidDatabaseSqlcipher = "4.5.3"
-agp = "8.3.2"
 fragmentKtx = "1.7.1"
 hiltAndroid = "2.49"
 androidxNavigationSafeargsGradlePlugin = "2.7.7"
 compiler = "4.14.2"
-fragmentKtx = "1.7.1"
 glide = "4.16.0"
 hiltAndroidCompiler = "2.49"
 kotlin = "1.9.0"
