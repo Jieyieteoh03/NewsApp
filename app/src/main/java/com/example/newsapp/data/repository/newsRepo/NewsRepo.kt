@@ -1,18 +1,22 @@
 package com.example.newsapp.data.repository.newsRepo
 
-import com.example.newsapp.data.model.News
+import com.example.newsapp.data.model.news.News
+import com.example.newsapp.data.model.user.UserSavedNews
 import kotlinx.coroutines.flow.Flow
 
 interface NewsRepo {
 
     fun getAllNews(): Flow<List<News>>
 
-    fun getNewsById(id: Int) : News?
+    fun addSavedNews(savedNews: UserSavedNews)
 
+    fun updateSavedNews(savedNews: UserSavedNews)
+
+    fun getNewsById(id: Int) : News?
 
     fun addNews(news: News)
 
-    fun deleteNews(id: Int)
+    fun deleteNews(news: News)
 
-    fun updateNews(id: Int, news: News)
+    fun updateNews(news: News)
 }
