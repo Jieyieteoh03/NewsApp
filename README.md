@@ -1,4 +1,4 @@
-Teammates: Denish, Fang Woei, Jie Yie
+Teammates: Jie Yie, Denish, Fang Woei
 
 Trello board:
 https://trello.com/b/RQ8JNSZV/newsappproject
